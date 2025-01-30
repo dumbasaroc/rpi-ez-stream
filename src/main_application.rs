@@ -36,8 +36,9 @@ impl MainApplication {
         m_app.app.connect_activate(|app| {
             let mainwindow = ui::MainWindow::new(app);
 
-            let img = mainwindow.imimage().icon_name().unwrap();
-            info!("icon: \"{}\"", img);
+            mainwindow.shown_screen().p1_character().connect_clicked(|_b| {
+                println!("Clicked p1 character button!");
+            });
 
             mainwindow.present();
         });

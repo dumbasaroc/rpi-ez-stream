@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.95.0 -->
+<interface>
+  <!-- interface-name main_screen.ui -->
+  <requires lib="gtk" version="4.12"/>
+  <template class="MainScreen" parent="GtkGrid">
+    <property name="hexpand">True</property>
+    <property name="vexpand">True</property>
+    <child>
+      <object class="GtkButton" id="switch_data">
+        <property name="icon-name">retweet-symbolic</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="column-span">1</property>
+          <property name="row">1</property>
+          <property name="row-span">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="p1_character">
+        <property name="label">Player 1 Character</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="column-span">1</property>
+          <property name="row">1</property>
+          <property name="row-span">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="p2_character">
+        <property name="label">Player 2 Character</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="column-span">1</property>
+          <property name="row">1</property>
+          <property name="row-span">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="update_button">
+        <property name="label">UPDATE</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="column-span">1</property>
+          <property name="row">2</property>
+          <property name="row-span">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="GtkEntry" id="p2_text_input">
+        <property name="input-hints">no-spellcheck</property>
+        <property name="placeholder-text">Player 2 Name</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="column-span">1</property>
+          <property name="row">0</property>
+          <property name="row-span">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="GtkEntry" id="p1_text_input">
+        <property name="input-hints">no-spellcheck</property>
+        <property name="placeholder-text">Player 1 Name</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="column-span">1</property>
+          <property name="row">0</property>
+          <property name="row-span">1</property>
+        </layout>
+      </object>
+    </child>
+  </template>
+</interface>

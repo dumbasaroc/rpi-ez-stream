@@ -4,6 +4,8 @@ use gtk4::prelude::*;
 use gtk4::glib;
 use gtk4::*;
 
+use super::MainScreen;
+
 glib::wrapper! {
 
     pub struct MainWindow(ObjectSubclass<priv_MainWindow>)
@@ -23,15 +25,12 @@ impl MainWindow {
 #[allow(non_camel_case_types)]
 #[derive(Default, CompositeTemplate, Properties)]
 #[properties(wrapper_type = MainWindow)]
-#[template(file = "source/main_window.ui")]
+#[template(file = "main_window.ui")]
 pub struct priv_MainWindow {
 
     #[template_child]
     #[property(get)]
-    pub imimage: TemplateChild<gtk4::Image>,
-
-    #[property(get)]
-    pub s: bool
+    pub shown_screen: TemplateChild<MainScreen>
 }
 
 #[glib::object_subclass]

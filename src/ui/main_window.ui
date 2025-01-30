@@ -4,13 +4,10 @@
   <!-- interface-name main_window.ui -->
   <requires lib="gtk" version="4.0"/>
   <template class="MainWindow" parent="GtkApplicationWindow">
-    <property name="child">
-      <object class="GtkImage" id="imimage">
-        <property name="icon-name">applications-utilities</property>
-        <property name="pixel-size">90</property>
-      </object>
-    </property>
     <property name="icon-name">media-floppy</property>
     <property name="title">RPI Smash EZ-Stream</property>
+    <child>
+      <object class="MainScreen" id="shown_screen"/>
+    </child>
   </template>
 </interface>
