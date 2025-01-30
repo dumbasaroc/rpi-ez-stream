@@ -1,6 +1,7 @@
 //! Contains the struct that initializes and runs
 //! the application.
 
+use log::info;
 use gtk4::prelude::*;
 use gtk4::Application;
 
@@ -34,6 +35,9 @@ impl MainApplication {
 
         m_app.app.connect_activate(|app| {
             let mainwindow = ui::MainWindow::new(app);
+
+            let img = mainwindow.imimage().icon_name().unwrap();
+            info!("icon: \"{}\"", img);
 
             mainwindow.present();
         });
