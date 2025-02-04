@@ -1,3 +1,4 @@
+mod actions;
 mod main_screen;
 mod main_window;
 

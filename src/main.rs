@@ -1,3 +1,4 @@
+mod application_data;
 mod main_application;
 mod ui;
 

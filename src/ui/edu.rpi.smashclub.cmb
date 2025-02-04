@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
 <cambalache-project version="0.95.0" target_tk="gtk-4.0">
+  <ui template-class="MainScreen" filename="main_screen/main_screen.ui" sha256="fd74e04f07bc322b2404925208d0a22bc9df9295900f765bef528790dca1a52b"/>
   <ui template-class="MainWindow" filename="main_window.ui" sha256="bc72fcd184ebb82b7f5328a83aff37af1c18c1f6b1a045dd9b692ee9f3e35998">
     <requires>MainScreen</requires>
   </ui>
-  <ui template-class="MainScreen" filename="main_screen/main_screen.ui" sha256="fd74e04f07bc322b2404925208d0a22bc9df9295900f765bef528790dca1a52b"/>
 </cambalache-project>

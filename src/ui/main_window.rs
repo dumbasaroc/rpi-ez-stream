@@ -1,5 +1,11 @@
+use gtk4::gio::prelude::ActionMapExtManual;
+use gtk4::gio::ActionGroup;
+use gtk4::gio::SimpleActionGroup;
 use gtk4::glib;
+use gtk4::prelude::*;
 use gtk4::*;
+
+use crate::ui::actions;
 
 use super::MainScreen;
 
@@ -13,8 +19,34 @@ glib::wrapper! {
 
 impl MainWindow {
     pub fn new(app: &Application) -> Self {
+
+        const MAIN_WINDOW_GROUP_PREFIX: &str = "win";
+
         // Create new window
-        glib::Object::builder().property("application", app).build()
+        let win: MainWindow = glib::Object::builder().property("application", app).build();
+
+        // Add in the actions that we need buttons
+        // and the like to call when they're activated.
+
+        win.add_action_entries([
+            actions::create_test_set_name_action(),
+            actions::create_test_write_action()
+        ]);
+
+        // let mainwin_action_group = SimpleActionGroup::new();
+        // mainwin_action_group.add_action_entries([
+        //     actions::create_test_set_name_action_simp()
+        // ]);
+
+        // win.insert_action_group(MAIN_WINDOW_GROUP_PREFIX, Some(&mainwin_action_group));
+
+        
+        // Connect the action to the update button.
+        win.shown_screen().update_button().set_action_name(
+            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::TEST_WRITE_ACTION_NAME).as_str() )
+        );
+
+        win
     }
 }
 
