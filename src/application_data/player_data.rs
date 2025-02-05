@@ -1,3 +1,4 @@
+#[derive(serde::Serialize)]
 pub struct PlayerData {
 
     /// Numerical score

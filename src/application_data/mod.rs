@@ -2,6 +2,7 @@ mod player_data;
 
 use anyhow::{anyhow, Result};
 use lazy_static::lazy_static;
+use serde::Serialize;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::Write;
@@ -30,7 +31,7 @@ const P2_PLAYER_ID: &str = "player_2";
 
 const DATA_FILE_RELATIVE_PATH: &str = "./data.json";
 
-
+#[derive(serde::Serialize)]
 pub struct ApplicationData {
     
     // Player data
@@ -58,7 +59,12 @@ impl ApplicationData {
             Err(e) => { return Err(anyhow!(e)); }
         };
 
-        match write!(outfile, "hahaha") {
+        let self_serialized = match serde_json::to_string_pretty(self) {
+            Ok(v) => v,
+            Err(e) => { return Err(anyhow!(e)); }
+        };
+
+        match write!(outfile, "{}", self_serialized) {
             Ok(_) => {},
             Err(e) => { return Err(anyhow!(e)); }
         };
@@ -66,4 +72,3 @@ impl ApplicationData {
         Ok(())
     }
 }
-
