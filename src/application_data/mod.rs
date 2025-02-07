@@ -2,7 +2,6 @@ mod player_data;
 
 use anyhow::{anyhow, Result};
 use lazy_static::lazy_static;
-use serde::Serialize;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::Write;

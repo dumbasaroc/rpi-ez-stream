@@ -1,10 +1,12 @@
 //! Contains the struct that initializes and runs
 //! the application.
 
+use gtk4::gio::Settings;
+use gtk4::gio::SettingsBackend;
 use log::debug;
 use gtk4::prelude::*;
 use gtk4::Application;
-use gtk4::gio::ActionEntry;
+use gtk4::gio::SettingsSchemaSource;
 
 use super::ui;
 
@@ -28,6 +30,30 @@ impl MainApplication {
     /// A new MainApplication struct, ready to
     /// start running.
     pub fn new() -> Self {
+
+        // Start by instantiating the GTK settings
+        // object
+        debug!("Instantiating/Loading settings...");
+
+        // @TODO: change this unwrap to real error-checking code
+        let settings_schema_source = SettingsSchemaSource::from_directory(
+            "./data",
+            None,
+            false
+        ).unwrap();
+
+        let settings_schema = settings_schema_source.lookup(APPLICATION_ID, false);
+        let settings_schema = match settings_schema {
+            Some(s) => s,
+            None => {
+                panic!("Failed to find the necessary settings schema for the application!");
+            }
+        };
+
+        let _settings = Settings::new_full(&settings_schema, None::<&SettingsBackend>, None);
+
+
+        // Next up, creating the application object.
         debug!("Creating application...");
         let m_app = MainApplication {
             app: Application::builder()
@@ -35,6 +61,7 @@ impl MainApplication {
                 .build()
         };
 
+        // This is where the widgets get created.
         debug!("Connecting activation callback to application...");
         m_app.app.connect_activate(|app| {
             debug!("Creating main window, attaching to application...");
@@ -45,19 +72,8 @@ impl MainApplication {
                 println!("Clicked p1 character button!");
             });
 
-            debug!("Creating a dummy action to close the window!");
-            let action_close = ActionEntry::builder("close")
-                .activate(|window: &ui::MainWindow, _, _| {
-                    window.close();
-                })
-                .build();
-            mainwindow.add_action_entries([action_close]);
-
             mainwindow.present();
         });
-
-        debug!("Adding shortcut for closing the application.");
-        m_app.app.set_accels_for_action("win.close", &["<Ctrl>W"]);
 
         m_app
     }

@@ -1,5 +1,12 @@
 # Rust output
 /target
 
+# GSchema compiled form - we don't want that
+# unless it's freshly compiled.
+gschemas.compiled
+
 # test data.json
 data.json
+
+# Test image folder
+res/

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="gschema.dtd" type="application/xml-dtd"?>
+<schemalist>
+    <schema id="edu.rpi.smashclub.ezstream" path="/edu/rpi/smashclub/ezstream/">
+        <key name="first-time-opening-app" type="b">
+            <default>true</default>
+            <description>Whether or not this is the first time entering EZ-Stream.</description>
+        </key>
+    </schema>
+</schemalist>
