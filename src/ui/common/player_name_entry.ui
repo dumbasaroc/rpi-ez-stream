@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.95.0 -->
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="PlayerNameEntry" parent="GtkEntry">
+    <property name="max-length">64</property>
+    <property name="placeholder-text">Player Name</property>
+  </template>
+</interface>

@@ -25,8 +25,8 @@ type PlayersHashMap = HashMap<String, PlayerData>;
 
 
 // Constants
-const P1_PLAYER_ID: &str = "player_1";
-const P2_PLAYER_ID: &str = "player_2";
+pub const P1_PLAYER_ID: &str = "player_1";
+pub const P2_PLAYER_ID: &str = "player_2";
 
 const DATA_FILE_RELATIVE_PATH: &str = "./data.json";
 
@@ -49,6 +49,10 @@ impl ApplicationData {
         ApplicationData {
             players
         }
+    }
+
+    pub fn get_player_via_id_mut(&mut self, id: &str) -> Option<&mut PlayerData> {
+        self.players.get_mut(id)
     }
 
     pub fn write_to_data_file(&self) -> Result<()> {

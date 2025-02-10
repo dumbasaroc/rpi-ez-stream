@@ -25,6 +25,8 @@ mod imp {
     use gtk4::glib;
     use gtk4::*;
 
+    use crate::ui;
+
     #[derive(Default, CompositeTemplate, Properties)]
     #[template(file = "./main_screen.ui")]
     #[properties(wrapper_type = super::MainScreen)]
@@ -48,11 +50,11 @@ mod imp {
 
         #[template_child]
         #[property(get)]
-        p1_text_input: TemplateChild<Entry>,
+        p1_name_input: TemplateChild<ui::PlayerNameEntry>,
 
         #[template_child]
         #[property(get)]
-        p2_text_input: TemplateChild<Entry>,
+        p2_name_input: TemplateChild<ui::PlayerNameEntry>,
     }
 
     #[glib::object_subclass]

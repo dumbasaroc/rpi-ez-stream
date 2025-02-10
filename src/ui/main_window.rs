@@ -3,9 +3,10 @@ use gtk4::glib;
 use gtk4::prelude::*;
 use gtk4::*;
 
+use crate::application_data::{P1_PLAYER_ID, P2_PLAYER_ID};
 use crate::ui::actions;
-
 use super::MainScreen;
+
 
 glib::wrapper! {
 
@@ -21,6 +22,9 @@ impl MainWindow {
         // Create new window
         let win: MainWindow = glib::Object::builder().property("application", app).build();
         win.instantiate_actions();
+
+        win.shown_screen().p1_name_input().set_change_callback(P1_PLAYER_ID);
+        win.shown_screen().p2_name_input().set_change_callback(P2_PLAYER_ID);
 
         win
     }
