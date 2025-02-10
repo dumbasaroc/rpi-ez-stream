@@ -4,7 +4,7 @@
   <!-- interface-name main_window.ui -->
   <requires lib="gtk" version="4.0"/>
   <template class="MainWindow" parent="GtkApplicationWindow">
-    <property name="icon-name">media-floppy</property>
+    <property name="resizable">False</property>
     <property name="title">RPI Smash EZ-Stream</property>
     <child>
       <object class="MainScreen" id="shown_screen"/>

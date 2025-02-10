@@ -33,13 +33,12 @@ impl MainWindow {
         // and the like to call when they're activated.
 
         self.add_action_entries([
-            actions::create_test_set_name_action(),
-            actions::create_test_write_action()
+            actions::create_write_data_action()
         ]);
         
         // Connect the action to the update button.
         self.shown_screen().update_button().set_action_name(
-            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::TEST_WRITE_ACTION_NAME).as_str() )
+            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::WRITE_DATA_ACTION_NAME).as_str() )
         );
     }
 }
