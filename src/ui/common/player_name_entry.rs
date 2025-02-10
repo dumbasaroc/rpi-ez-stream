@@ -28,10 +28,6 @@ impl PlayerNameEntry {
         self.connect_changed(|f| {
             use crate::application_data::APPLICATION_STATE;
 
-            // @TODO FUTURE TIM
-            // Change this so that the text updates the internal
-            // state.
-
             let mut lock = APPLICATION_STATE.lock().unwrap();
             let player = lock.get_player_via_id_mut(
                 &f.s()
