@@ -8,6 +8,8 @@ use gtk4::prelude::*;
 use gtk4::Application;
 use gtk4::gio::SettingsSchemaSource;
 
+use crate::application_data::{P1_PLAYER_ID, P2_PLAYER_ID};
+
 use super::ui;
 
 
@@ -67,10 +69,8 @@ impl MainApplication {
             debug!("Creating main window, attaching to application...");
             let mainwindow = ui::MainWindow::new(app);
 
-            debug!("Setting P1 Button click callback...");
-            mainwindow.shown_screen().p1_character().connect_clicked(|_b| {
-                println!("Clicked p1 character button!");
-            });
+            debug!("Setting widget callbacks and properties...");
+            instantiate_widget_properties(&mainwindow);
 
             mainwindow.present();
         });
@@ -88,4 +88,15 @@ impl MainApplication {
         debug!("Running application!");
         self.app.run()
     }
+}
+
+fn instantiate_widget_properties(win: &ui::MainWindow) {
+
+    debug!("Setting on-text-change callbacks for name entry widgets...");
+    win.shown_screen().p1_name_input().set_change_callback(P1_PLAYER_ID);
+    win.shown_screen().p2_name_input().set_change_callback(P2_PLAYER_ID);
+
+    debug!("Setting placeholder text for name entry widgets...");
+    win.shown_screen().p1_name_input().set_placeholder_text(Some("Player 1 Tag"));
+    win.shown_screen().p2_name_input().set_placeholder_text(Some("Player 2 Tag"));
 }

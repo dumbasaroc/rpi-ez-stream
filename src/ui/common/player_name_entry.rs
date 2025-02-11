@@ -23,14 +23,14 @@ impl PlayerNameEntry {
     /// whose data this callback should edit.
     pub fn set_change_callback(&self, player_id: &str) {
 
-        self.set_s(player_id);
+        self.set_player_name(player_id);
 
         self.connect_changed(|f| {
             use crate::application_data::APPLICATION_STATE;
 
             let mut lock = APPLICATION_STATE.lock().unwrap();
             let player = lock.get_player_via_id_mut(
-                &f.s()
+                &f.player_name()
             );
             let p = match player {
                 Some(p) => p,
@@ -60,7 +60,7 @@ mod imp {
     pub struct PlayerNameEntry {
 
         #[property(get, set)]
-        pub s: Rc<RefCell<String>>
+        pub player_name: Rc<RefCell<String>>
     }
 
     #[object_subclass]
