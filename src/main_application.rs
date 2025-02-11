@@ -1,6 +1,9 @@
 //! Contains the struct that initializes and runs
 //! the application.
 
+#[cfg(test)]
+use gtk_tester::GTKTester;
+
 use gtk4::gio::Settings;
 use gtk4::gio::SettingsBackend;
 use log::debug;
@@ -72,7 +75,13 @@ impl MainApplication {
             debug!("Setting widget callbacks and properties...");
             instantiate_widget_properties(&mainwindow);
 
+            #[cfg(test)]
+            MainApplication::steps().unwrap();
+
             mainwindow.present();
+            
+            #[cfg(test)]
+            mainwindow.close();
         });
 
         m_app
@@ -89,6 +98,7 @@ impl MainApplication {
         self.app.run()
     }
 }
+
 
 fn instantiate_widget_properties(win: &ui::MainWindow) {
 

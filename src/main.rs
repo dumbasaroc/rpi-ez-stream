@@ -5,6 +5,9 @@ mod ui;
 use env_logger::{self, Env};
 use main_application::MainApplication;
 
+#[cfg(test)]
+use gtk_tester::*;
+
 /// Sets up the logger for output, depending
 /// on whether we are in a debug context
 /// or not.
@@ -30,4 +33,20 @@ fn main() -> gtk4::glib::ExitCode {
 
     let app = MainApplication::new();
     app.run_application()
+}
+
+#[test]
+fn test_application() {
+    use gtk_tester::GTKTester;
+
+    impl GTKTester<String> for MainApplication {
+
+        fn steps() -> Result<(), String> {
+
+            Ok(())
+        }
+    }
+
+    let app = MainApplication::new();
+    app.run_application();
 }
