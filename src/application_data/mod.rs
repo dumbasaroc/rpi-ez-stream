@@ -34,7 +34,11 @@ const DATA_FILE_RELATIVE_PATH: &str = "./data.json";
 pub struct ApplicationData {
     
     // Player data
-    players: PlayersHashMap
+    #[cfg(not(test))]
+    players: PlayersHashMap,
+
+    #[cfg(test)]
+    pub players: PlayersHashMap
 
 }
 
