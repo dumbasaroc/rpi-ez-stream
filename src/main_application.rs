@@ -1,6 +1,7 @@
 //! Contains the struct that initializes and runs
 //! the application.
 
+use gtk4::gio::ApplicationFlags;
 use gtk4::gio::Settings;
 use gtk4::gio::SettingsBackend;
 use log::debug;
@@ -31,7 +32,10 @@ impl MainApplication {
     /// # Returns
     /// A new MainApplication struct, ready to
     /// start running.
-    pub fn new() -> Self {
+    pub fn new(
+        #[cfg(test)]
+        testing_callback: impl Fn(&ui::MainWindow) + 'static
+    ) -> Self {
 
         // Start by instantiating the GTK settings
         // object
@@ -60,19 +64,31 @@ impl MainApplication {
         let m_app = MainApplication {
             app: Application::builder()
                 .application_id(APPLICATION_ID)
+                .flags(ApplicationFlags::HANDLES_COMMAND_LINE)
                 .build()
         };
 
+        m_app.app.connect_command_line(|app, _| {
+            app.activate();
+            0
+        });
+
         // This is where the widgets get created.
         debug!("Connecting activation callback to application...");
-        m_app.app.connect_activate(|app| {
+        m_app.app.connect_activate(move |app| {
             debug!("Creating main window, attaching to application...");
             let mainwindow = ui::MainWindow::new(app);
 
             debug!("Setting widget callbacks and properties...");
             instantiate_widget_properties(&mainwindow);
 
+            #[cfg(test)]
+            testing_callback(&mainwindow);
+
             mainwindow.present();
+            
+            #[cfg(test)]
+            mainwindow.close();
         });
 
         m_app
@@ -89,6 +105,7 @@ impl MainApplication {
         self.app.run()
     }
 }
+
 
 fn instantiate_widget_properties(win: &ui::MainWindow) {
 

@@ -86,3 +86,37 @@ mod imp {
     impl EntryImpl for PlayerNameEntry {}
 
 }
+
+
+#[allow(unused_imports)]
+mod tests {
+
+    use crate::MainApplication;
+    use gtk4::prelude::EditableExt;
+    use gtk_tester::*;
+
+    create_test!{
+        ensure_typing_updates_app_data,
+        MainApplication,
+        |win| {
+
+            use crate::application_data::{APPLICATION_STATE, P1_PLAYER_ID};
+
+            let entry: &super::PlayerNameEntry = &win.shown_screen().p1_name_input();
+            
+            let mut new_text: String = format!(
+                "{}", entry.text().to_string()
+            );
+            let characters_to_add = "xyz123456";
+
+            for character in characters_to_add.chars() {
+                // append char to new_text
+                new_text.push(character);
+                entry.set_text(&new_text);
+                let lock = APPLICATION_STATE.lock().unwrap();
+                assert!(lock.players.get(P1_PLAYER_ID).unwrap().name() == new_text);
+                drop(lock);
+            }
+        }
+    }
+}
