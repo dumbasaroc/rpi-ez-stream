@@ -55,6 +55,14 @@ mod imp {
         #[template_child]
         #[property(get)]
         p2_name_input: TemplateChild<ui::PlayerNameEntry>,
+
+        #[template_child]
+        #[property(get)]
+        p1_score_input: TemplateChild<ui::common::ScoreEntry>,
+
+        #[template_child]
+        #[property(get)]
+        p2_score_input: TemplateChild<ui::common::ScoreEntry>,
     }
 
     #[glib::object_subclass]

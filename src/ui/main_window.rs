@@ -19,12 +19,17 @@ glib::wrapper! {
 impl MainWindow {
     pub fn new(app: &Application) -> Self {
 
+        use crate::ui::common as cmn;
+
         // Create new window
         let win: MainWindow = glib::Object::builder().property("application", app).build();
         win.instantiate_actions();
 
         win.shown_screen().p1_name_input().set_change_callback(P1_PLAYER_ID);
         win.shown_screen().p2_name_input().set_change_callback(P2_PLAYER_ID);
+
+        cmn::instantiate_score_entry(&win.shown_screen().p1_score_input(), P1_PLAYER_ID);
+        cmn::instantiate_score_entry(&win.shown_screen().p2_score_input(), P2_PLAYER_ID);
 
         win
     }

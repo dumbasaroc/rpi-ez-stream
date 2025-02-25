@@ -31,17 +31,17 @@ impl PlayerData {
 
     // Getters
 
-    // pub fn score(&self) -> u32 {
-    //     self.player_score
-    // }
+    pub fn score(&self) -> u32 {
+        self.player_score
+    }
 
     pub fn name(&self) -> &str {
         &self.player_name
     }
 
-    // pub fn character(&self) -> Option<&CharacterData> {
-    //     self.player_character.as_ref()
-    // }
+    pub fn character(&self) -> Option<&CharacterData> {
+        self.player_character.as_ref()
+    }
 
     
     // Setters
