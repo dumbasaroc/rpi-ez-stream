@@ -16,7 +16,7 @@ pub struct PlayerData {
 }
 
 #[derive(Clone, serde::Serialize)]
-struct CharacterData {
+pub struct CharacterData {
     
     /// The name of the character, should match
     /// some internal hashmap @TODO TBD
@@ -77,15 +77,10 @@ impl PlayerData {
     pub fn set_character<S>(&mut self, name: Option<S>)
         where S: AsRef<String>
     {
-        let c = match name {
-            Some(n) => {
-                Some(CharacterData {
-                    character_name: format!("{}", n.as_ref()),
-                    costume_number: 0
-                })
-            },
-            None => None
-        };
+        let c = name.map(|n| CharacterData {
+            character_name: n.as_ref().to_string(),
+            costume_number: 0
+        });
 
         self.player_character = c;
     }
@@ -98,7 +93,7 @@ impl Default for PlayerData {
     fn default() -> Self {
         PlayerData {
             player_score: 0,
-            player_name: format!(""),
+            player_name: String::new(),
             player_character: None
         }
     }

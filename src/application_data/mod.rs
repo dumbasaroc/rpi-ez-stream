@@ -47,8 +47,8 @@ impl ApplicationData {
     pub fn init() -> Self {
 
         let mut players: PlayersHashMap = HashMap::new();
-        players.insert(format!("{}", P1_PLAYER_ID), PlayerData::default());
-        players.insert(format!("{}", P2_PLAYER_ID), PlayerData::default());
+        players.insert(P1_PLAYER_ID.to_string(), PlayerData::default());
+        players.insert(P2_PLAYER_ID.to_string(), PlayerData::default());
 
         ApplicationData {
             players

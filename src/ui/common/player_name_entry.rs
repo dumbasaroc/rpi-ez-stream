@@ -20,7 +20,7 @@ impl PlayerNameEntry {
     /// 
     /// # Parameters
     /// - `player_id`: The string ID of the player
-    /// whose data this callback should edit.
+    ///   whose data this callback should edit.
     pub fn set_change_callback(&self, player_id: &str) {
 
         self.set_player_name(player_id);
