@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="gschema.dtd" type="application/xml-dtd"?>
 <schemalist>
-    <schema id="edu.rpi.smashclub.ezstream" path="/edu/rpi/smashclub/ezstream/">
-        <key name="first-time-opening-app" type="b">
-            <default>true</default>
-            <description>Whether or not this is the first time entering EZ-Stream.</description>
-        </key>
-    </schema>
+<schema id="edu.rpi.smashclub.ezstream" path="/edu/rpi/smashclub/ezstream/">
+<key name="first-time-opening-app" type="b">
+    <default>true</default>
+    <description>Whether or not this is the first time entering EZ-Stream.</description>
+</key>
+<key name="last-opened-version-major" type="u">
+    <default>0</default>
+    <description>The most recently opened version of the application. Used for first-time experience (TBC)</description>
+</key>
+<key name="last-opened-version-minor" type="u">
+    <default>0</default>
+    <description>The most recently opened version of the application. Used for first-time experience (TBC)</description>
+</key>
+<key name="last-opened-version-patch" type="u">
+    <default>0</default>
+    <description>The most recently opened version of the application. Used for first-time experience (TBC)</description>
+</key>
+<key name="p1-score" type="u">
+    <default>0</default>
+    <description>The last score typed into the P1 score box</description>
+</key>
+<key name="p2-score" type="u">
+    <default>0</default>
+    <description>The last score typed into the P2 score box</description>
+</key>
+<key name="p1-name" type="s">
+    <default>""</default>
+    <description>The last inputted name for P1</description>
+</key>
+<key name="p2-name" type="s">
+    <default>""</default>
+    <description>The last inputted name for P2</description>
+</key>
+</schema>
 </schemalist>

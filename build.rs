@@ -1,12 +1,12 @@
 use core::str;
 use std::process::Command;
+use settings_data::export_settings_to_xml;
 
 fn main() {
 
     const LOC_OF_SETTINGS_SCHEMA: &str = "data/edu.rpi.smashclub.ezstream.gschema.xml";
+    export_settings_to_xml(LOC_OF_SETTINGS_SCHEMA).unwrap();
 
-    // Rerun build if the settings schema has changed
-    println!("cargo::rerun-if-changed={}", LOC_OF_SETTINGS_SCHEMA);
 
     // Call the compilation of the schema, if there are errors, abort the
     // build by panicking

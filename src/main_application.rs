@@ -58,7 +58,6 @@ impl MainApplication {
 
         let _settings = Settings::new_full(&settings_schema, None::<&SettingsBackend>, None);
 
-
         // Next up, creating the application object.
         debug!("Creating application...");
         let m_app = MainApplication {
