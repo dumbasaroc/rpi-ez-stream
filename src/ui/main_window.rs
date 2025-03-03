@@ -42,13 +42,24 @@ impl MainWindow {
         // and the like to call when they're activated.
 
         self.add_action_entries([
-            actions::create_write_data_action()
+            actions::create_write_data_action(),
+            actions::create_initialize_character_select_data_action()
         ]);
         
         // Connect the action to the update button.
         self.shown_screen().update_button().set_action_name(
             Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::WRITE_DATA_ACTION_NAME).as_str() )
         );
+
+        // Connect "initialize CSS" action to a button
+        self.shown_screen().p1_character().set_action_name(
+            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME).as_str() )
+        );
+
+        self.shown_screen().p2_character().set_action_name(
+            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME).as_str() )
+        );
+
     }
 }
 
