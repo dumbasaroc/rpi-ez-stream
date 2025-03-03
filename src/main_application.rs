@@ -112,19 +112,19 @@ fn instantiate_widget_properties(win: &ui::MainWindow, settings: &Settings) {
     use settings_data::*;
 
     debug!("Setting on-text-change callbacks for name entry widgets...");
-    win.shown_screen().p1_name_input().set_change_callback(P1_PLAYER_ID);
-    win.shown_screen().p2_name_input().set_change_callback(P2_PLAYER_ID);
+    win.main_screen().p1_name_input().set_change_callback(P1_PLAYER_ID);
+    win.main_screen().p2_name_input().set_change_callback(P2_PLAYER_ID);
 
     debug!("Setting placeholder text for name entry widgets...");
-    win.shown_screen().p1_name_input().set_placeholder_text(Some("Player 1 Tag"));
-    win.shown_screen().p2_name_input().set_placeholder_text(Some("Player 2 Tag"));
+    win.main_screen().p1_name_input().set_placeholder_text(Some("Player 1 Tag"));
+    win.main_screen().p2_name_input().set_placeholder_text(Some("Player 2 Tag"));
     
     #[cfg(not(test))]
     {
-        settings.bind(P1_SCORE_SETTING_KEY, &win.shown_screen().p1_score_input(), "value").build();
-        settings.bind(P2_SCORE_SETTING_KEY, &win.shown_screen().p2_score_input(), "value").build();
-        settings.bind(P1_NAME_SETTING_KEY, &win.shown_screen().p1_name_input(), "text").build();
-        settings.bind(P2_NAME_SETTING_KEY, &win.shown_screen().p2_name_input(), "text").build();
+        settings.bind(P1_SCORE_SETTING_KEY, &win.main_screen().p1_score_input(), "value").build();
+        settings.bind(P2_SCORE_SETTING_KEY, &win.main_screen().p2_score_input(), "value").build();
+        settings.bind(P1_NAME_SETTING_KEY, &win.main_screen().p1_name_input(), "text").build();
+        settings.bind(P2_NAME_SETTING_KEY, &win.main_screen().p2_name_input(), "text").build();
     }
 }
 

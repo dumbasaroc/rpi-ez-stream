@@ -1,5 +1,4 @@
 use gtk4::glib;
-use gtk4::*;
 
 glib::wrapper! {
 
@@ -11,9 +10,9 @@ glib::wrapper! {
 }
 
 impl MainScreen {
-    pub fn new(app: &Application) -> Self {
+    pub fn new() -> Self {
         // Create new window
-        glib::Object::builder().property("application", app).build()
+        glib::Object::builder().build()
     }
 }
 

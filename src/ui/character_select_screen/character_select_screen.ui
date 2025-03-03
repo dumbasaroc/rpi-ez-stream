@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Created with Cambalache 0.95.0 -->
 <interface>
+  <!-- interface-name character_select_screen.ui -->
   <requires lib="gtk" version="4.12"/>
   <template class="CharacterSelectScreen" parent="GtkBox">
     <property name="orientation">vertical</property>

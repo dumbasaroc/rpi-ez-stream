@@ -5,7 +5,12 @@ use gtk4::*;
 
 use crate::application_data::{P1_PLAYER_ID, P2_PLAYER_ID};
 use crate::ui::actions;
-use super::MainScreen;
+use crate::ui::{CharacterSelectScreen, MainScreen};
+
+
+// SCENE NAMES
+const MAIN_SCREEN_NAME: &str = "mainscreen";
+const CHARACTER_SELECT_SCREEN_NAME: &str = "css";
 
 
 glib::wrapper! {
@@ -25,13 +30,48 @@ impl MainWindow {
         let win: MainWindow = glib::Object::builder().property("application", app).build();
         win.instantiate_actions();
 
-        win.shown_screen().p1_name_input().set_change_callback(P1_PLAYER_ID);
-        win.shown_screen().p2_name_input().set_change_callback(P2_PLAYER_ID);
+        win.main_screen().p1_name_input().set_change_callback(P1_PLAYER_ID);
+        win.main_screen().p2_name_input().set_change_callback(P2_PLAYER_ID);
 
-        cmn::instantiate_score_entry(&win.shown_screen().p1_score_input(), P1_PLAYER_ID);
-        cmn::instantiate_score_entry(&win.shown_screen().p2_score_input(), P2_PLAYER_ID);
+        cmn::instantiate_score_entry(&win.main_screen().p1_score_input(), P1_PLAYER_ID);
+        cmn::instantiate_score_entry(&win.main_screen().p2_score_input(), P2_PLAYER_ID);
 
         win
+    }
+
+    pub fn main_screen(&self) -> MainScreen {
+
+        let correct_child: gtk4::Widget = match self.scene_switcher().child_by_name(MAIN_SCREEN_NAME) {
+            Some(c) => c,
+            None => {
+                log::error!("Stack switcher could not find main scene with name \"{}\"!", MAIN_SCREEN_NAME);
+                panic!();
+            }
+        };
+
+        if !correct_child.is::<MainScreen>() {
+            log::error!("The provided child with name \"{}\" cannot be cast into the MainScreen type!", MAIN_SCREEN_NAME);
+            panic!();
+        }
+
+        correct_child.downcast().unwrap()
+    }
+
+    pub fn character_select_screen(&self) -> CharacterSelectScreen {
+        let correct_child = match self.scene_switcher().child_by_name(CHARACTER_SELECT_SCREEN_NAME) {
+            Some(c) => c,
+            None => {
+                log::error!("Stack switcher could not find main scene with name \"{}\"!", CHARACTER_SELECT_SCREEN_NAME);
+                panic!();
+            }
+        };
+
+        if !correct_child.is::<CharacterSelectScreen>() {
+            log::error!("The provided child with name \"{}\" cannot be cast into the CharacterSelectScreen type!", CHARACTER_SELECT_SCREEN_NAME);
+            panic!();
+        }
+
+        correct_child.downcast().unwrap()
     }
 
     fn instantiate_actions(&self) {
@@ -43,21 +83,22 @@ impl MainWindow {
 
         self.add_action_entries([
             actions::create_write_data_action(),
-            actions::create_initialize_character_select_data_action()
+            actions::create_initialize_character_select_data_action(),
+            actions::create_switch_to_css_action(),
         ]);
         
         // Connect the action to the update button.
-        self.shown_screen().update_button().set_action_name(
+        self.main_screen().update_button().set_action_name(
             Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::WRITE_DATA_ACTION_NAME).as_str() )
         );
 
         // Connect "initialize CSS" action to a button
-        self.shown_screen().p1_character().set_action_name(
-            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME).as_str() )
+        self.main_screen().p1_character().set_action_name(
+            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::SWITCH_TO_CSS_ACTION_NAME).as_str() )
         );
 
-        self.shown_screen().p2_character().set_action_name(
-            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME).as_str() )
+        self.main_screen().p2_character().set_action_name(
+            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::SWITCH_TO_CSS_ACTION_NAME).as_str() )
         );
 
     }
@@ -71,9 +112,6 @@ mod imp {
     use gtk4::glib;
     use gtk4::*;
 
-    use super::MainScreen;
-
-    #[allow(non_camel_case_types)]
     #[derive(Default, CompositeTemplate, Properties)]
     #[properties(wrapper_type = super::MainWindow)]
     #[template(file = "main_window.ui")]
@@ -81,7 +119,7 @@ mod imp {
 
         #[template_child]
         #[property(get)]
-        pub shown_screen: TemplateChild<MainScreen>
+        pub scene_switcher: TemplateChild<Stack>
     }
 
     #[glib::object_subclass]
@@ -93,6 +131,10 @@ mod imp {
 
 
         fn class_init(klass: &mut Self::Class) {
+            // Ensure child types are loaded at this point
+            crate::ui::MainScreen::static_type();
+            crate::ui::CharacterSelectScreen::static_type();
+
             klass.bind_template();
         }
 
@@ -102,7 +144,6 @@ mod imp {
     }
 
 
-    impl MainWindow {}
 
 
     impl ApplicationWindowImpl for MainWindow {}

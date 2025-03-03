@@ -102,7 +102,7 @@ mod tests {
 
             use crate::application_data::{APPLICATION_STATE, P1_PLAYER_ID};
 
-            let entry: &super::PlayerNameEntry = &win.shown_screen().p1_name_input();
+            let entry: &super::PlayerNameEntry = &win.main_screen().p1_name_input();
             
             let mut new_text: String = format!(
                 "{}", entry.text().to_string()

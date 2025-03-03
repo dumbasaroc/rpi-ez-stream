@@ -2,12 +2,13 @@
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
 <cambalache-project version="0.95.0" target_tk="gtk-4.0">
   <ui template-class="PlayerNameEntry" filename="common/player_name_entry.ui" sha256="21ca69a3897211aa100c07451f725316d2c33c1ef757fcec2bc500d8172b1dc6"/>
+  <ui template-class="CharacterSelectScreen" filename="character_select_screen/character_select_screen.ui" sha256="abda1582a8903a58f00d8dc8ad7b68272f7633aec7fd0254d27efa2ccfa9fd96"/>
+  <ui template-class="CharacterButton" filename="character_select_screen/character_select_button.ui" sha256="e6cb900260617b1892e7b9ca5550ae06962a1acf6ef89676b13952440244694f"/>
   <ui template-class="MainScreen" filename="main_screen/main_screen.ui" sha256="14f1d546f49c8d466b4acdcdf973a77e0727e20bc5320fe885bac842d784c327">
     <requires>PlayerNameEntry</requires>
   </ui>
-  <ui template-class="MainWindow" filename="main_window.ui" sha256="ae6926472366f0ac6081e902f2fdda7a8dd8875333af0efbd6c873952db3a5bb">
+  <ui template-class="MainWindow" filename="main_window.ui" sha256="eff24df17e2f979b901427f90345db7e11ac2513e6cf1dd723f7db40a18aa825">
     <requires>MainScreen</requires>
+    <requires>CharacterSelectScreen</requires>
   </ui>
-  <ui template-class="CharacterSelectScreen" filename="character_select_screen/character_select_screen.ui" sha256="56ac8e16591c5c862ae3b43e50e9a043612d2949e2e1a38aa9d17322a2cb5fcb"/>
-  <ui template-class="CharacterButton" filename="character_select_screen/character_select_button.ui" sha256="5efbaaa1c24944fcf653d816c46d49dc2b9b650d03410681ff50b6c6dc2160bf"/>
 </cambalache-project>

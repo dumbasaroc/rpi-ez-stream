@@ -7,7 +7,24 @@
     <property name="resizable">False</property>
     <property name="title">RPI Smash EZ-Stream</property>
     <child>
-      <object class="MainScreen" id="shown_screen"/>
+      <object class="GtkStack" id="scene_switcher">
+        <child>
+          <object class="GtkStackPage" id="main_screen">
+            <property name="child">
+              <object class="MainScreen"/>
+            </property>
+            <property name="name">mainscreen</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkStackPage" id="character_select_screen">
+            <property name="child">
+              <object class="CharacterSelectScreen"/>
+            </property>
+            <property name="name">css</property>
+          </object>
+        </child>
+      </object>
     </child>
   </template>
 </interface>
