@@ -11,7 +11,7 @@ settings_data = { path = "./settings_data/" }
 [dependencies]
 anyhow = "1.0.95"
 env_logger = "0.11.6"
-gtk4 = "0.9.5"
+gtk4 = { version = "0.9.5", features = [ "v4_12" ] }
 gtk_tester = { path = "./gtk_tester/" }
 lazy_static = "1.5.0"
 log = "0.4.25"

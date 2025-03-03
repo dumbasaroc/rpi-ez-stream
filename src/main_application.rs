@@ -77,7 +77,7 @@ impl MainApplication {
         m_app.app.connect_activate(move |app| {
             debug!("Creating main window, attaching to application...");
             let mainwindow = ui::MainWindow::new(app);
-
+        
             debug!("Setting widget callbacks and properties...");
             instantiate_widget_properties(&mainwindow, &settings);
 
@@ -105,7 +105,7 @@ impl MainApplication {
     }
 }
 
-
+#[allow(unused_variables)]
 fn instantiate_widget_properties(win: &ui::MainWindow, settings: &Settings) {
 
     #[cfg(not(test))]

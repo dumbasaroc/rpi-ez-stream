@@ -2,7 +2,7 @@
 <!-- Created with Cambalache 0.95.0 -->
 <interface>
   <!-- interface-name main_window.ui -->
-  <requires lib="gtk" version="4.0"/>
+  <requires lib="gtk" version="4.12"/>
   <template class="MainWindow" parent="GtkApplicationWindow">
     <property name="resizable">False</property>
     <property name="title">RPI Smash EZ-Stream</property>

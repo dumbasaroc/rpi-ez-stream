@@ -2,6 +2,7 @@ mod application_data;
 mod main_application;
 mod ui;
 
+#[cfg(not(test))]
 use env_logger::{self, Env};
 use main_application::MainApplication;
 
@@ -12,6 +13,7 @@ use main_application::MainApplication;
 /// 
 /// Debug contexts will log up through "trace".<br>
 /// Release contexts will log up through "warn".
+#[cfg(not(test))]
 fn initialize_logger() {
     #[cfg(debug_assertions)]
     env_logger::init_from_env(

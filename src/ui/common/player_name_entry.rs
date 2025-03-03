@@ -5,7 +5,7 @@ use gtk4::*;
 glib::wrapper! {
     pub struct PlayerNameEntry(ObjectSubclass<imp::PlayerNameEntry>)
         @extends Entry, Widget,
-        @implements Accessible, Buildable, CellEditable, ConstraintTarget, Editable;
+        @implements Accessible, Buildable, ConstraintTarget, Editable;
 }
 
 impl PlayerNameEntry {
