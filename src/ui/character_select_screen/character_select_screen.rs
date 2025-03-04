@@ -31,14 +31,17 @@ impl CharacterSelectScreen {
     }
 
     pub fn initialize_character_list<'a>(&self, characters: impl IntoIterator<Item = &'a str>) -> anyhow::Result<()> {
+        use crate::ui::CharacterButton;
+
         let iter = characters.into_iter();
         self.character_box().remove_all();
         
         for character in iter {
-            
-            let button = Button::builder()
-                .label(character)
-                .build();
+
+            let button = CharacterButton::new(
+                character,
+                vec![ character ]
+            );
 
             self.character_box().insert(&button, -1);
         }
@@ -78,6 +81,7 @@ mod imp {
 
 
         fn class_init(klass: &mut Self::Class) {
+            crate::ui::CharacterButton::static_type();
             klass.bind_template();
         }
 

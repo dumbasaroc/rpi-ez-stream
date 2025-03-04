@@ -85,6 +85,7 @@ impl MainWindow {
             actions::create_write_data_action(),
             actions::create_initialize_character_select_data_action(),
             actions::create_switch_to_css_action(),
+            actions::create_switch_to_mainscreen_action(),
         ]);
         
         // Connect the action to the update button.
@@ -101,6 +102,9 @@ impl MainWindow {
             Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::SWITCH_TO_CSS_ACTION_NAME).as_str() )
         );
 
+        self.main_screen().switch_data().set_action_name(
+            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME).as_str() )
+        );
     }
 }
 

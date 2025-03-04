@@ -1,3 +1,4 @@
+mod character_data;
 mod player_data;
 
 use anyhow::{anyhow, Result};
@@ -8,12 +9,17 @@ use std::io::Write;
 use std::sync::Mutex;
 
 use player_data::PlayerData;
+use character_data::*;
 
 // LAZY STATIC BLOCK FOR SINGLETON MUT DATA
 lazy_static! {
 
     pub static ref APPLICATION_STATE: Mutex<ApplicationData> = Mutex::new(
         ApplicationData::init()
+    );
+
+    pub static ref MODULE_HANDLER: Mutex<Option<ModuleHandler>> = Mutex::new(
+        None
     );
 
 }

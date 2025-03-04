@@ -9,15 +9,15 @@ glib::wrapper! {
 }
 
 impl CharacterButton {
-    pub fn new<S, I>(character_name: S, aliases: I) -> Self where
+    pub fn new<'a, S, I>(character_name: S, aliases: I) -> Self where
         std::string::String: From<S>,
-        I: IntoIterator<Item = String>
+        I: IntoIterator<Item = &'a str>
     {
         let button: Self = glib::Object::builder().build();
         
         let internal_character_name: String = character_name.into();
         button.set_character_name_internal(internal_character_name);
-        button.set_aliases(aliases.into_iter().collect::<Vec<String>>());
+        button.set_aliases(aliases.into_iter().map(|s| s.to_string()).collect::<Vec<String>>());
 
         button
     }
