@@ -1,4 +1,5 @@
 use gtk4::glib;
+use gtk4::prelude::ButtonExt;
 
 glib::wrapper! {
 
@@ -11,13 +12,14 @@ glib::wrapper! {
 impl CharacterButton {
     pub fn new<'a, S, I>(character_name: S, aliases: I) -> Self where
         std::string::String: From<S>,
-        I: IntoIterator<Item = &'a str>
+        I: IntoIterator<Item = String>
     {
         let button: Self = glib::Object::builder().build();
         
         let internal_character_name: String = character_name.into();
         button.set_character_name_internal(internal_character_name);
         button.set_aliases(aliases.into_iter().map(|s| s.to_string()).collect::<Vec<String>>());
+        button.set_label(button.character_name_internal().as_str());
 
         button
     }

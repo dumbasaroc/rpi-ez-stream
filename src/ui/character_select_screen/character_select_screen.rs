@@ -1,5 +1,7 @@
+use gtk4::glib::object::Cast;
+use gtk4::prelude::WidgetExt;
 use gtk4::glib;
-use gtk4::*;
+use gtk4::prelude::{ButtonExt, ObjectExt};
 
 glib::wrapper! {
 
@@ -12,41 +14,41 @@ glib::wrapper! {
 
 impl CharacterSelectScreen {
     pub fn new() -> Self {
-        // Create new window
-        let list: Vec<&'static str> = vec! [
-            "Mario",
-            "Donkey Kong",
-            "Link",
-            "Samus",
-            "Kirby",
-            "Fox",
-            "Pikachu",
-            "Yoshi"
-        ];
-
-        let css: Self = glib::Object::builder().build();
-        css.initialize_character_list(list).unwrap();
-        
-        css
+        glib::Object::builder().build()
     }
 
-    pub fn initialize_character_list<'a>(&self, characters: impl IntoIterator<Item = &'a str>) -> anyhow::Result<()> {
-        use crate::ui::CharacterButton;
+    /* GETTERS FOR WIDGETS NOT IMMEDIATELY IN TEMPLATE */
+    
+    pub fn back_button(&self) -> gtk4::Button {
+        for child in self.top_bar().observe_children().into_iter() {
+            if child.is_err() {
+                continue;
+            }
 
-        let iter = characters.into_iter();
-        self.character_box().remove_all();
-        
-        for character in iter {
-
-            let button = CharacterButton::new(
-                character,
-                vec![ character ]
-            );
-
-            self.character_box().insert(&button, -1);
+            let child = child.unwrap();
+            if child.is::<gtk4::Button>() {
+                let child = child.downcast::<gtk4::Button>().unwrap();
+                return child;
+            }
         }
-        
-        Ok(())
+
+        panic!("No such widget \"back_button\" in CSS.");
+    }
+
+    pub fn search_bar(&self) -> gtk4::SearchEntry {
+        for child in self.top_bar().observe_children().into_iter() {
+            if child.is_err() {
+                continue;
+            }
+
+            let child = child.unwrap();
+            if child.is::<gtk4::SearchEntry>() {
+                let child = child.downcast::<gtk4::SearchEntry>().unwrap();
+                return child;
+            }
+        }
+
+        panic!("No such widget \"back_button\" in CSS.");
     }
 }
 
@@ -65,7 +67,7 @@ mod imp {
 
         #[template_child]
         #[property(get)]
-        search_bar: TemplateChild<SearchEntry>,
+        top_bar: TemplateChild<gtk4::Box>,
 
         #[template_child]
         #[property(get)]

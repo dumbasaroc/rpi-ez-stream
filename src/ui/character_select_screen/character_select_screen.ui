@@ -6,7 +6,20 @@
   <template class="CharacterSelectScreen" parent="GtkBox">
     <property name="orientation">vertical</property>
     <child>
-      <object class="GtkSearchEntry" id="search_bar"/>
+      <object class="GtkBox" id="top_bar">
+        <child>
+          <object class="GtkButton" id="back_button">
+            <property name="icon-name">back</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSearchEntry" id="search_bar">
+            <property name="activates-default">True</property>
+            <property name="hexpand">True</property>
+            <property name="placeholder-text">Search character name...</property>
+          </object>
+        </child>
+      </object>
     </child>
     <child>
       <object class="GtkFlowBox" id="character_box"/>

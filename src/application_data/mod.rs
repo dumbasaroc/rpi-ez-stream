@@ -85,3 +85,27 @@ impl ApplicationData {
         Ok(())
     }
 }
+
+/* ******** MODULE HANDLER CHANGE FUNCTION ******* */
+pub fn switch_active_module<P>(path: Option<P>) where P: ToString {
+    let mut module_handler = MODULE_HANDLER.lock().unwrap();
+    match path {
+        Some(p) => {
+            let path = p.to_string();
+            log::debug!("Module path: {:?}", path);
+            match ModuleHandler::new(path) {
+                Ok(module) => {
+                    *module_handler = Some(module);
+                },
+                Err(e) => {
+                    *module_handler = None;
+                    log::error!("Encountered an error while switching to new module: {}", e);
+                }
+            };
+        },
+
+        None => {
+            *module_handler = None;
+        }
+    }
+}

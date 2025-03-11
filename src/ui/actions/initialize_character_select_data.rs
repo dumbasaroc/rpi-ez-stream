@@ -8,6 +8,9 @@ use log::info;
 pub const INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME: &str = "INITCSS";
 
 pub fn create_initialize_character_select_data_action() -> ActionEntry<MainWindow> {
+
+    use crate::application_data::MODULE_HANDLER;
+    use crate::ui::CharacterButton;
     
     ActionEntry::builder(INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME)
         .activate(|win: &MainWindow, _, _| {
@@ -17,14 +20,17 @@ pub fn create_initialize_character_select_data_action() -> ActionEntry<MainWindo
             let flowbox = css.character_box();
             flowbox.remove_all();
 
-            let go_back_button = gtk4::Button::builder()
-                .label("Go back.")
-                .build();
-            go_back_button.set_action_name(
-                Some( format!("win.{}", crate::ui::actions::SWITCH_TO_MAINSCREEN_ACTION_NAME).as_str() )
-            );
+            let module_handler = MODULE_HANDLER.lock().unwrap();
+            if module_handler.is_some() {
+                for character in &(module_handler.as_ref().unwrap().characters) {
+                    let char_button = CharacterButton::new(
+                        character.display_name.clone(),
+                        character.aliases.clone()
+                    );
+                    flowbox.insert(&char_button, -1);
+                }
+            }
             
-            flowbox.insert(&go_back_button, -1);
         })
         .build()
 

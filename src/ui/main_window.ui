@@ -4,8 +4,10 @@
   <!-- interface-name main_window.ui -->
   <requires lib="gtk" version="4.12"/>
   <template class="MainWindow" parent="GtkApplicationWindow">
+    <property name="height-request">500</property>
     <property name="resizable">False</property>
     <property name="title">RPI Smash EZ-Stream</property>
+    <property name="width-request">1000</property>
     <child>
       <object class="GtkStack" id="scene_switcher">
         <child>

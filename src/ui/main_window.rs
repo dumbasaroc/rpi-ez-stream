@@ -3,6 +3,8 @@ use gtk4::glib;
 use gtk4::prelude::*;
 use gtk4::*;
 
+use crate::application_data::switch_active_module;
+use crate::application_data::MODULE_HANDLER;
 use crate::application_data::{P1_PLAYER_ID, P2_PLAYER_ID};
 use crate::ui::actions;
 use crate::ui::{CharacterSelectScreen, MainScreen};
@@ -36,7 +38,21 @@ impl MainWindow {
         cmn::instantiate_score_entry(&win.main_screen().p1_score_input(), P1_PLAYER_ID);
         cmn::instantiate_score_entry(&win.main_screen().p2_score_input(), P2_PLAYER_ID);
 
+        // Instantiate the default active module
+        win.change_module("res/modules/smash_ultimate_stock_icons");
+
         win
+    }
+
+    fn change_module<P>(&self, module_path: P) where P: ToString {
+        let path = module_path.to_string();
+        switch_active_module(Some(path));
+
+        gtk4::prelude::WidgetExt::activate_action(
+            self,
+            format!("win.{}", actions::INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME).as_str(),
+            None
+        ).unwrap();
     }
 
     pub fn main_screen(&self) -> MainScreen {
@@ -104,6 +120,10 @@ impl MainWindow {
 
         self.main_screen().switch_data().set_action_name(
             Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME).as_str() )
+        );
+
+        self.character_select_screen().back_button().set_action_name(
+            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::SWITCH_TO_MAINSCREEN_ACTION_NAME).as_str() )
         );
     }
 }
