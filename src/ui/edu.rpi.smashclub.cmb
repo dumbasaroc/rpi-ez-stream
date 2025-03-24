@@ -1,14 +1,112 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
-<cambalache-project version="0.95.0" target_tk="gtk-4.0">
-  <ui template-class="PlayerNameEntry" filename="common/player_name_entry.ui" sha256="21ca69a3897211aa100c07451f725316d2c33c1ef757fcec2bc500d8172b1dc6"/>
-  <ui template-class="CharacterSelectScreen" filename="character_select_screen/character_select_screen.ui" sha256="fb3768c51a8708e0b85bc64e21633cf8c5c56ce2c1211f0a651d62bfd8508f57"/>
-  <ui template-class="CharacterButton" filename="character_select_screen/character_select_button.ui" sha256="e6cb900260617b1892e7b9ca5550ae06962a1acf6ef89676b13952440244694f"/>
-  <ui template-class="MainScreen" filename="main_screen/main_screen.ui" sha256="14f1d546f49c8d466b4acdcdf973a77e0727e20bc5320fe885bac842d784c327">
-    <requires>PlayerNameEntry</requires>
+<cambalache-project version="0.94.0" target_tk="gtk-4.0">
+  <ui>
+	(1,1,"character_select_button.ui","character_select_screen/character_select_button.ui",None,None,None,None,None,None,None),
+	(2,1,"character_select_screen.ui","character_select_screen/character_select_screen.ui",None,None,None,None,None,None,None),
+	(3,1,"player_name_entry.ui","common/player_name_entry.ui",None,None,None,None,None,None,None),
+	(4,None,"score_widget.ui","common/score_widget.ui",None,None,None,None,None,None,None),
+	(5,1,"main_screen.ui","main_screen/main_screen.ui",None,None,None,None,None,None,None),
+	(6,1,"main_window.ui","main_window.ui",None,None,None,None,None,None,None)
   </ui>
-  <ui template-class="MainWindow" filename="main_window.ui" sha256="4ee48ca02956b2e0695828c56d570113e36205d4a75d6068cc36f166f25e0d9f">
-    <requires>MainScreen</requires>
-    <requires>CharacterSelectScreen</requires>
-  </ui>
+  <ui_library>
+	(1,"gtk","4.12",None),
+	(2,"gtk","4.12",None),
+	(3,"gtk","4.12",None),
+	(4,"gtk","4.14",None),
+	(5,"gtk","4.12",None),
+	(6,"gtk","4.12",None)
+  </ui_library>
+  <object>
+	(1,1,"GtkButton","CharacterButton",None,None,None,None,0,None,None),
+	(2,1,"GtkBox","CharacterSelectScreen",None,None,None,None,0,None,None),
+	(2,2,"GtkBox","top_bar",1,None,None,None,0,None,None),
+	(2,3,"GtkButton","back_button",2,None,None,None,0,None,None),
+	(2,4,"GtkSearchEntry","search_bar",2,None,None,None,1,None,None),
+	(2,5,"GtkFlowBox","character_box",1,None,None,None,1,None,None),
+	(3,1,"GtkEntry","PlayerNameEntry",None,None,None,None,0,None,None),
+	(4,1,"GtkSpinButton",None,None,None,None,None,0,None,None),
+	(4,2,"GtkAdjustment",None,1,None,None,None,0,None,None),
+	(5,1,"GtkGrid","MainScreen",None,None,None,None,0,None,None),
+	(5,2,"GtkButton","switch_data",1,None,None,None,0,None,None),
+	(5,3,"GtkButton","p1_character",1,None,None,None,1,None,None),
+	(5,4,"GtkButton","p2_character",1,None,None,None,2,None,None),
+	(5,5,"GtkButton","update_button",1,None,None,None,3,None,None),
+	(5,6,"PlayerNameEntry","p1_name_input",1,None,None,None,4,None,None),
+	(5,7,"PlayerNameEntry","p2_name_input",1,None,None,None,5,None,None),
+	(5,8,"GtkSpinButton","p1_score_input",1,None,None,None,6,None,None),
+	(5,9,"GtkSpinButton","p2_score_input",1,None,None,None,7,None,None),
+	(6,1,"GtkApplicationWindow","MainWindow",None,None,None,None,0,None,None),
+	(6,2,"GtkStack","scene_switcher",1,None,None,None,0,None,None),
+	(6,3,"GtkStackPage","main_screen",2,None,None,None,0,None,None),
+	(6,4,"MainScreen",None,3,None,None,None,0,None,None),
+	(6,5,"GtkStackPage","character_select_screen",2,None,None,None,1,None,None),
+	(6,6,"CharacterSelectScreen",None,5,None,None,None,0,None,None)
+  </object>
+  <object_property>
+	(2,1,"GtkOrientable","orientation","vertical",0,None,None,None,None,None,None,None,None),
+	(2,3,"GtkButton","icon-name","back",0,None,None,None,None,None,None,None,None),
+	(2,4,"GtkSearchEntry","activates-default","True",0,None,None,None,None,None,None,None,None),
+	(2,4,"GtkSearchEntry","placeholder-text","Search character name...",0,None,None,None,None,None,None,None,None),
+	(2,4,"GtkWidget","hexpand","True",0,None,None,None,None,None,None,None,None),
+	(3,1,"GtkEntry","max-length","64",0,None,None,None,None,None,None,None,None),
+	(3,1,"GtkEntry","placeholder-text","Player Name",0,None,None,None,None,None,None,None,None),
+	(4,1,"GtkSpinButton","adjustment",None,0,None,None,None,2,None,None,None,None),
+	(4,2,"GtkAdjustment","step-increment","1.0",0,None,None,None,None,None,None,None,None),
+	(4,2,"GtkAdjustment","upper","65535.0",0,None,None,None,None,None,None,None,None),
+	(5,1,"GtkWidget","hexpand","True",0,None,None,None,None,None,None,None,None),
+	(5,1,"GtkWidget","vexpand","True",0,None,None,None,None,None,None,None,None),
+	(5,2,"GtkButton","icon-name","retweet-symbolic",0,None,None,None,None,None,None,None,None),
+	(5,3,"GtkButton","label","Player 1 Character",0,None,None,None,None,None,None,None,None),
+	(5,4,"GtkButton","label","Player 2 Character",0,None,None,None,None,None,None,None,None),
+	(5,5,"GtkButton","label","UPDATE",0,None,None,None,None,None,None,None,None),
+	(6,1,"GtkWidget","height-request","500",0,None,None,None,None,None,None,None,None),
+	(6,1,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(6,1,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
+	(6,1,"GtkWidget","width-request","1000",0,None,None,None,None,None,None,None,None),
+	(6,1,"GtkWindow","resizable","False",0,None,None,None,None,None,None,None,None),
+	(6,1,"GtkWindow","title","RPI Smash EZ-Stream",0,None,None,None,None,None,None,None,None),
+	(6,2,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(6,2,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
+	(6,3,"GtkStackPage","child",None,0,None,None,None,4,None,None,None,None),
+	(6,3,"GtkStackPage","name","mainscreen",0,None,None,None,None,None,None,None,None),
+	(6,5,"GtkStackPage","child",None,0,None,None,None,6,None,None,None,None),
+	(6,5,"GtkStackPage","name","css",0,None,None,None,None,None,None,None,None)
+  </object_property>
+  <object_layout_property>
+	(5,1,2,"GtkGridLayoutChild","column","1",0,None,None,None),
+	(5,1,2,"GtkGridLayoutChild","column-span","1",0,None,None,None),
+	(5,1,2,"GtkGridLayoutChild","row","2",0,None,None,None),
+	(5,1,2,"GtkGridLayoutChild","row-span","1",0,None,None,None),
+	(5,1,3,"GtkGridLayoutChild","column","0",0,None,None,None),
+	(5,1,3,"GtkGridLayoutChild","column-span","1",0,None,None,None),
+	(5,1,3,"GtkGridLayoutChild","row","2",0,None,None,None),
+	(5,1,3,"GtkGridLayoutChild","row-span","1",0,None,None,None),
+	(5,1,4,"GtkGridLayoutChild","column","2",0,None,None,None),
+	(5,1,4,"GtkGridLayoutChild","column-span","1",0,None,None,None),
+	(5,1,4,"GtkGridLayoutChild","row","2",0,None,None,None),
+	(5,1,4,"GtkGridLayoutChild","row-span","1",0,None,None,None),
+	(5,1,5,"GtkGridLayoutChild","column","1",0,None,None,None),
+	(5,1,5,"GtkGridLayoutChild","column-span","1",0,None,None,None),
+	(5,1,5,"GtkGridLayoutChild","row","3",0,None,None,None),
+	(5,1,6,"GtkGridLayoutChild","column","0",0,None,None,None),
+	(5,1,6,"GtkGridLayoutChild","column-span","1",0,None,None,None),
+	(5,1,6,"GtkGridLayoutChild","row","0",0,None,None,None),
+	(5,1,6,"GtkGridLayoutChild","row-span","1",0,None,None,None),
+	(5,1,7,"GtkGridLayoutChild","column","2",0,None,None,None),
+	(5,1,7,"GtkGridLayoutChild","column-span","1",0,None,None,None),
+	(5,1,7,"GtkGridLayoutChild","row","0",0,None,None,None),
+	(5,1,7,"GtkGridLayoutChild","row-span","1",0,None,None,None),
+	(5,1,8,"GtkGridLayoutChild","column","0",0,None,None,None),
+	(5,1,8,"GtkGridLayoutChild","column-span","1",0,None,None,None),
+	(5,1,8,"GtkGridLayoutChild","row","1",0,None,None,None),
+	(5,1,8,"GtkGridLayoutChild","row-span","1",0,None,None,None),
+	(5,1,9,"GtkGridLayoutChild","column","2",0,None,None,None),
+	(5,1,9,"GtkGridLayoutChild","column-span","1",0,None,None,None),
+	(5,1,9,"GtkGridLayoutChild","row","1",0,None,None,None),
+	(5,1,9,"GtkGridLayoutChild","row-span","1",0,None,None,None)
+  </object_layout_property>
+  <object_signal>
+	(1,2,4,"GtkEditable","changed","on_type_character",None,5,0,0,None)
+  </object_signal>
 </cambalache-project>

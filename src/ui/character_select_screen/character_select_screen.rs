@@ -60,6 +60,8 @@ mod imp {
     use gtk4::glib;
     use gtk4::*;
 
+    use crate::ui;
+
     #[derive(Default, CompositeTemplate, Properties)]
     #[template(file = "./character_select_screen.ui")]
     #[properties(wrapper_type = super::CharacterSelectScreen)]
@@ -74,6 +76,31 @@ mod imp {
         character_box: TemplateChild<FlowBox>,
     }
 
+    #[gtk4::template_callbacks]
+    impl CharacterSelectScreen {
+
+        #[template_callback]
+        fn on_type_character(flowbox: &FlowBox, searchbar: &SearchEntry) {
+            let bar_text = searchbar.text().to_string();
+            for child in &flowbox.observe_children() {
+                if child.is_err() { break; }
+                let child = child.unwrap()
+                    .downcast::<gtk4::FlowBoxChild>().unwrap()
+                    .child();
+                
+                if child.is_none() { break; }
+                let child = child.unwrap();
+
+                if child.is::<ui::CharacterButton>() {
+                    let child = child.downcast::<ui::CharacterButton>().unwrap();
+                    child.set_visible(
+                        child.search_match(&bar_text)
+                    );
+                }
+            }
+        }
+    }
+
     #[glib::object_subclass]
     impl ObjectSubclass for CharacterSelectScreen {
 
@@ -85,6 +112,7 @@ mod imp {
         fn class_init(klass: &mut Self::Class) {
             crate::ui::CharacterButton::static_type();
             klass.bind_template();
+            klass.bind_template_callbacks();
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {

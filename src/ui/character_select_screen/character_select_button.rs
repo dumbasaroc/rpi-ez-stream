@@ -30,8 +30,10 @@ impl CharacterButton {
             return true;
         }
 
+        if self.character_name_internal().to_lowercase().contains(&str_search_query.to_lowercase()) { return true; }
+
         for alias in self.aliases() {
-            if alias.contains(&str_search_query) { return true; }
+            if alias.to_lowercase().contains(&str_search_query.to_lowercase()) { return true; }
         }
 
         false
