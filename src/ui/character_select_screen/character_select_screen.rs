@@ -1,7 +1,7 @@
 use gtk4::glib::object::Cast;
 use gtk4::prelude::WidgetExt;
 use gtk4::glib;
-use gtk4::prelude::{ButtonExt, ObjectExt};
+use gtk4::prelude::ObjectExt;
 
 glib::wrapper! {
 

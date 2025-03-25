@@ -4,7 +4,6 @@ use gtk4::prelude::*;
 use gtk4::*;
 
 use crate::application_data::switch_active_module;
-use crate::application_data::MODULE_HANDLER;
 use crate::application_data::{P1_PLAYER_ID, P2_PLAYER_ID};
 use crate::ui::actions;
 use crate::ui::{CharacterSelectScreen, MainScreen};
