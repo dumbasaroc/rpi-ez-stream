@@ -1,5 +1,5 @@
 use gtk4::glib;
-use gtk4::prelude::ButtonExt;
+use gtk4::prelude::{ButtonExt, WidgetExt};
 
 glib::wrapper! {
 
@@ -10,7 +10,7 @@ glib::wrapper! {
 }
 
 impl CharacterButton {
-    pub fn new<'a, S, I>(character_name: S, aliases: I) -> Self where
+    pub fn new<S, I>(character_name: S, aliases: I) -> Self where
         std::string::String: From<S>,
         I: IntoIterator<Item = String>
     {
@@ -40,6 +40,23 @@ impl CharacterButton {
     }
 }
 
+#[gtk4::template_callbacks]
+impl CharacterButton {
+    
+    #[template_callback]
+    fn on_click(button: &CharacterButton) {
+        // use crate::application_data::{APPLICATION_STATE, P1_PLAYER_ID, P2_PLAYER_ID};
+
+        // let mut app_state = APPLICATION_STATE.lock().unwrap();
+
+        println!("Clicked the {} button!", button.character_name_internal());
+        button.activate_action(
+            format!("win.{}", crate::ui::actions::SWITCH_TO_MAINSCREEN_ACTION_NAME).as_str(),
+            None
+        ).unwrap();
+    }
+}
+
 mod imp {
 
     use gtk4::glib::Properties;
@@ -62,7 +79,7 @@ mod imp {
         #[property(get, set)]
         aliases: Rc<RefCell<Vec<String>>>,
     }
-
+    
     #[glib::object_subclass]
     impl ObjectSubclass for CharacterButton {
 
@@ -73,6 +90,7 @@ mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
+            super::CharacterButton::bind_template_callbacks(klass);
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {

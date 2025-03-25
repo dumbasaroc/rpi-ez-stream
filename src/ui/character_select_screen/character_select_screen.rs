@@ -84,16 +84,20 @@ mod imp {
             let bar_text = searchbar.text().to_string();
             for child in &flowbox.observe_children() {
                 if child.is_err() { break; }
-                let child = child.unwrap()
-                    .downcast::<gtk4::FlowBoxChild>().unwrap()
-                    .child();
+                let flowbox_child = child.unwrap()
+                    .downcast::<gtk4::FlowBoxChild>().unwrap();
+
+                let child = flowbox_child.child();
                 
                 if child.is_none() { break; }
                 let child = child.unwrap();
 
                 if child.is::<ui::CharacterButton>() {
                     let child = child.downcast::<ui::CharacterButton>().unwrap();
-                    child.set_visible(
+                    // child.set_visible(
+                    //     child.search_match(&bar_text)
+                    // );
+                    flowbox_child.set_visible(
                         child.search_match(&bar_text)
                     );
                 }

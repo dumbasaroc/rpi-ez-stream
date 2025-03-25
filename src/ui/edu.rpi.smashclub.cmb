@@ -107,6 +107,7 @@
 	(5,1,9,"GtkGridLayoutChild","row-span","1",0,None,None,None)
   </object_layout_property>
   <object_signal>
-	(1,2,4,"GtkEditable","changed","on_type_character",None,5,0,0,None)
+	(1,2,4,"GtkEditable","changed","on_type_character",None,5,0,0,None),
+	(2,1,1,"GtkButton","clicked","on_click",None,0,0,0,None)
   </object_signal>
 </cambalache-project>

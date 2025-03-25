@@ -1,4 +1,4 @@
-use gtk4::gio::ActionEntry;
+use gtk4::{gio::ActionEntry, prelude::EditableExt};
 
 use crate::ui::MainWindow;
 
@@ -13,6 +13,7 @@ pub fn create_switch_to_mainscreen_action() -> ActionEntry<MainWindow> {
                 "mainscreen",
                 gtk4::StackTransitionType::None
             );
+            win.character_select_screen().search_bar().set_text("");
         })
         .build()
 
