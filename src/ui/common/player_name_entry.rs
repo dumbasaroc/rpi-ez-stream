@@ -2,6 +2,8 @@ use gtk4::glib;
 use gtk4::prelude::EditableExt;
 use gtk4::*;
 
+use crate::application_data::AlterApplicationDataState;
+
 glib::wrapper! {
     pub struct PlayerNameEntry(ObjectSubclass<imp::PlayerNameEntry>)
         @extends Entry, Widget,
@@ -21,23 +23,15 @@ impl PlayerNameEntry {
     /// # Parameters
     /// - `player_id`: The string ID of the player
     ///   whose data this callback should edit.
-    pub fn set_change_callback(&self, player_id: &str) {
+    pub fn set_change_callback(&self, player_id: &'static str) {
 
-        self.set_player_name(player_id);
+        self.set_internal_player_id(player_id);
 
-        self.connect_changed(|f| {
+        self.connect_changed(move |f| {
             use crate::application_data::APPLICATION_STATE;
 
             let mut lock = APPLICATION_STATE.lock().unwrap();
-            let player = lock.get_player_via_id_mut(
-                &f.player_name()
-            );
-            let p = match player {
-                Some(p) => p,
-                None => { return; }
-            };
-
-            p.set_name(f.text());
+            lock.set_player_tag(player_id, f.text());
         });
     }
 }
@@ -51,8 +45,8 @@ mod imp {
     use gtk4::glib::subclass::types::*;
     use gtk4::subclass::prelude::*;
     use gtk4::prelude::ObjectExt;
-    use std::cell::RefCell;
     use std::rc::Rc;
+    use std::cell::RefCell;
 
     #[derive(Default, CompositeTemplate, glib::Properties)]
     #[template(file = "player_name_entry.ui")]
@@ -60,7 +54,7 @@ mod imp {
     pub struct PlayerNameEntry {
 
         #[property(get, set)]
-        pub player_name: Rc<RefCell<String>>
+        pub internal_player_id: Rc<RefCell<String>>
     }
 
     #[object_subclass]
@@ -100,7 +94,8 @@ mod tests {
         MainApplication,
         |win| {
 
-            use crate::application_data::{APPLICATION_STATE, P1_PLAYER_ID};
+            use crate::application_data::APPLICATION_STATE;
+            use crate::playerid;
 
             let entry: &super::PlayerNameEntry = &win.shown_screen().p1_name_input();
             
@@ -114,7 +109,7 @@ mod tests {
                 new_text.push(character);
                 entry.set_text(&new_text);
                 let lock = APPLICATION_STATE.lock().unwrap();
-                assert!(lock.players.get(P1_PLAYER_ID).unwrap().name() == new_text);
+                assert!(lock.players.get(playerid!(PLAYER1)).unwrap().name() == new_text);
                 drop(lock);
             }
         }

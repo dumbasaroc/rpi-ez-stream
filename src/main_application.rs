@@ -9,7 +9,7 @@ use gtk4::prelude::*;
 use gtk4::Application;
 use gtk4::gio::SettingsSchemaSource;
 
-use crate::application_data::{P1_PLAYER_ID, P2_PLAYER_ID};
+use crate::playerid;
 
 use super::ui;
 
@@ -112,8 +112,8 @@ fn instantiate_widget_properties(win: &ui::MainWindow, settings: &Settings) {
     use settings_data::*;
 
     debug!("Setting on-text-change callbacks for name entry widgets...");
-    win.shown_screen().p1_name_input().set_change_callback(P1_PLAYER_ID);
-    win.shown_screen().p2_name_input().set_change_callback(P2_PLAYER_ID);
+    win.shown_screen().p1_name_input().set_change_callback(playerid!(PLAYER1));
+    win.shown_screen().p2_name_input().set_change_callback(playerid!(PLAYER2));
 
     debug!("Setting placeholder text for name entry widgets...");
     win.shown_screen().p1_name_input().set_placeholder_text(Some("Player 1 Tag"));
