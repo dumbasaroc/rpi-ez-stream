@@ -4,7 +4,7 @@ use gtk4::prelude::*;
 use gtk4::*;
 
 use crate::application_data::switch_active_module;
-use crate::application_data::{P1_PLAYER_ID, P2_PLAYER_ID};
+use crate::playerid;
 use crate::ui::actions;
 use crate::ui::{CharacterSelectScreen, MainScreen};
 
@@ -31,11 +31,11 @@ impl MainWindow {
         let win: MainWindow = glib::Object::builder().property("application", app).build();
         win.instantiate_actions();
 
-        win.main_screen().p1_name_input().set_change_callback(P1_PLAYER_ID);
-        win.main_screen().p2_name_input().set_change_callback(P2_PLAYER_ID);
+        win.shown_screen().p1_name_input().set_change_callback(playerid!(PLAYER1));
+        win.shown_screen().p2_name_input().set_change_callback(playerid!(PLAYER2));
 
-        cmn::instantiate_score_entry(&win.main_screen().p1_score_input(), P1_PLAYER_ID);
-        cmn::instantiate_score_entry(&win.main_screen().p2_score_input(), P2_PLAYER_ID);
+        cmn::instantiate_score_entry(&win.shown_screen().p1_score_input(), playerid!(PLAYER1));
+        cmn::instantiate_score_entry(&win.shown_screen().p2_score_input(), playerid!(PLAYER2));
 
         // Instantiate the default active module
         win.change_module("res/modules/smash_ultimate_stock_icons");
