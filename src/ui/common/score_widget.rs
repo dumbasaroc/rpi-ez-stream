@@ -1,4 +1,4 @@
-use crate::application_data::APPLICATION_STATE;
+use crate::application_data::{AlterApplicationDataState, APPLICATION_STATE};
 
 pub type ScoreEntry = gtk4::SpinButton;
 
@@ -16,11 +16,7 @@ pub fn instantiate_score_entry(entry: &ScoreEntry, player_id: &'static str) {
     entry.connect_value_changed(move |x| {
         let val: u32 = x.value() as u32;
         let mut lock = APPLICATION_STATE.lock().unwrap();
-        let player = lock.get_player_via_id_mut(
-            player_id
-        ).unwrap();
-
-        player.set_score(val);
+        lock.set_player_score(player_id, val);
     });
 }
 
@@ -45,8 +41,8 @@ mod tests {
                 5.0
             );
 
-            let mut data = APPLICATION_STATE.lock().unwrap();
-            let p1_data = data.get_player_via_id_mut(playerid!(PLAYER1)).unwrap();
+            let data = APPLICATION_STATE.lock().unwrap();
+            let p1_data = data.players.get(playerid!(PLAYER1)).unwrap();
             assert!(p1_data.score() == 5);
         }
     }
@@ -65,8 +61,8 @@ mod tests {
                 5.0
             );
 
-            let mut data = APPLICATION_STATE.lock().unwrap();
-            let p1_data = data.get_player_via_id_mut(playerid!(PLAYER1)).unwrap();
+            let data = APPLICATION_STATE.lock().unwrap();
+            let p1_data = data.players.get(playerid!(PLAYER1)).unwrap();
             assert!(p1_data.score() == 2);
         }
     }
@@ -87,8 +83,8 @@ mod tests {
                 5.0
             );
 
-            let mut data = APPLICATION_STATE.lock().unwrap();
-            let p1_data = data.get_player_via_id_mut(playerid!(PLAYER1)).unwrap();
+            let data = APPLICATION_STATE.lock().unwrap();
+            let p1_data = data.players.get(playerid!(PLAYER1)).unwrap();
             assert!(p1_data.score() == 100);
         }
     }
@@ -107,8 +103,8 @@ mod tests {
                 5.0
             );
 
-            let mut data = APPLICATION_STATE.lock().unwrap();
-            let p1_data = data.get_player_via_id_mut(playerid!(PLAYER1)).unwrap();
+            let data = APPLICATION_STATE.lock().unwrap();
+            let p1_data = data.players.get(playerid!(PLAYER1)).unwrap();
             assert!(p1_data.score() == 0);
         }
     }

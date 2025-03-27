@@ -2,6 +2,8 @@ use gtk4::glib;
 use gtk4::prelude::EditableExt;
 use gtk4::*;
 
+use crate::application_data::AlterApplicationDataState;
+
 glib::wrapper! {
     pub struct PlayerNameEntry(ObjectSubclass<imp::PlayerNameEntry>)
         @extends Entry, Widget,
@@ -21,23 +23,15 @@ impl PlayerNameEntry {
     /// # Parameters
     /// - `player_id`: The string ID of the player
     ///   whose data this callback should edit.
-    pub fn set_change_callback(&self, player_id: &str) {
+    pub fn set_change_callback(&self, player_id: &'static str) {
 
         self.set_internal_player_id(player_id);
 
-        self.connect_changed(|f| {
+        self.connect_changed(move |f| {
             use crate::application_data::APPLICATION_STATE;
 
             let mut lock = APPLICATION_STATE.lock().unwrap();
-            let player = lock.get_player_via_id_mut(
-                &f.internal_player_id()
-            );
-            let p = match player {
-                Some(p) => p,
-                None => { return; }
-            };
-
-            p.set_name(f.text());
+            lock.set_player_tag(player_id, f.text());
         });
     }
 }

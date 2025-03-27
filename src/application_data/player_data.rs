@@ -75,10 +75,10 @@ impl PlayerData {
     /// This method resets the costume to idx zero if given the
     /// name parameter.
     pub fn set_character<S>(&mut self, name: Option<S>)
-        where S: AsRef<String>
+        where S: Into<String>
     {
         let c = name.map(|n| CharacterData {
-            character_name: n.as_ref().to_string(),
+            character_name: n.into(),
             costume_number: 0
         });
 
