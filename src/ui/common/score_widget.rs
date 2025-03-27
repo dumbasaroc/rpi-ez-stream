@@ -36,7 +36,8 @@ mod tests {
         test_increment_normal,
         MainApplication,
         |win| {
-            use crate::application_data::{APPLICATION_STATE, P1_PLAYER_ID};
+            use crate::application_data::APPLICATION_STATE;
+            use crate::playerid;
             
             let score_input_p1 = win.shown_screen().p1_score_input();
             score_input_p1.spin(
@@ -45,7 +46,7 @@ mod tests {
             );
 
             let mut data = APPLICATION_STATE.lock().unwrap();
-            let p1_data = data.get_player_via_id_mut(P1_PLAYER_ID).unwrap();
+            let p1_data = data.get_player_via_id_mut(playerid!(PLAYER1)).unwrap();
             assert!(p1_data.score() == 5);
         }
     }
@@ -54,7 +55,8 @@ mod tests {
         test_decrement_normal,
         MainApplication,
         |win| {
-            use crate::application_data::{APPLICATION_STATE, P1_PLAYER_ID};
+            use crate::application_data::APPLICATION_STATE;
+            use crate::playerid;
             
             let score_input_p1 = win.shown_screen().p1_score_input();
             score_input_p1.set_value(7.0);
@@ -64,7 +66,7 @@ mod tests {
             );
 
             let mut data = APPLICATION_STATE.lock().unwrap();
-            let p1_data = data.get_player_via_id_mut(P1_PLAYER_ID).unwrap();
+            let p1_data = data.get_player_via_id_mut(playerid!(PLAYER1)).unwrap();
             assert!(p1_data.score() == 2);
         }
     }
@@ -73,7 +75,8 @@ mod tests {
         test_increment_at_max,
         MainApplication,
         |win| {
-            use crate::application_data::{APPLICATION_STATE, P1_PLAYER_ID};
+            use crate::application_data::APPLICATION_STATE;
+            use crate::playerid;
             
             let score_input_p1 = win.shown_screen().p1_score_input();
             let limit: u32 = 100;
@@ -85,7 +88,7 @@ mod tests {
             );
 
             let mut data = APPLICATION_STATE.lock().unwrap();
-            let p1_data = data.get_player_via_id_mut(P1_PLAYER_ID).unwrap();
+            let p1_data = data.get_player_via_id_mut(playerid!(PLAYER1)).unwrap();
             assert!(p1_data.score() == 100);
         }
     }
@@ -94,7 +97,8 @@ mod tests {
         test_decrement_at_min,
         MainApplication,
         |win| {
-            use crate::application_data::{APPLICATION_STATE, P1_PLAYER_ID};
+            use crate::application_data::APPLICATION_STATE;
+            use crate::playerid;
             
             let score_input_p1 = win.shown_screen().p1_score_input();
             score_input_p1.set_value(1.0);
@@ -104,7 +108,7 @@ mod tests {
             );
 
             let mut data = APPLICATION_STATE.lock().unwrap();
-            let p1_data = data.get_player_via_id_mut(P1_PLAYER_ID).unwrap();
+            let p1_data = data.get_player_via_id_mut(playerid!(PLAYER1)).unwrap();
             assert!(p1_data.score() == 0);
         }
     }
