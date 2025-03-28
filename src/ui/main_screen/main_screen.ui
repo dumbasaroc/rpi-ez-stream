@@ -19,11 +19,9 @@
         <property name="halign">center</property>
         <property name="height-request">80</property>
         <property name="hexpand">True</property>
-        <property name="hexpand-set">True</property>
         <property name="icon-name">retweet-symbolic</property>
         <property name="valign">center</property>
         <property name="vexpand">True</property>
-        <property name="vexpand-set">True</property>
         <layout>
           <property name="column">1</property>
           <property name="column-span">1</property>

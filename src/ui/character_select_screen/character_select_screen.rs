@@ -35,6 +35,13 @@ impl CharacterSelectScreen {
         panic!("No such widget \"back_button\" in CSS.");
     }
 
+    pub fn character_box(&self) -> gtk4::FlowBox {
+        let child = self.scroll_window().child().unwrap();
+        let viewport = child.downcast::<gtk4::Viewport>().unwrap();
+        let child = viewport.child().unwrap();
+        child.downcast::<gtk4::FlowBox>().unwrap()
+    }
+
     pub fn search_bar(&self) -> gtk4::SearchEntry {
         for child in self.top_bar().observe_children().into_iter() {
             if child.is_err() {
@@ -73,7 +80,7 @@ mod imp {
 
         #[template_child]
         #[property(get)]
-        character_box: TemplateChild<FlowBox>,
+        scroll_window: TemplateChild<gtk4::ScrolledWindow>,
     }
 
     #[gtk4::template_callbacks]

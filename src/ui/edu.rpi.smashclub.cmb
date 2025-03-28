@@ -23,7 +23,9 @@
 	(2,2,"GtkBox","top_bar",1,None,None,None,0,None,None),
 	(2,3,"GtkButton","back_button",2,None,None,None,0,None,None),
 	(2,4,"GtkSearchEntry","search_bar",2,None,None,None,1,None,None),
-	(2,5,"GtkFlowBox","character_box",1,None,None,None,1,None,None),
+	(2,5,"GtkScrolledWindow","scroll_window",1,None,None,None,1,None,None),
+	(2,6,"GtkViewport",None,5,None,None,None,0,None,None),
+	(2,7,"GtkFlowBox","character_box",6,None,None,None,0,None,None),
 	(3,1,"GtkEntry","PlayerNameEntry",None,None,None,None,0,None,None),
 	(4,1,"GtkSpinButton",None,None,None,None,None,0,None,None),
 	(4,2,"GtkAdjustment",None,1,None,None,None,0,None,None),
@@ -49,6 +51,14 @@
 	(2,4,"GtkSearchEntry","activates-default","True",0,None,None,None,None,None,None,None,None),
 	(2,4,"GtkSearchEntry","placeholder-text","Search character name...",0,None,None,None,None,None,None,None,None),
 	(2,4,"GtkWidget","hexpand","True",0,None,None,None,None,None,None,None,None),
+	(2,5,"GtkScrolledWindow","child",None,None,None,None,None,6,None,None,None,None),
+	(2,5,"GtkScrolledWindow","hscrollbar-policy","never",None,None,None,None,None,None,None,None,None),
+	(2,5,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(2,5,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
+	(2,6,"GtkScrollable","vscroll-policy","natural",None,None,None,None,None,None,None,None,None),
+	(2,6,"GtkViewport","child","7",None,None,None,None,7,None,None,None,None),
+	(2,6,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(2,6,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
 	(3,1,"GtkEntry","max-length","64",0,None,None,None,None,None,None,None,None),
 	(3,1,"GtkEntry","placeholder-text","Player Name",0,None,None,None,None,None,None,None,None),
 	(4,1,"GtkSpinButton","adjustment",None,0,None,None,None,2,None,None,None,None),
@@ -68,10 +78,8 @@
 	(5,2,"GtkWidget","halign","center",None,None,None,None,None,None,None,None,None),
 	(5,2,"GtkWidget","height-request","80",None,None,None,None,None,None,None,None,None),
 	(5,2,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
-	(5,2,"GtkWidget","hexpand-set","True",None,None,None,None,None,None,None,None,None),
 	(5,2,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),
 	(5,2,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
-	(5,2,"GtkWidget","vexpand-set","True",None,None,None,None,None,None,None,None,None),
 	(5,3,"GtkButton","label","Player 1 Character",0,None,None,None,None,None,None,None,None),
 	(5,3,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(5,3,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
@@ -151,7 +159,7 @@
 	(5,1,9,"GtkGridLayoutChild","row-span","1",0,None,None,None)
   </object_layout_property>
   <object_signal>
-	(1,2,4,"GtkEditable","changed","on_type_character",None,5,0,0,None),
+	(1,2,4,"GtkEditable","changed","on_type_character",None,7,0,0,None),
 	(2,1,1,"GtkButton","clicked","on_click",None,0,0,0,None)
   </object_signal>
 </cambalache-project>
