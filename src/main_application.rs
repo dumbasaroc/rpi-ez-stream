@@ -112,8 +112,8 @@ fn instantiate_widget_properties(win: &ui::MainWindow, settings: &Settings) {
     use settings_data::*;
 
     debug!("Setting on-text-change callbacks for name entry widgets...");
-    win.shown_screen().p1_name_input().set_change_callback(playerid!(PLAYER1));
-    win.shown_screen().p2_name_input().set_change_callback(playerid!(PLAYER2));
+    win.main_screen().p1_name_input().set_change_callback(playerid!(PLAYER1));
+    win.main_screen().p2_name_input().set_change_callback(playerid!(PLAYER2));
 
     debug!("Setting placeholder text for name entry widgets...");
     win.main_screen().p1_name_input().set_placeholder_text(Some("Player 1 Tag"));

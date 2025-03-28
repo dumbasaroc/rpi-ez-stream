@@ -31,11 +31,11 @@ impl MainWindow {
         let win: MainWindow = glib::Object::builder().property("application", app).build();
         win.instantiate_actions();
 
-        win.shown_screen().p1_name_input().set_change_callback(playerid!(PLAYER1));
-        win.shown_screen().p2_name_input().set_change_callback(playerid!(PLAYER2));
+        win.main_screen().p1_name_input().set_change_callback(playerid!(PLAYER1));
+        win.main_screen().p2_name_input().set_change_callback(playerid!(PLAYER2));
 
-        cmn::instantiate_score_entry(&win.shown_screen().p1_score_input(), playerid!(PLAYER1));
-        cmn::instantiate_score_entry(&win.shown_screen().p2_score_input(), playerid!(PLAYER2));
+        cmn::instantiate_score_entry(&win.main_screen().p1_score_input(), playerid!(PLAYER1));
+        cmn::instantiate_score_entry(&win.main_screen().p2_score_input(), playerid!(PLAYER2));
 
         // Instantiate the default active module
         win.change_module("res/modules/smash_ultimate_stock_icons");
