@@ -4,20 +4,26 @@
   <!-- interface-name main_window.ui -->
   <requires lib="gtk" version="4.12"/>
   <template class="MainWindow" parent="GtkApplicationWindow">
-    <property name="height-request">500</property>
     <property name="hexpand">True</property>
-    <property name="resizable">False</property>
+    <property name="hexpand-set">True</property>
     <property name="title">RPI Smash EZ-Stream</property>
     <property name="vexpand">True</property>
-    <property name="width-request">1000</property>
+    <property name="vexpand-set">True</property>
     <child>
       <object class="GtkStack" id="scene_switcher">
         <property name="hexpand">True</property>
+        <property name="hexpand-set">True</property>
         <property name="vexpand">True</property>
+        <property name="vexpand-set">True</property>
         <child>
           <object class="GtkStackPage" id="main_screen">
             <property name="child">
-              <object class="MainScreen"/>
+              <object class="MainScreen">
+                <property name="hexpand">True</property>
+                <property name="hexpand-set">True</property>
+                <property name="vexpand">True</property>
+                <property name="vexpand-set">True</property>
+              </object>
             </property>
             <property name="name">mainscreen</property>
           </object>
@@ -25,7 +31,10 @@
         <child>
           <object class="GtkStackPage" id="character_select_screen">
             <property name="child">
-              <object class="CharacterSelectScreen"/>
+              <object class="CharacterSelectScreen">
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+              </object>
             </property>
             <property name="name">css</property>
           </object>

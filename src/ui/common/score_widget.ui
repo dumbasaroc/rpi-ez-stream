@@ -2,7 +2,7 @@
 <!-- Created with Cambalache 0.94.1 -->
 <interface>
   <!-- interface-name score_widget.ui -->
-  <requires lib="gtk" version="4.14"/>
+  <requires lib="gtk" version="4.12"/>
   <object class="GtkSpinButton">
     <property name="adjustment">
       <object class="GtkAdjustment">
