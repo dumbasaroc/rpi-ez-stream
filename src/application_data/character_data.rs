@@ -38,8 +38,6 @@ impl ModuleHandler {
             }
         };
 
-        // @TODO Finish this logic here, we should load some kind of
-        // module data from the filesystem.
         new_module.parse_module_information()?;
 
         Ok(new_module)
