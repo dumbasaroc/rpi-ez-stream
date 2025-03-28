@@ -110,6 +110,8 @@ pub fn switch_active_module<P>(path: Option<P>) where P: ToString {
             *module_handler = None;
         }
     }
+
+    
 }
 
 

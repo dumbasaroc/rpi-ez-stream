@@ -49,6 +49,12 @@ impl MainWindow {
 
         gtk4::prelude::WidgetExt::activate_action(
             self,
+            format!("win.{}", actions::UPDATE_CHARACTER_BUTTON_VISIBILITY_ACTION_NAME).as_str(),
+            None
+        ).unwrap();
+
+        gtk4::prelude::WidgetExt::activate_action(
+            self,
             format!("win.{}", actions::INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME).as_str(),
             None
         ).unwrap();
@@ -101,6 +107,7 @@ impl MainWindow {
             actions::create_initialize_character_select_data_action(),
             actions::create_switch_to_css_action(),
             actions::create_switch_to_mainscreen_action(),
+            actions::create_update_character_button_visibility_action(),
         ]);
         
         // Connect the action to the update button.
