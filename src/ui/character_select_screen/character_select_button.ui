@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.94.1 -->
+<interface>
+  <!-- interface-name character_select_button.ui -->
+  <requires lib="gtk" version="4.12"/>
+  <template class="CharacterButton" parent="GtkButton">
+    <signal name="clicked" handler="on_click"/>
+  </template>
+</interface>

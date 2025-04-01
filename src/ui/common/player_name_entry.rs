@@ -7,7 +7,7 @@ use crate::application_data::AlterApplicationDataState;
 glib::wrapper! {
     pub struct PlayerNameEntry(ObjectSubclass<imp::PlayerNameEntry>)
         @extends Entry, Widget,
-        @implements Accessible, Buildable, CellEditable, ConstraintTarget, Editable;
+        @implements Accessible, Buildable, ConstraintTarget, Editable;
 }
 
 impl PlayerNameEntry {
@@ -97,7 +97,7 @@ mod tests {
             use crate::application_data::APPLICATION_STATE;
             use crate::playerid;
 
-            let entry: &super::PlayerNameEntry = &win.shown_screen().p1_name_input();
+            let entry: &super::PlayerNameEntry = &win.main_screen().p1_name_input();
             
             let mut new_text: String = format!(
                 "{}", entry.text().to_string()

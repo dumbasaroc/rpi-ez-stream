@@ -26,7 +26,7 @@ pub struct CharacterData {
     pub costume_number: u32,
 }
 
-
+#[allow(dead_code)]
 impl PlayerData {
 
     // Getters

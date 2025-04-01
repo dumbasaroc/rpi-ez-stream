@@ -10,3 +10,6 @@ data.json
 
 # Test image folder
 res/
+
+# Just straight up ignored files
+ignored/

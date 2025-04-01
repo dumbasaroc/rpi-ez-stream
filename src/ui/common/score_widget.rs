@@ -35,7 +35,7 @@ mod tests {
             use crate::application_data::APPLICATION_STATE;
             use crate::playerid;
             
-            let score_input_p1 = win.shown_screen().p1_score_input();
+            let score_input_p1 = win.main_screen().p1_score_input();
             score_input_p1.spin(
                 gtk4::SpinType::StepForward,
                 5.0
@@ -54,7 +54,7 @@ mod tests {
             use crate::application_data::APPLICATION_STATE;
             use crate::playerid;
             
-            let score_input_p1 = win.shown_screen().p1_score_input();
+            let score_input_p1 = win.main_screen().p1_score_input();
             score_input_p1.set_value(7.0);
             score_input_p1.spin(
                 gtk4::SpinType::StepBackward,
@@ -74,7 +74,7 @@ mod tests {
             use crate::application_data::APPLICATION_STATE;
             use crate::playerid;
             
-            let score_input_p1 = win.shown_screen().p1_score_input();
+            let score_input_p1 = win.main_screen().p1_score_input();
             let limit: u32 = 100;
 
             score_input_p1.set_value(limit as f64);
@@ -96,7 +96,7 @@ mod tests {
             use crate::application_data::APPLICATION_STATE;
             use crate::playerid;
             
-            let score_input_p1 = win.shown_screen().p1_score_input();
+            let score_input_p1 = win.main_screen().p1_score_input();
             score_input_p1.set_value(1.0);
             score_input_p1.spin(
                 gtk4::SpinType::StepBackward,

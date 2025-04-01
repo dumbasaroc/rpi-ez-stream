@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.94.1 -->
+<interface>
+  <!-- interface-name character_select_screen.ui -->
+  <requires lib="gtk" version="4.12"/>
+  <template class="CharacterSelectScreen" parent="GtkBox">
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkBox" id="top_bar">
+        <child>
+          <object class="GtkButton" id="back_button">
+            <property name="icon-name">back</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSearchEntry" id="search_bar">
+            <property name="activates-default">True</property>
+            <property name="hexpand">True</property>
+            <property name="placeholder-text">Search character name...</property>
+            <signal name="changed" handler="on_type_character" object="character_box"/>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkScrolledWindow" id="scroll_window">
+        <property name="child">
+          <object class="GtkViewport">
+            <property name="child">
+              <object class="GtkFlowBox" id="character_box"/>
+            </property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <property name="vscroll-policy">natural</property>
+          </object>
+        </property>
+        <property name="hexpand">True</property>
+        <property name="hscrollbar-policy">never</property>
+        <property name="vexpand">True</property>
+      </object>
+    </child>
+  </template>
+</interface>

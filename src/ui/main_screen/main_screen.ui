@@ -1,14 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- Created with Cambalache 0.95.0 -->
+<!-- Created with Cambalache 0.94.1 -->
 <interface>
   <!-- interface-name main_screen.ui -->
   <requires lib="gtk" version="4.12"/>
   <template class="MainScreen" parent="GtkGrid">
+    <property name="column-spacing">10</property>
     <property name="hexpand">True</property>
+    <property name="hexpand-set">True</property>
+    <property name="margin-bottom">10</property>
+    <property name="margin-end">10</property>
+    <property name="margin-start">10</property>
+    <property name="margin-top">10</property>
+    <property name="row-spacing">10</property>
     <property name="vexpand">True</property>
+    <property name="vexpand-set">True</property>
     <child>
       <object class="GtkButton" id="switch_data">
+        <property name="halign">center</property>
+        <property name="height-request">80</property>
+        <property name="hexpand">True</property>
         <property name="icon-name">retweet-symbolic</property>
+        <property name="valign">center</property>
+        <property name="vexpand">True</property>
         <layout>
           <property name="column">1</property>
           <property name="column-span">1</property>
@@ -19,7 +32,9 @@
     </child>
     <child>
       <object class="GtkButton" id="p1_character">
+        <property name="hexpand">True</property>
         <property name="label">Player 1 Character</property>
+        <property name="vexpand">True</property>
         <layout>
           <property name="column">0</property>
           <property name="column-span">1</property>
@@ -30,7 +45,9 @@
     </child>
     <child>
       <object class="GtkButton" id="p2_character">
+        <property name="hexpand">True</property>
         <property name="label">Player 2 Character</property>
+        <property name="vexpand">True</property>
         <layout>
           <property name="column">2</property>
           <property name="column-span">1</property>
@@ -41,7 +58,11 @@
     </child>
     <child>
       <object class="GtkButton" id="update_button">
+        <property name="height-request">100</property>
+        <property name="hexpand">True</property>
         <property name="label">UPDATE</property>
+        <property name="valign">center</property>
+        <property name="width-request">200</property>
         <layout>
           <property name="column">1</property>
           <property name="column-span">1</property>
@@ -51,6 +72,9 @@
     </child>
     <child>
       <object class="PlayerNameEntry" id="p1_name_input">
+        <property name="hexpand">True</property>
+        <property name="valign">center</property>
+        <property name="width-request">200</property>
         <layout>
           <property name="column">0</property>
           <property name="column-span">1</property>
@@ -61,6 +85,9 @@
     </child>
     <child>
       <object class="PlayerNameEntry" id="p2_name_input">
+        <property name="hexpand">True</property>
+        <property name="valign">center</property>
+        <property name="width-request">200</property>
         <layout>
           <property name="column">2</property>
           <property name="column-span">1</property>
@@ -71,6 +98,10 @@
     </child>
     <child>
       <object class="GtkSpinButton" id="p1_score_input">
+        <property name="halign">center</property>
+        <property name="hexpand">True</property>
+        <property name="valign">center</property>
+        <property name="width-request">150</property>
         <layout>
           <property name="column">0</property>
           <property name="column-span">1</property>
@@ -81,6 +112,10 @@
     </child>
     <child>
       <object class="GtkSpinButton" id="p2_score_input">
+        <property name="halign">center</property>
+        <property name="hexpand">True</property>
+        <property name="valign">center</property>
+        <property name="width-request">150</property>
         <layout>
           <property name="column">2</property>
           <property name="column-span">1</property>
