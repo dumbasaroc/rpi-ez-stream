@@ -135,6 +135,7 @@ impl MainWindow {
             actions::create_switch_to_css_action(),
             actions::create_switch_to_mainscreen_action(),
             actions::create_update_character_button_visibility_action(),
+            actions::create_set_css_player_action(),
         ]);
         
         // Connect the action to the update button.
@@ -143,13 +144,31 @@ impl MainWindow {
         );
 
         // Connect "initialize CSS" action to a button
-        self.main_screen().p1_character().set_action_name(
-            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::SWITCH_TO_CSS_ACTION_NAME).as_str() )
-        );
+        self.main_screen().p1_character().connect_clicked(|button| {
+            
+            button.activate_action(
+                format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::SET_CSS_PLAYER_ACTION_NAME).as_str(),
+                Some(&playerid!(PLAYER1).to_variant())
+            ).unwrap();
 
-        self.main_screen().p2_character().set_action_name(
-            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::SWITCH_TO_CSS_ACTION_NAME).as_str() )
-        );
+            button.activate_action(
+                format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::SWITCH_TO_CSS_ACTION_NAME).as_str(),
+                None
+            ).unwrap();
+        });
+
+        self.main_screen().p2_character().connect_clicked(|button| {
+
+            button.activate_action(
+                format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::SET_CSS_PLAYER_ACTION_NAME).as_str(),
+                Some(&playerid!(PLAYER2).to_variant())
+            ).unwrap();
+
+            button.activate_action(
+                format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::SWITCH_TO_CSS_ACTION_NAME).as_str(),
+                None
+            ).unwrap();
+        });
 
         self.main_screen().switch_data().set_action_name(
             Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME).as_str() )

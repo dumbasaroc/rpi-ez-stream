@@ -14,3 +14,13 @@ macro_rules! playerid {
         "player_2"
     };
 }
+
+pub fn get_playerid_from_string(s: String) -> &'static str {
+
+    match s.as_str() {
+        playerid!(PLAYER1) => playerid!(PLAYER1),
+        playerid!(PLAYER2) => playerid!(PLAYER2),
+        _ => { panic!( "Attempted to match \"{}\", which is an invalid PlayerID.", s ); }
+    }
+
+}

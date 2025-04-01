@@ -47,10 +47,12 @@ impl CharacterButton {
     fn on_click(button: &CharacterButton) {
         use crate::application_data::APPLICATION_STATE;
         use crate::application_data::AlterApplicationDataState;
-        use crate::playerid;
 
         let mut app_state = APPLICATION_STATE.lock().unwrap();
-        app_state.set_player_character_name(playerid!(PLAYER1), button.character_name_internal());
+        app_state.set_player_character_name(
+            crate::application_data::get_playerid_from_string(button.player_id()),
+            button.character_name_internal()
+        );
         
         button.activate_action(
             format!("win.{}", crate::ui::actions::SWITCH_TO_MAINSCREEN_ACTION_NAME).as_str(),
@@ -80,6 +82,9 @@ mod imp {
 
         #[property(get, set)]
         aliases: Rc<RefCell<Vec<String>>>,
+
+        #[property(get, set)]
+        player_id: Rc<RefCell<String>>,
     }
     
     #[glib::object_subclass]

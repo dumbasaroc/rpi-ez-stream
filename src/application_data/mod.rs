@@ -4,6 +4,7 @@ pub use data_trait::AlterApplicationDataState;
 
 mod player_data;
 mod player_ids;
+pub use player_ids::get_playerid_from_string;
 
 use anyhow::{anyhow, Result};
 use lazy_static::lazy_static;
