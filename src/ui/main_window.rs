@@ -136,6 +136,7 @@ impl MainWindow {
             actions::create_switch_to_mainscreen_action(),
             actions::create_update_character_button_visibility_action(),
             actions::create_set_css_player_action(),
+            actions::create_swap_p1_p2_data_action(),
         ]);
         
         // Connect the action to the update button.
@@ -171,7 +172,7 @@ impl MainWindow {
         });
 
         self.main_screen().switch_data().set_action_name(
-            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME).as_str() )
+            Some( format!("{}.{}", MAIN_WINDOW_GROUP_PREFIX, actions::SWAP_P1_P2_DATA_ACTION_NAME).as_str() )
         );
 
         self.character_select_screen().back_button().set_action_name(
