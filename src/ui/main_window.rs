@@ -25,7 +25,7 @@ glib::wrapper! {
 impl MainWindow {
     pub fn new(app: &Application) -> Self {
 
-        use crate::ui::common as cmn;
+        use crate::ui::main_screen as cmn;
 
         // Create new window
         let win: MainWindow = glib::Object::builder().property("application", app).build();
