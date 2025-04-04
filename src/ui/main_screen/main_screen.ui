@@ -71,34 +71,6 @@
       </object>
     </child>
     <child>
-      <object class="PlayerNameEntry" id="p1_name_input">
-        <property name="hexpand">True</property>
-        <property name="placeholder-text">Player 1 Name</property>
-        <property name="valign">center</property>
-        <property name="width-request">200</property>
-        <layout>
-          <property name="column">0</property>
-          <property name="column-span">1</property>
-          <property name="row">0</property>
-          <property name="row-span">1</property>
-        </layout>
-      </object>
-    </child>
-    <child>
-      <object class="PlayerNameEntry" id="p2_name_input">
-        <property name="hexpand">True</property>
-        <property name="placeholder-text">Player 2 Name</property>
-        <property name="valign">center</property>
-        <property name="width-request">200</property>
-        <layout>
-          <property name="column">2</property>
-          <property name="column-span">1</property>
-          <property name="row">0</property>
-          <property name="row-span">1</property>
-        </layout>
-      </object>
-    </child>
-    <child>
       <object class="GtkSpinButton" id="p1_score_input">
         <property name="halign">center</property>
         <property name="hexpand">True</property>
@@ -122,6 +94,28 @@
           <property name="column">2</property>
           <property name="column-span">1</property>
           <property name="row">1</property>
+          <property name="row-span">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="PlayerNameEntry" id="p1_name_input">
+        <property name="placeholder-text">Player 1 Name</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="column-span">1</property>
+          <property name="row">0</property>
+          <property name="row-span">1</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="PlayerNameEntry" id="p2_name_input">
+        <property name="placeholder-text">Player 2 Name</property>
+        <layout>
+          <property name="column">2</property>
+          <property name="column-span">1</property>
+          <property name="row">0</property>
           <property name="row-span">1</property>
         </layout>
       </object>

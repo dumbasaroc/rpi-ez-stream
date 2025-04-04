@@ -4,18 +4,16 @@
   <ui>
 	(1,1,"character_select_button.ui","character_select_screen/character_select_button.ui",None,None,None,None,None,None,None),
 	(2,1,"character_select_screen.ui","character_select_screen/character_select_screen.ui",None,None,None,None,None,None,None),
-	(3,1,"player_name_entry.ui","common/player_name_entry.ui",None,None,None,None,None,None,None),
-	(4,None,"score_widget.ui","common/score_widget.ui",None,None,None,None,None,None,None),
 	(5,1,"main_screen.ui","main_screen/main_screen.ui",None,None,None,None,None,None,None),
-	(6,1,"main_window.ui","main_window.ui",None,None,None,None,None,None,None)
+	(6,1,"main_window.ui","main_window.ui",None,None,None,None,None,None,None),
+	(8,1,"player_name_entry.ui","main_screen/player_name_entry.ui",None,None,None,None,None,None,None)
   </ui>
   <ui_library>
 	(1,"gtk","4.12",None),
 	(2,"gtk","4.12",None),
-	(3,"gtk","4.12",None),
-	(4,"gtk","4.12",None),
 	(5,"gtk","4.12",None),
-	(6,"gtk","4.12",None)
+	(6,"gtk","4.12",None),
+	(8,"gtk","4.12",None)
   </ui_library>
   <object>
 	(1,1,"GtkButton","CharacterButton",None,None,None,None,0,None,None),
@@ -26,24 +24,22 @@
 	(2,5,"GtkScrolledWindow","scroll_window",1,None,None,None,1,None,None),
 	(2,6,"GtkViewport",None,5,None,None,None,0,None,None),
 	(2,7,"GtkFlowBox","character_box",6,None,None,None,0,None,None),
-	(3,1,"GtkEntry","PlayerNameEntry",None,None,None,None,0,None,None),
-	(4,1,"GtkSpinButton",None,None,None,None,None,0,None,None),
-	(4,2,"GtkAdjustment",None,1,None,None,None,0,None,None),
 	(5,1,"GtkGrid","MainScreen",None,None,None,None,0,None,None),
 	(5,2,"GtkButton","switch_data",1,None,None,None,0,None,None),
 	(5,3,"GtkButton","p1_character",1,None,None,None,1,None,None),
 	(5,4,"GtkButton","p2_character",1,None,None,None,2,None,None),
 	(5,5,"GtkButton","update_button",1,None,None,None,3,None,None),
-	(5,6,"PlayerNameEntry","p1_name_input",1,None,None,None,4,None,None),
-	(5,7,"PlayerNameEntry","p2_name_input",1,None,None,None,5,None,None),
 	(5,8,"GtkSpinButton","p1_score_input",1,None,None,None,6,None,None),
 	(5,9,"GtkSpinButton","p2_score_input",1,None,None,None,7,None,None),
+	(5,10,"PlayerNameEntry","p1_name_input",1,None,None,None,8,None,None),
+	(5,11,"PlayerNameEntry","p2_name_input",1,None,None,None,9,None,None),
 	(6,1,"GtkApplicationWindow","MainWindow",None,None,None,None,0,None,None),
 	(6,2,"GtkStack","scene_switcher",1,None,None,None,0,None,None),
 	(6,3,"GtkStackPage","main_screen",2,None,None,None,0,None,None),
 	(6,4,"MainScreen",None,3,None,None,None,0,None,None),
 	(6,5,"GtkStackPage","character_select_screen",2,None,None,None,1,None,None),
-	(6,6,"CharacterSelectScreen",None,5,None,None,None,0,None,None)
+	(6,6,"CharacterSelectScreen",None,5,None,None,None,0,None,None),
+	(8,1,"GtkEntry","PlayerNameEntry",None,None,None,None,0,None,None)
   </object>
   <object_property>
 	(2,1,"GtkOrientable","orientation","vertical",0,None,None,None,None,None,None,None,None),
@@ -59,11 +55,6 @@
 	(2,6,"GtkViewport","child","7",None,None,None,None,7,None,None,None,None),
 	(2,6,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(2,6,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
-	(3,1,"GtkEntry","max-length","64",0,None,None,None,None,None,None,None,None),
-	(3,1,"GtkEntry","placeholder-text","Player Name",0,None,None,None,None,None,None,None,None),
-	(4,1,"GtkSpinButton","adjustment",None,0,None,None,None,2,None,None,None,None),
-	(4,2,"GtkAdjustment","step-increment","1.0",0,None,None,None,None,None,None,None,None),
-	(4,2,"GtkAdjustment","upper","65535.0",0,None,None,None,None,None,None,None,None),
 	(5,1,"GtkGrid","column-spacing","10",None,None,None,None,None,None,None,None,None),
 	(5,1,"GtkGrid","row-spacing","10",None,None,None,None,None,None,None,None,None),
 	(5,1,"GtkWidget","hexpand","True",0,None,None,None,None,None,None,None,None),
@@ -91,14 +82,6 @@
 	(5,5,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(5,5,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),
 	(5,5,"GtkWidget","width-request","200",None,None,None,None,None,None,None,None,None),
-	(5,6,"GtkEntry","placeholder-text","Player 1 Name",None,None,None,None,None,None,None,None,None),
-	(5,6,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
-	(5,6,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),
-	(5,6,"GtkWidget","width-request","200",None,None,None,None,None,None,None,None,None),
-	(5,7,"GtkEntry","placeholder-text","Player 2 Name",None,None,None,None,None,None,None,None,None),
-	(5,7,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
-	(5,7,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),
-	(5,7,"GtkWidget","width-request","200",None,None,None,None,None,None,None,None,None),
 	(5,8,"GtkWidget","halign","center",None,None,None,None,None,None,None,None,None),
 	(5,8,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(5,8,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),
@@ -107,6 +90,8 @@
 	(5,9,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(5,9,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),
 	(5,9,"GtkWidget","width-request","150",None,None,None,None,None,None,None,None,None),
+	(5,10,"GtkEntry","placeholder-text","Player 1 Name",None,None,None,None,None,None,None,None,None),
+	(5,11,"GtkEntry","placeholder-text","Player 2 Name",None,None,None,None,None,None,None,None,None),
 	(6,1,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(6,1,"GtkWidget","hexpand-set","True",None,None,None,None,None,None,None,None,None),
 	(6,1,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
@@ -125,7 +110,9 @@
 	(6,5,"GtkStackPage","child",None,0,None,None,None,6,None,None,None,None),
 	(6,5,"GtkStackPage","name","css",0,None,None,None,None,None,None,None,None),
 	(6,6,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
-	(6,6,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None)
+	(6,6,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
+	(8,1,"GtkEntry","max-length","64",0,None,None,None,None,None,None,None,None),
+	(8,1,"GtkEntry","placeholder-text","Player Name",0,None,None,None,None,None,None,None,None)
   </object_property>
   <object_layout_property>
 	(5,1,2,"GtkGridLayoutChild","column","1",0,None,None,None),
@@ -143,14 +130,6 @@
 	(5,1,5,"GtkGridLayoutChild","column","1",0,None,None,None),
 	(5,1,5,"GtkGridLayoutChild","column-span","1",0,None,None,None),
 	(5,1,5,"GtkGridLayoutChild","row","3",0,None,None,None),
-	(5,1,6,"GtkGridLayoutChild","column","0",0,None,None,None),
-	(5,1,6,"GtkGridLayoutChild","column-span","1",0,None,None,None),
-	(5,1,6,"GtkGridLayoutChild","row","0",0,None,None,None),
-	(5,1,6,"GtkGridLayoutChild","row-span","1",0,None,None,None),
-	(5,1,7,"GtkGridLayoutChild","column","2",0,None,None,None),
-	(5,1,7,"GtkGridLayoutChild","column-span","1",0,None,None,None),
-	(5,1,7,"GtkGridLayoutChild","row","0",0,None,None,None),
-	(5,1,7,"GtkGridLayoutChild","row-span","1",0,None,None,None),
 	(5,1,8,"GtkGridLayoutChild","column","0",0,None,None,None),
 	(5,1,8,"GtkGridLayoutChild","column-span","1",0,None,None,None),
 	(5,1,8,"GtkGridLayoutChild","row","1",0,None,None,None),
@@ -158,7 +137,15 @@
 	(5,1,9,"GtkGridLayoutChild","column","2",0,None,None,None),
 	(5,1,9,"GtkGridLayoutChild","column-span","1",0,None,None,None),
 	(5,1,9,"GtkGridLayoutChild","row","1",0,None,None,None),
-	(5,1,9,"GtkGridLayoutChild","row-span","1",0,None,None,None)
+	(5,1,9,"GtkGridLayoutChild","row-span","1",0,None,None,None),
+	(5,1,10,"GtkGridLayoutChild","column","0",None,None,None,None),
+	(5,1,10,"GtkGridLayoutChild","column-span","1",None,None,None,None),
+	(5,1,10,"GtkGridLayoutChild","row","0",None,None,None,None),
+	(5,1,10,"GtkGridLayoutChild","row-span","1",None,None,None,None),
+	(5,1,11,"GtkGridLayoutChild","column","2",None,None,None,None),
+	(5,1,11,"GtkGridLayoutChild","column-span","1",None,None,None,None),
+	(5,1,11,"GtkGridLayoutChild","row","0",None,None,None,None),
+	(5,1,11,"GtkGridLayoutChild","row-span","1",None,None,None,None)
   </object_layout_property>
   <object_signal>
 	(1,2,4,"GtkEditable","changed","on_type_character",None,7,0,0,None),
