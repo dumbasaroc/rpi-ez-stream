@@ -13,9 +13,9 @@ use std::fs::File;
 use std::io::Write;
 use std::sync::Mutex;
 
+use character_data::*;
 use player_data::PlayerData;
 use crate::playerid;
-use character_data::*;
 
 // LAZY STATIC BLOCK FOR SINGLETON MUT DATA
 lazy_static! {
