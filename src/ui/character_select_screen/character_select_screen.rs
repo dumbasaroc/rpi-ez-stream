@@ -19,6 +19,8 @@ impl CharacterSelectScreen {
 
     /* GETTERS FOR WIDGETS NOT IMMEDIATELY IN TEMPLATE */
     
+    /// Returns the button on the CSS that returns
+    /// the user to the MainScreen.
     pub fn back_button(&self) -> gtk4::Button {
         for child in self.top_bar().observe_children().into_iter() {
             if child.is_err() {
@@ -32,9 +34,12 @@ impl CharacterSelectScreen {
             }
         }
 
-        panic!("No such widget \"back_button\" in CSS.");
+        panic!("No such widget \"back_button\" in the CSS.");
     }
 
+
+    /// Returns the FlowBox containing the character
+    /// buttons.
     pub fn character_box(&self) -> gtk4::FlowBox {
         let child = self.scroll_window().child().unwrap();
         let viewport = child.downcast::<gtk4::Viewport>().unwrap();
@@ -42,6 +47,9 @@ impl CharacterSelectScreen {
         child.downcast::<gtk4::FlowBox>().unwrap()
     }
 
+
+    /// Returns the SearchEntry on the Character
+    /// Select Screen.
     pub fn search_bar(&self) -> gtk4::SearchEntry {
         for child in self.top_bar().observe_children().into_iter() {
             if child.is_err() {
@@ -55,7 +63,7 @@ impl CharacterSelectScreen {
             }
         }
 
-        panic!("No such widget \"back_button\" in CSS.");
+        panic!("No such widget \"search_bar\" in the CSS.");
     }
 }
 
@@ -86,6 +94,17 @@ mod imp {
     #[gtk4::template_callbacks]
     impl CharacterSelectScreen {
 
+        /// The callback for editing the searchbar
+        /// on the CSS. This is responsible for filtering
+        /// the characters based on the user's input into
+        /// the searchbar.
+        /// 
+        /// # Parameters
+        /// - `flowbox`: The area where all the character
+        /// select buttons reside, used to check their
+        /// data and hide/show them accordingly.
+        /// - `searchbar`: The SearchEntry to pull text
+        /// from.
         #[template_callback]
         fn on_type_character(flowbox: &FlowBox, searchbar: &SearchEntry) {
             let bar_text = searchbar.text().to_string();
@@ -101,9 +120,6 @@ mod imp {
 
                 if child.is::<ui::CharacterButton>() {
                     let child = child.downcast::<ui::CharacterButton>().unwrap();
-                    // child.set_visible(
-                    //     child.search_match(&bar_text)
-                    // );
                     flowbox_child.set_visible(
                         child.search_match(&bar_text)
                     );

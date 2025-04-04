@@ -8,6 +8,11 @@ pub type ScoreEntry = gtk4::SpinButton;
 /// spinbuttons, as well as sets up the
 /// callback for when the value is changed.
 /// 
+/// @TODO Follow the example in
+/// CharacterSelectButton::on_click(),
+/// it handles this much more gracefully
+/// than we do here.
+/// 
 /// # Parameters
 /// - `entry`: The ScoreEntry widget to propogate
 /// data to.

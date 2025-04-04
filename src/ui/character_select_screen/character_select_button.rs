@@ -24,6 +24,18 @@ impl CharacterButton {
         button
     }
 
+
+    /// Checks a given search query against both
+    /// the internal name of the button, as well
+    /// as any aliases the character may have.
+    /// 
+    /// # Parameters
+    /// - `search_query`: The actual text the user
+    /// inputted.
+    /// 
+    /// # Returns
+    /// `true` if the query matched any string found
+    /// in this CharacterButton, `false` if it did not.
     pub fn search_match<P>(&self, search_query: P) -> bool where std::string::String: From<P> {
         let str_search_query: String = search_query.into();
         if str_search_query == "" {
@@ -43,6 +55,12 @@ impl CharacterButton {
 #[gtk4::template_callbacks]
 impl CharacterButton {
     
+    /// Handles changing a given player's character
+    /// when the button is clicked.
+    /// 
+    /// # Parameters
+    /// - `button`: The CharacterButton that
+    /// was just clicked.
     #[template_callback]
     fn on_click(button: &CharacterButton) {
         use crate::application_data::APPLICATION_STATE;

@@ -20,6 +20,11 @@ impl PlayerNameEntry {
     /// the internal data struct for a specific
     /// player.
     /// 
+    /// @TODO Follow the example in
+    /// CharacterSelectButton::on_click(),
+    /// it handles this much more gracefully
+    /// than we do here.
+    /// 
     /// # Parameters
     /// - `player_id`: The string ID of the player
     ///   whose data this callback should edit.
