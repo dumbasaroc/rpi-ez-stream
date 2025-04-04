@@ -27,12 +27,9 @@ function usage() {
 
 function last_cmd_did_fail() {
     RETVAL=$?
-    echo "$RETVAL"
     if [[ "$RETVAL" == "0" ]]; then
-        echo "last command worked"
         return 1
     else
-        echo "last command failed"
         return 0
     fi
 }

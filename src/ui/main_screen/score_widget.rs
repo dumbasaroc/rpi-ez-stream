@@ -2,6 +2,23 @@ use crate::application_data::{AlterApplicationDataState, APPLICATION_STATE};
 
 pub type ScoreEntry = gtk4::SpinButton;
 
+/// This is akin to a "new" function, but
+/// performed on an existing object. It
+/// sets minimums and maximums for the
+/// spinbuttons, as well as sets up the
+/// callback for when the value is changed.
+/// 
+/// @TODO Follow the example in
+/// CharacterSelectButton::on_click(),
+/// it handles this much more gracefully
+/// than we do here.
+/// 
+/// # Parameters
+/// - `entry`: The ScoreEntry widget to propogate
+/// data to.
+/// - `player_id`: The Player ID that this ScoreEntry
+/// should alter when it changes value. See
+/// the `playerid!()` macro for more information.
 pub fn instantiate_score_entry(entry: &ScoreEntry, player_id: &'static str) {
     const MIN: f64 = 0.0;
     const MAX: f64 = 100.0;

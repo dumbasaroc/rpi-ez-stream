@@ -9,8 +9,12 @@ use crate::ui::actions;
 use crate::ui::{CharacterSelectScreen, MainScreen};
 
 
-// SCENE NAMES
+/// The internal name for the MainScreen object in
+/// the GTK hierarchy
 const MAIN_SCREEN_NAME: &str = "mainscreen";
+
+/// The internal name for the CharacterSelectScreen object in
+/// the GTK hierarchy
 const CHARACTER_SELECT_SCREEN_NAME: &str = "css";
 
 
@@ -23,9 +27,19 @@ glib::wrapper! {
 }
 
 impl MainWindow {
+
+    /// Instantiates a new MainWindow for the inputted
+    /// Application.
+    /// 
+    /// # Parameters
+    /// - `app`: A reference to the gtk4::Application
+    /// this window should be attached to.
+    /// 
+    /// # Returns
+    /// A newly instantiated MainWindow object.
     pub fn new(app: &Application) -> Self {
 
-        use crate::ui::common as cmn;
+        use crate::ui::main_screen as cmn;
 
         // Create new window
         let win: MainWindow = glib::Object::builder().property("application", app).build();
@@ -43,6 +57,19 @@ impl MainWindow {
         win
     }
 
+
+    /// A helper function to change the active
+    /// module in the MODULE_HANDLER singleton.
+    /// This function additionally calls the two
+    /// actions that reload the CSS and set the
+    /// visibility of the CharacterSelect buttons
+    /// on the main screen, as well as populate
+    /// the default character of the module.
+    /// 
+    /// # Parameters
+    /// - `module_path`: The absolute or relative
+    /// path of the base folder where the new
+    /// module is located.
     fn change_module<P>(&self, module_path: P) where P: ToString {
         use crate::application_data::{APPLICATION_STATE, MODULE_HANDLER};
         use crate::application_data::AlterApplicationDataState;
@@ -87,6 +114,9 @@ impl MainWindow {
         ).unwrap();
     }
 
+
+    /// Returns the currently created MainScreen
+    /// for reading and writing purposes
     pub fn main_screen(&self) -> MainScreen {
 
         let correct_child: gtk4::Widget = match self.scene_switcher().child_by_name(MAIN_SCREEN_NAME) {
@@ -105,6 +135,10 @@ impl MainWindow {
         correct_child.downcast().unwrap()
     }
 
+
+    /// Returns the currently created Character
+    /// Select Screen for reading and writing
+    /// purposes.
     pub fn character_select_screen(&self) -> CharacterSelectScreen {
         let correct_child = match self.scene_switcher().child_by_name(CHARACTER_SELECT_SCREEN_NAME) {
             Some(c) => c,
@@ -122,6 +156,10 @@ impl MainWindow {
         correct_child.downcast().unwrap()
     }
 
+
+    /// A helper function that creates and populates
+    /// all the actions under `crate::ui::actions`
+    /// module into the main window.
     fn instantiate_actions(&self) {
 
         const MAIN_WINDOW_GROUP_PREFIX: &str = "win";

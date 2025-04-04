@@ -11,7 +11,6 @@ glib::wrapper! {
 
 impl MainScreen {
     pub fn new() -> Self {
-        // Create new window
         glib::Object::builder().build()
     }
 }
@@ -57,11 +56,11 @@ mod imp {
 
         #[template_child]
         #[property(get)]
-        p1_score_input: TemplateChild<ui::common::ScoreEntry>,
+        p1_score_input: TemplateChild<ui::ScoreEntry>,
 
         #[template_child]
         #[property(get)]
-        p2_score_input: TemplateChild<ui::common::ScoreEntry>,
+        p2_score_input: TemplateChild<ui::ScoreEntry>,
     }
 
     #[glib::object_subclass]

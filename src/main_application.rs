@@ -9,8 +9,6 @@ use gtk4::prelude::*;
 use gtk4::Application;
 use gtk4::gio::SettingsSchemaSource;
 
-use crate::playerid;
-
 use super::ui;
 
 
@@ -28,6 +26,13 @@ impl MainApplication {
 
     /// Instantiates the application, initializing
     /// all widgets required for it to start.
+    /// 
+    /// # Parameters
+    /// - `testing_callback` (only when run with `cargo test`):
+    /// A function that will run commands on the main window
+    /// just after creating it, simulating user input for
+    /// automatic testing purposes. See the `gtk_tester` crate
+    /// for more information.
     /// 
     /// # Returns
     /// A new MainApplication struct, ready to
@@ -78,8 +83,11 @@ impl MainApplication {
             debug!("Creating main window, attaching to application...");
             let mainwindow = ui::MainWindow::new(app);
         
-            debug!("Setting widget callbacks and properties...");
-            instantiate_widget_properties(&mainwindow, &settings);
+            #[cfg(not(test))]
+            {
+                debug!("Setting widget callbacks and properties...");
+                instantiate_widget_properties(&mainwindow, &settings);
+            }
 
             #[cfg(test)]
             testing_callback(&mainwindow);
@@ -105,21 +113,15 @@ impl MainApplication {
     }
 }
 
+/// @TODO Repurpose or remove this method, it basically
+/// does nothing besides binding settings to parameters,
+/// which can probably be done elsewhere.
 #[allow(unused_variables)]
+#[cfg(not(test))]
 fn instantiate_widget_properties(win: &ui::MainWindow, settings: &Settings) {
 
-    #[cfg(not(test))]
     use settings_data::*;
-
-    debug!("Setting on-text-change callbacks for name entry widgets...");
-    win.main_screen().p1_name_input().set_change_callback(playerid!(PLAYER1));
-    win.main_screen().p2_name_input().set_change_callback(playerid!(PLAYER2));
-
-    debug!("Setting placeholder text for name entry widgets...");
-    win.main_screen().p1_name_input().set_placeholder_text(Some("Player 1 Tag"));
-    win.main_screen().p2_name_input().set_placeholder_text(Some("Player 2 Tag"));
     
-    #[cfg(not(test))]
     {
         settings.bind(P1_SCORE_SETTING_KEY, &win.main_screen().p1_score_input(), "value").build();
         settings.bind(P2_SCORE_SETTING_KEY, &win.main_screen().p2_score_input(), "value").build();

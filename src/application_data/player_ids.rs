@@ -15,6 +15,9 @@ macro_rules! playerid {
     };
 }
 
+
+/// Takes in a String, returns a static
+/// reference to a valid PlayerID.
 pub fn get_playerid_from_string(s: String) -> &'static str {
 
     match s.as_str() {

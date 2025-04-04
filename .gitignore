@@ -13,3 +13,5 @@ res/
 
 # Just straight up ignored files
 ignored/
+
+release/
