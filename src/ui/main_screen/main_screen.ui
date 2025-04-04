@@ -73,6 +73,7 @@
     <child>
       <object class="PlayerNameEntry" id="p1_name_input">
         <property name="hexpand">True</property>
+        <property name="placeholder-text">Player 1 Name</property>
         <property name="valign">center</property>
         <property name="width-request">200</property>
         <layout>
@@ -86,6 +87,7 @@
     <child>
       <object class="PlayerNameEntry" id="p2_name_input">
         <property name="hexpand">True</property>
+        <property name="placeholder-text">Player 2 Name</property>
         <property name="valign">center</property>
         <property name="width-request">200</property>
         <layout>

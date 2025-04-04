@@ -11,7 +11,6 @@ glib::wrapper! {
 
 impl MainScreen {
     pub fn new() -> Self {
-        // Create new window
         glib::Object::builder().build()
     }
 }
