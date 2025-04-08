@@ -113,7 +113,6 @@ impl ModuleHandlerAPI {
         P: ToString,
         W: gtk4::prelude::WidgetExt
     {
-        use crate::application_data::{ApplicationStateAPI, MODULE_HANDLER};
         use crate::ui::actions;
         use crate::playerid;
 
@@ -186,6 +185,13 @@ impl ModuleHandlerAPI {
         if modhandler.is_none() { return None; }
 
         Some(modhandler.as_ref().unwrap().default_character.clone())
+    }
+
+    pub fn get_module_characters() -> Option<Vec<character_data::CharacterData>> {
+        let modhandler = MODULE_HANDLER.lock().unwrap();
+        if modhandler.is_none() { return None; }
+
+        Some(modhandler.as_ref().unwrap().characters.clone())
     }
 
     pub fn list_modules_in_folder() -> std::io::Result<Vec<(std::path::PathBuf, String)>>{

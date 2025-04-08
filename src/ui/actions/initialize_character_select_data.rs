@@ -8,7 +8,7 @@ pub const INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME: &str = "INITCSS";
 
 pub fn create_initialize_character_select_data_action() -> ActionEntry<MainWindow> {
 
-    use crate::application_data::MODULE_HANDLER;
+    use crate::application_data::ModuleHandlerAPI;
     use crate::ui::CharacterButton;
     
     ActionEntry::builder(INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME)
@@ -19,9 +19,8 @@ pub fn create_initialize_character_select_data_action() -> ActionEntry<MainWindo
             let flowbox = css.character_box();
             flowbox.remove_all();
 
-            let module_handler = MODULE_HANDLER.lock().unwrap();
-            if module_handler.is_some() {
-                for character in &(module_handler.as_ref().unwrap().characters) {
+            if ModuleHandlerAPI::is_module_loaded() {
+                for character in ModuleHandlerAPI::get_module_characters().unwrap() {
                     let char_button = CharacterButton::new(
                         character.display_name.clone(),
                         character.aliases.clone()
