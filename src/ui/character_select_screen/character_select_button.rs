@@ -71,6 +71,7 @@ impl CharacterButton {
             crate::application_data::get_playerid_from_string(button.player_id()),
             button.character_name_internal()
         );
+        drop(app_state);
         
         button.activate_action(
             format!("win.{}", crate::ui::actions::SWITCH_TO_MAINSCREEN_ACTION_NAME).as_str(),

@@ -64,7 +64,7 @@ impl ApplicationData {
         }
     }
 
-    fn get_player_via_id_mut(&mut self, id: &str) -> Option<&mut PlayerData> {
+    pub fn get_player_via_id_mut(&mut self, id: &str) -> Option<&mut PlayerData> {
         self.players.get_mut(id)
     }
 

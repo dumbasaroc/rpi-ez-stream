@@ -10,5 +10,6 @@
     - [x] ~~Come up with Module Data format~~
  - [ ] On CharacterButton click, set character data in ApplicationData to correct state
  - [ ] Integrate CostumeButtons on MainScreen
-    - [ ] Steps TBD
+ - [ ] Make a Dedicated writing API for APPLICATION_STATE to avoid hangs and forgetting to drop locks
+ - [ ] Same as above, but for reading (this is desperately needed)
 

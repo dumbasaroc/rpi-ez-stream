@@ -91,7 +91,11 @@
 	(5,9,"GtkWidget","valign","center",None,None,None,None,None,None,None,None,None),
 	(5,9,"GtkWidget","width-request","150",None,None,None,None,None,None,None,None,None),
 	(5,10,"GtkEntry","placeholder-text","Player 1 Name",None,None,None,None,None,None,None,None,None),
+	(5,10,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(5,10,"GtkWidget","width-request","200",None,None,None,None,None,None,None,None,None),
 	(5,11,"GtkEntry","placeholder-text","Player 2 Name",None,None,None,None,None,None,None,None,None),
+	(5,11,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
+	(5,11,"GtkWidget","width-request","200",None,None,None,None,None,None,None,None,None),
 	(6,1,"GtkWidget","hexpand","True",None,None,None,None,None,None,None,None,None),
 	(6,1,"GtkWidget","hexpand-set","True",None,None,None,None,None,None,None,None,None),
 	(6,1,"GtkWidget","vexpand","True",None,None,None,None,None,None,None,None,None),
@@ -151,4 +155,7 @@
 	(1,2,4,"GtkEditable","changed","on_type_character",None,7,0,0,None),
 	(2,1,1,"GtkButton","clicked","on_click",None,0,0,0,None)
   </object_signal>
+  <object_data>
+	(5,3,"GtkWidget",2,2,None,1,None,None,None,None)
+  </object_data>
 </cambalache-project>

@@ -40,6 +40,7 @@ impl MainWindow {
     pub fn new(app: &Application) -> Self {
 
         use crate::ui::main_screen as cmn;
+        use crate::ui::actions::*;
 
         // Create new window
         let win: MainWindow = glib::Object::builder().property("application", app).build();
@@ -53,6 +54,11 @@ impl MainWindow {
 
         // Instantiate the default active module
         win.change_module("res/modules/smash_ultimate_stock_icons");
+
+        WidgetExt::activate_action(&win,
+            format!("win.{}", SWITCH_TO_MAINSCREEN_ACTION_NAME).as_str(),
+            None
+        ).unwrap();
 
         win
     }
