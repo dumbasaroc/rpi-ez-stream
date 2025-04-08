@@ -28,7 +28,7 @@ lazy_static! {
 }
 
 /* ******** MODULE HANDLER CHANGE FUNCTION ******* */
-pub fn switch_active_module<P>(path: Option<P>) where P: ToString {
+fn switch_active_module<P>(path: Option<P>) where P: ToString {
     let mut module_handler = MODULE_HANDLER.lock().unwrap();
     match path {
         Some(p) => {
@@ -104,3 +104,123 @@ impl ApplicationStateAPI {
     }
 }
 
+pub struct ModuleHandlerAPI;
+
+#[allow(dead_code)]
+impl ModuleHandlerAPI {
+
+    pub fn load_module<P, W>(initiator: &W, modpath: Option<P>) -> anyhow::Result<()> where
+        P: ToString,
+        W: gtk4::prelude::WidgetExt
+    {
+        use crate::application_data::{ApplicationStateAPI, MODULE_HANDLER};
+        use crate::ui::actions;
+        use crate::playerid;
+
+        match modpath {
+            None => {
+                let mut module_state = MODULE_HANDLER.lock().unwrap();
+                *module_state = None;
+            },
+            Some(path) => {
+                let path = path.to_string();
+                switch_active_module(Some(path));       
+            }
+        }
+
+        let module_state = MODULE_HANDLER.lock().unwrap();
+
+        match module_state.as_ref() {
+            Some(module) => {
+                ApplicationStateAPI::set_player_character_name(
+                    playerid!(PLAYER1),
+                    module.default_character.display_name.clone()
+                );
+                ApplicationStateAPI::set_player_character_name(
+                    playerid!(PLAYER2),
+                    module.default_character.display_name.clone()
+                );
+            },
+            None => {
+                ApplicationStateAPI::set_player_character_to_none(playerid!(PLAYER1));
+                ApplicationStateAPI::set_player_character_to_none(playerid!(PLAYER2));
+            }
+        };
+
+        drop(module_state);
+
+        initiator.activate_action(
+            format!("win.{}", actions::UPDATE_CHARACTER_BUTTON_VISIBILITY_ACTION_NAME).as_str(),
+            None
+        ).unwrap();
+
+        initiator.activate_action(
+            format!("win.{}", actions::INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME).as_str(),
+            None
+        ).unwrap();
+
+        Ok(())
+    }
+
+    pub fn is_module_loaded() -> bool {
+        let modhandler = MODULE_HANDLER.lock().unwrap();
+        modhandler.is_some()
+    }
+
+    pub fn get_module_path() -> Option<std::path::PathBuf> {
+        let modhandler = MODULE_HANDLER.lock().unwrap();
+        if modhandler.is_none() { return None; }
+
+        Some(modhandler.as_ref().unwrap().base_directory_path.clone())
+    }
+
+    pub fn get_module_name() -> Option<String> {
+        let modhandler = MODULE_HANDLER.lock().unwrap();
+        if modhandler.is_none() { return None; }
+
+        Some(modhandler.as_ref().unwrap().current_module_name.clone())
+    }
+
+    pub fn get_module_default_character() -> Option<character_data::CharacterData> {
+        let modhandler = MODULE_HANDLER.lock().unwrap();
+        if modhandler.is_none() { return None; }
+
+        Some(modhandler.as_ref().unwrap().default_character.clone())
+    }
+
+    pub fn list_modules_in_folder() -> std::io::Result<Vec<(std::path::PathBuf, String)>>{
+        const MODULES_FOLDER: &str = "./res/modules/";
+
+        let dirs = std::fs::read_dir(MODULES_FOLDER)?;
+        let mut out_mods: Vec<(std::path::PathBuf, String)> = vec![];
+
+        for path in dirs {
+            let path = path?;
+
+            match path.metadata()?.is_dir() {
+                true => {                    
+                    match ModuleHandler::new(path.path()) {
+                        Ok(mh) => {
+                            // println!("  - Module display name: {}", mh.current_module_name);
+                            out_mods.push((
+                                path.path().clone(),
+                                mh.current_module_name.clone()
+                            ));
+                        },
+                        Err(e) => {
+                            log::warn!(
+                                "Invalid module detected at {}\n{}",
+                                path.path().to_str().unwrap(),
+                                e
+                            );
+                        }
+                    }
+                },
+                _ => {}
+            }
+        }
+
+        Ok(out_mods)
+    }
+
+}

@@ -3,7 +3,7 @@ use gtk4::glib;
 use gtk4::prelude::*;
 use gtk4::*;
 
-use crate::application_data::switch_active_module;
+// use crate::application_data::switch_active_module;
 use crate::playerid;
 use crate::ui::actions;
 use crate::ui::{CharacterSelectScreen, MainScreen};
@@ -41,6 +41,7 @@ impl MainWindow {
 
         use crate::ui::main_screen as cmn;
         use crate::ui::actions::*;
+        use crate::application_data::ModuleHandlerAPI;
 
         // Create new window
         let win: MainWindow = glib::Object::builder().property("application", app).build();
@@ -53,7 +54,11 @@ impl MainWindow {
         cmn::instantiate_score_entry(&win.main_screen().p2_score_input(), playerid!(PLAYER2));
 
         // Instantiate the default active module
-        win.change_module("res/modules/smash_ultimate_stock_icons");
+        
+        ModuleHandlerAPI::load_module(&win, None::<String>).unwrap();
+        // let _ = ModuleHandlerAPI::list_modules_in_folder();
+        // ModuleHandlerAPI::load_module(&win, Some("res/modules/smash_ultimate_stock_icons")).unwrap();
+        // win.change_module("res/modules/smash_ultimate_stock_icons");
 
         WidgetExt::activate_action(&win,
             format!("win.{}", SWITCH_TO_MAINSCREEN_ACTION_NAME).as_str(),
@@ -61,60 +66,6 @@ impl MainWindow {
         ).unwrap();
 
         win
-    }
-
-
-    /// A helper function to change the active
-    /// module in the MODULE_HANDLER singleton.
-    /// This function additionally calls the two
-    /// actions that reload the CSS and set the
-    /// visibility of the CharacterSelect buttons
-    /// on the main screen, as well as populate
-    /// the default character of the module.
-    /// 
-    /// # Parameters
-    /// - `module_path`: The absolute or relative
-    /// path of the base folder where the new
-    /// module is located.
-    fn change_module<P>(&self, module_path: P) where P: ToString {
-        use crate::application_data::{ApplicationStateAPI, MODULE_HANDLER};
-        use crate::playerid;
-
-        let path = module_path.to_string();
-        switch_active_module(Some(path));
-
-        let module_state = MODULE_HANDLER.lock().unwrap();
-
-        match module_state.as_ref() {
-            Some(module) => {
-                ApplicationStateAPI::set_player_character_name(
-                    playerid!(PLAYER1),
-                    module.default_character.display_name.clone()
-                );
-                ApplicationStateAPI::set_player_character_name(
-                    playerid!(PLAYER2),
-                    module.default_character.display_name.clone()
-                );
-            },
-            None => {
-                ApplicationStateAPI::set_player_character_to_none(playerid!(PLAYER1));
-                ApplicationStateAPI::set_player_character_to_none(playerid!(PLAYER2));
-            }
-        };
-
-        drop(module_state);
-
-        gtk4::prelude::WidgetExt::activate_action(
-            self,
-            format!("win.{}", actions::UPDATE_CHARACTER_BUTTON_VISIBILITY_ACTION_NAME).as_str(),
-            None
-        ).unwrap();
-
-        gtk4::prelude::WidgetExt::activate_action(
-            self,
-            format!("win.{}", actions::INITIALIZE_CHARACTER_SELECT_DATA_ACTION_NAME).as_str(),
-            None
-        ).unwrap();
     }
 
 

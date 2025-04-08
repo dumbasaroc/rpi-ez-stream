@@ -25,10 +25,10 @@ struct ModuleData {
 
 impl ModuleHandler {
 
-    pub fn new<P>(path: P) -> anyhow::Result<Self> where P: ToString {
+    pub fn new<P>(path: P) -> anyhow::Result<Self> where P: AsRef<std::path::Path> {
         let mut new_module = Self {
             current_module_name: "Something".to_string(),
-            base_directory_path: PathBuf::from(path.to_string()),
+            base_directory_path: PathBuf::from(path.as_ref()),
             characters: vec![],
             default_character: CharacterData {
                 display_name: "Nil".to_string(),

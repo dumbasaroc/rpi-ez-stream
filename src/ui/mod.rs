@@ -1,4 +1,4 @@
-mod actions;
+pub mod actions;
 mod character_select_screen;
 mod main_screen;
 mod main_window;

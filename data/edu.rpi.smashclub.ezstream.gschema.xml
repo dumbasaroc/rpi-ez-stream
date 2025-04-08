@@ -34,5 +34,17 @@
     <default>""</default>
     <description>The last inputted name for P2</description>
 </key>
+<key name="last-opened-module" type="s">
+    <default>""</default>
+    <description>Holds the path of the last opened module. If there is no such module, or if this is empty, defaults to the "None" module</description>
+</key>
+<key name="p1-character" type="s">
+    <default>""</default>
+    <description>The last character P1 was reported as playing. Ignored if the last opened module didn't persist.</description>
+</key>
+<key name="p2-character" type="s">
+    <default>""</default>
+    <description>The last character P2 was reported as playing. Ignored if the last opened module didn't persist.</description>
+</key>
 </schema>
 </schemalist>

@@ -14,8 +14,12 @@ pub const P2_NAME_SETTING_KEY: &str = "p2-name";
 pub const P1_SCORE_SETTING_KEY: &str = "p1-score";
 pub const P2_SCORE_SETTING_KEY: &str = "p2-score";
 
+pub const LAST_OPENED_MODULE_KEY: &str = "last-opened-module";
+pub const P1_CHARACTER_SETTING_KEY: &str = "p1-character";
+pub const P2_CHARACTER_SETTING_KEY: &str = "p2-character";
 
-const SETTINGS: [datatypes::GTKSettingsDatatypes; 8] = [
+
+const SETTINGS: [datatypes::GTKSettingsDatatypes; 11] = [
     SD::Bool {
         key: FIRST_TIME_USE_KEY,
         val: true,
@@ -62,6 +66,24 @@ const SETTINGS: [datatypes::GTKSettingsDatatypes; 8] = [
         key: P2_NAME_SETTING_KEY,
         val: "",
         description: "The last inputted name for P2"
+    },
+
+    SD::String {
+        key: LAST_OPENED_MODULE_KEY,
+        val: "",
+        description: "Holds the path of the last opened module. If there is no such module, or if this is empty, defaults to the \"None\" module"
+    },
+
+    SD::String {
+        key: P1_CHARACTER_SETTING_KEY,
+        val: "",
+        description: "The last character P1 was reported as playing. Ignored if the last opened module didn't persist."
+    },
+
+    SD::String {
+        key: P2_CHARACTER_SETTING_KEY,
+        val: "",
+        description: "The last character P2 was reported as playing. Ignored if the last opened module didn't persist."
     },
 ];
 
