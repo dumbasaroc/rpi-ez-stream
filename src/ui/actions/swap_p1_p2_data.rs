@@ -37,7 +37,7 @@ mod tests {
         MainApplication,
         |win| {
             use crate::ui::actions::SWAP_P1_P2_DATA_ACTION_NAME;
-            use crate::application_data::APPLICATION_STATE;
+            use crate::application_data::ApplicationStateAPI;
             use crate::playerid;
 
             let p1_name = "p1";
@@ -64,14 +64,15 @@ mod tests {
             assert!(main_screen.p2_score_input().value_as_int() == p1_score as i32);
 
             // Internal State
-            let app_state = APPLICATION_STATE.lock().unwrap();
-            let p1 = app_state.players.get(playerid!(PLAYER1)).unwrap();
-            let p2 = app_state.players.get(playerid!(PLAYER2)).unwrap();
+            let curr_p1_name = ApplicationStateAPI::get_player_tag(playerid!(PLAYER1));
+            let curr_p2_name = ApplicationStateAPI::get_player_tag(playerid!(PLAYER2));
+            let curr_p1_score = ApplicationStateAPI::get_player_score(playerid!(PLAYER1));
+            let curr_p2_score = ApplicationStateAPI::get_player_score(playerid!(PLAYER2));
             
-            assert!(p1.name() == p2_name);
-            assert!(p2.name() == p1_name);
-            assert!(p1.score() == p2_score);
-            assert!(p2.score() == p1_score);
+            assert!(curr_p1_name == p2_name);
+            assert!(curr_p2_name == p1_name);
+            assert!(curr_p1_score == p2_score);
+            assert!(curr_p2_score == p1_score);
         }
     }
 }

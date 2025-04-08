@@ -63,15 +63,12 @@ impl CharacterButton {
     /// was just clicked.
     #[template_callback]
     fn on_click(button: &CharacterButton) {
-        use crate::application_data::APPLICATION_STATE;
-        use crate::application_data::AlterApplicationDataState;
+        use crate::application_data::ApplicationStateAPI;
 
-        let mut app_state = APPLICATION_STATE.lock().unwrap();
-        app_state.set_player_character_name(
+        ApplicationStateAPI::set_player_character_name(
             crate::application_data::get_playerid_from_string(button.player_id()),
             button.character_name_internal()
         );
-        drop(app_state);
         
         button.activate_action(
             format!("win.{}", crate::ui::actions::SWITCH_TO_MAINSCREEN_ACTION_NAME).as_str(),

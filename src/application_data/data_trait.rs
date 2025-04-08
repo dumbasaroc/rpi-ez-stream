@@ -1,6 +1,14 @@
-pub trait AlterApplicationDataState {
+#[allow(dead_code)]
+pub trait AppStateDataAPI {
 
     type PlayerIDType;
+    type CharacterDataType;
+
+    fn get_player_tag(&mut self, id: Self::PlayerIDType) -> String;
+
+    fn get_player_score(&mut self, id: Self::PlayerIDType) -> u32;
+    
+    fn get_player_character(&mut self, id: Self::PlayerIDType) -> Option<Self::CharacterDataType>;
 
     fn set_player_score(&mut self, id: Self::PlayerIDType, score: u32);
 

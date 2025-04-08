@@ -77,35 +77,32 @@ impl MainWindow {
     /// path of the base folder where the new
     /// module is located.
     fn change_module<P>(&self, module_path: P) where P: ToString {
-        use crate::application_data::{APPLICATION_STATE, MODULE_HANDLER};
-        use crate::application_data::AlterApplicationDataState;
+        use crate::application_data::{ApplicationStateAPI, MODULE_HANDLER};
         use crate::playerid;
 
         let path = module_path.to_string();
         switch_active_module(Some(path));
 
         let module_state = MODULE_HANDLER.lock().unwrap();
-        let mut app_state = APPLICATION_STATE.lock().unwrap();
 
         match module_state.as_ref() {
             Some(module) => {
-                app_state.set_player_character_name(
+                ApplicationStateAPI::set_player_character_name(
                     playerid!(PLAYER1),
                     module.default_character.display_name.clone()
                 );
-                app_state.set_player_character_name(
+                ApplicationStateAPI::set_player_character_name(
                     playerid!(PLAYER2),
                     module.default_character.display_name.clone()
                 );
             },
             None => {
-                app_state.set_player_character_to_none(playerid!(PLAYER1));
-                app_state.set_player_character_to_none(playerid!(PLAYER2));
+                ApplicationStateAPI::set_player_character_to_none(playerid!(PLAYER1));
+                ApplicationStateAPI::set_player_character_to_none(playerid!(PLAYER2));
             }
         };
 
         drop(module_state);
-        drop(app_state);
 
         gtk4::prelude::WidgetExt::activate_action(
             self,

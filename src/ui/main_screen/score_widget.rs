@@ -1,4 +1,4 @@
-use crate::application_data::{AlterApplicationDataState, APPLICATION_STATE};
+use crate::application_data::ApplicationStateAPI;
 
 pub type ScoreEntry = gtk4::SpinButton;
 
@@ -32,8 +32,7 @@ pub fn instantiate_score_entry(entry: &ScoreEntry, player_id: &'static str) {
 
     entry.connect_value_changed(move |x| {
         let val: u32 = x.value() as u32;
-        let mut lock = APPLICATION_STATE.lock().unwrap();
-        lock.set_player_score(player_id, val);
+        ApplicationStateAPI::set_player_score(player_id, val);
     });
 }
 
@@ -49,7 +48,7 @@ mod tests {
         test_increment_normal,
         MainApplication,
         |win| {
-            use crate::application_data::APPLICATION_STATE;
+            use crate::application_data::ApplicationStateAPI;
             use crate::playerid;
             
             let score_input_p1 = win.main_screen().p1_score_input();
@@ -58,9 +57,8 @@ mod tests {
                 5.0
             );
 
-            let data = APPLICATION_STATE.lock().unwrap();
-            let p1_data = data.players.get(playerid!(PLAYER1)).unwrap();
-            assert!(p1_data.score() == 5);
+            let p1_data = ApplicationStateAPI::get_player_score(playerid!(PLAYER1));
+            assert!(p1_data == 5);
         }
     }
 
@@ -68,7 +66,7 @@ mod tests {
         test_decrement_normal,
         MainApplication,
         |win| {
-            use crate::application_data::APPLICATION_STATE;
+            use crate::application_data::ApplicationStateAPI;
             use crate::playerid;
             
             let score_input_p1 = win.main_screen().p1_score_input();
@@ -78,9 +76,8 @@ mod tests {
                 5.0
             );
 
-            let data = APPLICATION_STATE.lock().unwrap();
-            let p1_data = data.players.get(playerid!(PLAYER1)).unwrap();
-            assert!(p1_data.score() == 2);
+            let p1_data = ApplicationStateAPI::get_player_score(playerid!(PLAYER1));
+            assert!(p1_data == 2);
         }
     }
 
@@ -88,7 +85,7 @@ mod tests {
         test_increment_at_max,
         MainApplication,
         |win| {
-            use crate::application_data::APPLICATION_STATE;
+            use crate::application_data::ApplicationStateAPI;
             use crate::playerid;
             
             let score_input_p1 = win.main_screen().p1_score_input();
@@ -100,9 +97,8 @@ mod tests {
                 5.0
             );
 
-            let data = APPLICATION_STATE.lock().unwrap();
-            let p1_data = data.players.get(playerid!(PLAYER1)).unwrap();
-            assert!(p1_data.score() == 100);
+            let p1_data = ApplicationStateAPI::get_player_score(playerid!(PLAYER1));
+            assert!(p1_data == 100);
         }
     }
 
@@ -110,7 +106,7 @@ mod tests {
         test_decrement_at_min,
         MainApplication,
         |win| {
-            use crate::application_data::APPLICATION_STATE;
+            use crate::application_data::ApplicationStateAPI;
             use crate::playerid;
             
             let score_input_p1 = win.main_screen().p1_score_input();
@@ -120,9 +116,8 @@ mod tests {
                 5.0
             );
 
-            let data = APPLICATION_STATE.lock().unwrap();
-            let p1_data = data.players.get(playerid!(PLAYER1)).unwrap();
-            assert!(p1_data.score() == 0);
+            let p1_data = ApplicationStateAPI::get_player_score(playerid!(PLAYER1));
+            assert!(p1_data == 0);
         }
     }
 }

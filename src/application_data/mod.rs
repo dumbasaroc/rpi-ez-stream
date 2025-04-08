@@ -1,7 +1,7 @@
 mod application_state;
 mod character_data;
 mod data_trait;
-pub use data_trait::AlterApplicationDataState;
+pub use data_trait::AppStateDataAPI;
 
 mod player_data;
 mod player_ids;
@@ -55,99 +55,52 @@ pub fn switch_active_module<P>(path: Option<P>) where P: ToString {
 
 pub struct ApplicationStateAPI;
 
+#[allow(dead_code)]
 impl ApplicationStateAPI {
 
-    pub fn get_player_character(player_id: &'static str) -> Option<player_data::CharacterData> {
-        todo!();
+    pub fn write_to_data_file() -> anyhow::Result<()> {
+        let appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.write_to_data_file()
     }
 
-    pub fn get_player_name(player_id: &'static str) -> String {
-        todo!();
+    pub fn get_player_character(player_id: &'static str) -> Option<player_data::CharacterData> {
+        let mut appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.get_player_character(player_id)
+    }
+
+    pub fn get_player_tag(player_id: &'static str) -> String {
+        let mut appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.get_player_tag(player_id)
     }
 
     pub fn get_player_score(player_id: &'static str) -> u32 {
-        todo!();
+        let mut appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.get_player_score(player_id)
     }
 
     pub fn set_player_score(player_id: &'static str, score: u32) {
-        todo!();
+        let mut appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.set_player_score(player_id, score);
     }
 
     pub fn set_player_tag<P>(player_id: &'static str, tag: P) where P: Into<String> {
-        todo!()
+        let mut appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.set_player_tag(player_id, tag);
     }
 
-    pub fn set_player_character_name<C>(player_id: &'static str, char_data: C) where C: Into<String> {
-        todo!()
+    pub fn set_player_character_name<C>(player_id: &'static str, name: C) where C: Into<String> {
+        let mut appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.set_player_character_name(player_id, name);
     }
 
     pub fn set_player_character_costume(player_id: &'static str, costume_id: u32) {
-        todo!()
+        let mut appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.set_player_character_costume(player_id, costume_id);
     }
 
     pub fn set_player_character_to_none(player_id: &'static str) {
-        todo!()
+        let mut appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.set_player_character_to_none(player_id);
     }
 }
 
-
-impl data_trait::AlterApplicationDataState for ApplicationData {
-
-    type PlayerIDType = &'static str;
-
-    fn set_player_tag<P>(&mut self, id: Self::PlayerIDType, tag: P) where P: Into<String> {
-        let pdata = match self.get_player_via_id_mut(id) {
-            Some(c) => c,
-            None => {
-                panic!("Tried and failed to access invalid PlayerID \"{}\"", id);
-            }
-        };
-
-        pdata.set_name(tag);
-    }
-
-    fn set_player_character_name<C>(&mut self, id: Self::PlayerIDType, char_name: C) where C: Into<String> {
-        
-        let pdata = match self.get_player_via_id_mut(id) {
-            Some(c) => c,
-            None => {
-                panic!("Tried and failed to access invalid PlayerID \"{}\"", id);
-            }
-        };
-
-        pdata.set_character(Some(char_name));
-    }
-
-    fn set_player_score(&mut self, id: Self::PlayerIDType, score: u32) {
-        let pdata = match self.get_player_via_id_mut(id) {
-            Some(c) => c,
-            None => {
-                panic!("Tried and failed to access invalid PlayerID \"{}\"", id);
-            }
-        };
-
-        pdata.set_score(score);
-    }
-
-    fn set_player_character_costume(&mut self, id: Self::PlayerIDType, costume_id: u32) {
-        let pdata = match self.get_player_via_id_mut(id) {
-            Some(c) => c,
-            None => {
-                panic!("Tried and failed to access invalid PlayerID \"{}\"", id);
-            }
-        };
-
-        pdata.set_character_costume(costume_id);
-    }
-
-    fn set_player_character_to_none(&mut self, id: Self::PlayerIDType) {
-        let pdata = match self.get_player_via_id_mut(id) {
-            Some(c) => c,
-            None => {
-                panic!("Tried and failed to access invalid PlayerID \"{}\"", id);
-            }
-        };
-
-        pdata.set_character::<String>(None);
-    }
-}

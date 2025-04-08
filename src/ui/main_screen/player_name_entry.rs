@@ -2,8 +2,6 @@ use gtk4::glib;
 use gtk4::prelude::EditableExt;
 use gtk4::*;
 
-use crate::application_data::AlterApplicationDataState;
-
 glib::wrapper! {
     pub struct PlayerNameEntry(ObjectSubclass<imp::PlayerNameEntry>)
         @extends Entry, Widget,
@@ -33,10 +31,9 @@ impl PlayerNameEntry {
         self.set_internal_player_id(player_id);
 
         self.connect_changed(move |f| {
-            use crate::application_data::APPLICATION_STATE;
+            use crate::application_data::ApplicationStateAPI;
 
-            let mut lock = APPLICATION_STATE.lock().unwrap();
-            lock.set_player_tag(player_id, f.text());
+            ApplicationStateAPI::set_player_tag(player_id, f.text());
         });
     }
 }
@@ -99,7 +96,7 @@ mod tests {
         MainApplication,
         |win| {
 
-            use crate::application_data::APPLICATION_STATE;
+            use crate::application_data::ApplicationStateAPI;
             use crate::playerid;
 
             let entry: &super::PlayerNameEntry = &win.main_screen().p1_name_input();
@@ -113,9 +110,7 @@ mod tests {
                 // append char to new_text
                 new_text.push(character);
                 entry.set_text(&new_text);
-                let lock = APPLICATION_STATE.lock().unwrap();
-                assert!(lock.players.get(playerid!(PLAYER1)).unwrap().name() == new_text);
-                drop(lock);
+                assert!(ApplicationStateAPI::get_player_tag(playerid!(PLAYER1)) == new_text);
             }
         }
     }
