@@ -1,3 +1,4 @@
+mod application_state;
 mod character_data;
 mod data_trait;
 pub use data_trait::AlterApplicationDataState;
@@ -6,16 +7,12 @@ mod player_data;
 mod player_ids;
 pub use player_ids::get_playerid_from_string;
 
-use anyhow::{anyhow, Result};
 use lazy_static::lazy_static;
-use std::collections::HashMap;
-use std::fs::File;
-use std::io::Write;
 use std::sync::Mutex;
 
+use application_state::ApplicationData;
 use character_data::*;
 use player_data::PlayerData;
-use crate::playerid;
 
 // LAZY STATIC BLOCK FOR SINGLETON MUT DATA
 lazy_static! {
@@ -28,65 +25,6 @@ lazy_static! {
         None
     );
 
-}
-
-
-// Type definitions
-
-type PlayersHashMap = HashMap<&'static str, PlayerData>;
-
-
-// Constants
-const DATA_FILE_RELATIVE_PATH: &str = "./data.json";
-
-#[derive(serde::Serialize)]
-pub struct ApplicationData {
-    
-    // Player data
-    #[cfg(not(test))]
-    players: PlayersHashMap,
-
-    #[cfg(test)]
-    pub players: PlayersHashMap
-
-}
-
-impl ApplicationData {
-
-    pub fn init() -> Self {
-
-        let mut players: PlayersHashMap = HashMap::new();
-        players.insert(playerid!(PLAYER1), PlayerData::default());
-        players.insert(playerid!(PLAYER2), PlayerData::default());
-
-        ApplicationData {
-            players
-        }
-    }
-
-    pub fn get_player_via_id_mut(&mut self, id: &str) -> Option<&mut PlayerData> {
-        self.players.get_mut(id)
-    }
-
-    pub fn write_to_data_file(&self) -> Result<()> {
-        let outfile = File::create(DATA_FILE_RELATIVE_PATH);
-        let mut outfile = match outfile {
-            Ok(f) => f,
-            Err(e) => { return Err(anyhow!(e)); }
-        };
-
-        let self_serialized = match serde_json::to_string_pretty(self) {
-            Ok(v) => v,
-            Err(e) => { return Err(anyhow!(e)); }
-        };
-
-        match write!(outfile, "{}", self_serialized) {
-            Ok(_) => {},
-            Err(e) => { return Err(anyhow!(e)); }
-        };
-
-        Ok(())
-    }
 }
 
 /* ******** MODULE HANDLER CHANGE FUNCTION ******* */
@@ -113,6 +51,43 @@ pub fn switch_active_module<P>(path: Option<P>) where P: ToString {
     }
 
     
+}
+
+pub struct ApplicationStateAPI;
+
+impl ApplicationStateAPI {
+
+    pub fn get_player_character(player_id: &'static str) -> Option<player_data::CharacterData> {
+        todo!();
+    }
+
+    pub fn get_player_name(player_id: &'static str) -> String {
+        todo!();
+    }
+
+    pub fn get_player_score(player_id: &'static str) -> u32 {
+        todo!();
+    }
+
+    pub fn set_player_score(player_id: &'static str, score: u32) {
+        todo!();
+    }
+
+    pub fn set_player_tag<P>(player_id: &'static str, tag: P) where P: Into<String> {
+        todo!()
+    }
+
+    pub fn set_player_character_name<C>(player_id: &'static str, char_data: C) where C: Into<String> {
+        todo!()
+    }
+
+    pub fn set_player_character_costume(player_id: &'static str, costume_id: u32) {
+        todo!()
+    }
+
+    pub fn set_player_character_to_none(player_id: &'static str) {
+        todo!()
+    }
 }
 
 
