@@ -3,10 +3,36 @@
 <interface>
   <!-- interface-name main_window.ui -->
   <requires lib="gtk" version="4.12"/>
+  <requires lib="gio" version="2.0"/>
   <template class="MainWindow" parent="GtkApplicationWindow">
     <property name="hexpand">True</property>
     <property name="hexpand-set">True</property>
     <property name="title">RPI Smash EZ-Stream</property>
+    <property name="titlebar">
+      <object class="GtkHeaderBar">
+        <child>
+          <object class="GtkMenuButton">
+            <property name="icon-name">start-here</property>
+            <property name="popover">
+              <object class="GtkPopoverMenu">
+                <property name="menu-model">
+                  <menu>
+                    <item>
+                      <attribute name="action">win.OPENMODULEDIALOG</attribute>
+                      <attribute name="label">Change Active Module</attribute>
+                    </item>
+                    <item>
+                      <attribute name="action">window.close</attribute>
+                      <attribute name="label">Quit EZStream</attribute>
+                    </item>
+                  </menu>
+                </property>
+              </object>
+            </property>
+          </object>
+        </child>
+      </object>
+    </property>
     <property name="vexpand">True</property>
     <property name="vexpand-set">True</property>
     <child>

@@ -55,7 +55,7 @@ impl MainWindow {
 
         // Instantiate the default active module
         
-        ModuleHandlerAPI::load_module(&win, None::<String>).unwrap();
+        ModuleHandlerAPI::load_module(&win, Some("res/modules/smash_ultimate_stock_icons")).unwrap();
         // let _ = ModuleHandlerAPI::list_modules_in_folder();
         // ModuleHandlerAPI::load_module(&win, Some("res/modules/smash_ultimate_stock_icons")).unwrap();
         // win.change_module("res/modules/smash_ultimate_stock_icons");
@@ -94,6 +94,7 @@ impl MainWindow {
     /// Select Screen for reading and writing
     /// purposes.
     pub fn character_select_screen(&self) -> CharacterSelectScreen {
+
         let correct_child = match self.scene_switcher().child_by_name(CHARACTER_SELECT_SCREEN_NAME) {
             Some(c) => c,
             None => {
@@ -129,6 +130,7 @@ impl MainWindow {
             actions::create_update_character_button_visibility_action(),
             actions::create_set_css_player_action(),
             actions::create_swap_p1_p2_data_action(),
+            actions::create_open_module_change_dialog_action(),
         ]);
         
         // Connect the action to the update button.
@@ -188,7 +190,7 @@ mod imp {
 
         #[template_child]
         #[property(get)]
-        pub scene_switcher: TemplateChild<Stack>
+        pub scene_switcher: TemplateChild<gtk4::Stack>
     }
 
     #[glib::object_subclass]

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.94.1 -->
+<interface>
+  <requires lib="gtk" version="4.12"/>
+  <template class="ModuleSelector" parent="GtkWindow">
+    <property name="modal">True</property>
+    <property name="title">Change Active Module</property>
+    <child>
+      <object class="GtkBox" id="layout">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="halign">center</property>
+            <property name="justify">center</property>
+            <property name="label">&lt;span font="Bold 14"&gt;Select Module to switch to:&lt;/span&gt;</property>
+            <property name="use-markup">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="modules_list">
+            <property name="halign">center</property>
+            <property name="orientation">vertical</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="button_box">
+            <child>
+              <object class="GtkButton" id="cancel_button">
+                <property name="label">Cancel</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="confirm_button">
+                <property name="label">Switch to Selected Module</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
