@@ -1,5 +1,6 @@
 use gtk4::gio::prelude::ActionMapExtManual;
 use gtk4::glib;
+use gtk4::glib::object::{ObjectRef, TypedObjectRef};
 use gtk4::prelude::*;
 use gtk4::*;
 
@@ -17,13 +18,18 @@ const MAIN_SCREEN_NAME: &str = "mainscreen";
 /// the GTK hierarchy
 const CHARACTER_SELECT_SCREEN_NAME: &str = "css";
 
-
 glib::wrapper! {
 
     pub struct MainWindow(ObjectSubclass<imp::MainWindow>)
         @extends gtk4::ApplicationWindow, gtk4::Window, gtk4::Widget,
         @implements gio::ActionGroup, gio::ActionMap, gtk4::Buildable;
 
+}
+
+impl Default for MainWindow {
+    fn default() -> Self {
+        glib::Object::builder().build()
+    }
 }
 
 impl MainWindow {

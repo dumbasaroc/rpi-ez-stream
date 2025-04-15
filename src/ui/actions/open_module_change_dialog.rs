@@ -12,8 +12,10 @@ pub fn create_open_module_change_dialog_action() -> ActionEntry<MainWindow> {
         .activate(|win: &MainWindow, _, _| {
             use crate::application_data::ModuleHandlerAPI;
 
-            let mod_select = crate::ui::ModuleSelector::new();
+            let mod_select = crate::ui::ModuleSelector::new(win);
+            println!("Finished calling shite");
             mod_select.set_application(win.application().as_ref());
+            println!("Set win application");
             mod_select.present();
             
             match ModuleHandlerAPI::list_modules_in_folder() {
