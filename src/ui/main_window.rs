@@ -1,6 +1,5 @@
 use gtk4::gio::prelude::ActionMapExtManual;
 use gtk4::glib;
-use gtk4::glib::object::{ObjectRef, TypedObjectRef};
 use gtk4::prelude::*;
 use gtk4::*;
 
