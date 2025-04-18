@@ -1,33 +1,46 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Created with Cambalache 0.94.1 -->
 <interface>
-  <requires lib="gtk" version="4.8"/>
+  <requires lib="gtk" version="4.14"/>
   <template class="TournamentInfoBar" parent="GtkBox">
     <child>
       <object class="GtkCheckButton" id="best_of_radio">
         <property name="active">True</property>
         <property name="label">Best of</property>
+        <signal name="toggled" handler="best_of_toggled_on"/>
       </object>
     </child>
     <child>
       <object class="GtkCheckButton" id="first_to_radio">
         <property name="group">best_of_radio</property>
         <property name="label">First To</property>
+        <signal name="toggled" handler="first_to_toggled_on"/>
       </object>
     </child>
     <child>
-      <object class="GtkSpinButton" id="bo_ft_counter"/>
+      <object class="GtkSpinButton" id="bo_ft_counter">
+        <property name="adjustment">
+          <object class="GtkAdjustment">
+            <property name="step-increment">1.0</property>
+            <property name="upper">100.0</property>
+          </object>
+        </property>
+        <property name="value">3.0</property>
+        <signal name="value-changed" handler="on_bestof_counter_change"/>
+      </object>
     </child>
     <child>
       <object class="GtkEntry" id="bracket_position">
         <property name="placeholder-text">Bracket Position</property>
         <property name="width-request">200</property>
+        <signal name="changed" handler="on_change_bracketpos"/>
       </object>
     </child>
     <child>
       <object class="GtkEntry" id="tournament_name">
         <property name="placeholder-text">Tournament Name</property>
         <property name="width-request">200</property>
+        <signal name="changed" handler="on_change_tournname"/>
       </object>
     </child>
   </template>

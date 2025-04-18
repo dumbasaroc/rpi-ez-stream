@@ -19,4 +19,12 @@ pub trait AppStateDataAPI {
     fn set_player_character_costume(&mut self, id: Self::PlayerIDType, costume_id: u32);
 
     fn set_player_character_to_none(&mut self, id: Self::PlayerIDType);
+
+    fn set_is_bestof(&mut self, is_bestof: bool);
+
+    fn set_bestof_firstto_counter(&mut self, ctr: u32);
+
+    fn set_tournament_name<C>(&mut self, name: C) where C: Into<String>;
+
+    fn set_bracket_location<C>(&mut self, loc: C) where C: Into<String>;
 }

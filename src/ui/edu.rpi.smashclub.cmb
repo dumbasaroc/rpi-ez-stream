@@ -63,7 +63,8 @@
 	(11,3,"GtkCheckButton","first_to_radio",1,None,None,None,1,None,None),
 	(11,4,"GtkSpinButton","bo_ft_counter",1,None,None,None,2,None,None),
 	(11,5,"GtkEntry","bracket_position",1,None,None,None,3,None,None),
-	(11,6,"GtkEntry","tournament_name",1,None,None,None,4,None,None)
+	(11,6,"GtkEntry","tournament_name",1,None,None,None,4,None,None),
+	(11,7,"GtkAdjustment",None,4,None,None,None,0,None,None)
   </object>
   <object_property>
 	(2,1,"GtkOrientable","orientation","vertical",0,None,None,None,None,None,None,None,None),
@@ -165,10 +166,14 @@
 	(11,2,"GtkCheckButton","label","Best of",None,None,None,None,None,None,None,None,None),
 	(11,3,"GtkCheckButton","group","2",None,None,None,None,None,None,None,None,None),
 	(11,3,"GtkCheckButton","label","First To",None,None,None,None,None,None,None,None,None),
+	(11,4,"GtkSpinButton","adjustment",None,None,None,None,None,7,None,None,None,None),
+	(11,4,"GtkSpinButton","value","3.0",None,None,None,None,None,None,None,None,None),
 	(11,5,"GtkEntry","placeholder-text","Bracket Position",None,None,None,None,None,None,None,None,None),
 	(11,5,"GtkWidget","width-request","200",None,None,None,None,None,None,None,None,None),
 	(11,6,"GtkEntry","placeholder-text","Tournament Name",None,None,None,None,None,None,None,None,None),
-	(11,6,"GtkWidget","width-request","200",None,None,None,None,None,None,None,None,None)
+	(11,6,"GtkWidget","width-request","200",None,None,None,None,None,None,None,None,None),
+	(11,7,"GtkAdjustment","step-increment","1.0",None,None,None,None,None,None,None,None,None),
+	(11,7,"GtkAdjustment","upper","100.0",None,None,None,None,None,None,None,None,None)
   </object_property>
   <object_layout_property>
 	(5,1,2,"GtkGridLayoutChild","column","1",0,None,None,None),
@@ -209,7 +214,12 @@
   </object_layout_property>
   <object_signal>
 	(1,2,4,"GtkEditable","changed","on_type_character",None,7,0,0,None),
-	(2,1,1,"GtkButton","clicked","on_click",None,0,0,0,None)
+	(2,1,1,"GtkButton","clicked","on_click",None,0,0,0,None),
+	(3,11,2,"GtkCheckButton","toggled","best_of_toggled_on",None,0,0,0,None),
+	(4,11,3,"GtkCheckButton","toggled","first_to_toggled_on",None,0,0,0,None),
+	(5,11,4,"GtkSpinButton","value-changed","on_bestof_counter_change",None,0,0,0,None),
+	(6,11,5,"GtkEditable","changed","on_change_bracketpos",None,0,0,0,None),
+	(7,11,6,"GtkEditable","changed","on_change_tournname",None,0,0,0,None)
   </object_signal>
   <object_data>
 	(5,3,"GtkWidget",2,2,None,1,None,None,None,None)

@@ -23,6 +23,8 @@ mod imp {
     use gtk4::subclass::prelude::*;
     use gtk4::prelude::*;
 
+    use crate::application_data::ApplicationStateAPI;
+
     #[derive(Default, CompositeTemplate, glib::Properties)]
     #[template(file = "tournament_info_bar.ui")]
     #[properties(wrapper_type = super::TournamentInfoBar)]
@@ -49,6 +51,39 @@ mod imp {
         pub tournament_name: TemplateChild<gtk4::Entry>,
     }
 
+    #[gtk4::template_callbacks]
+    impl TournamentInfoBar {
+
+        #[template_callback]
+        fn best_of_toggled_on(but: &gtk4::CheckButton) {
+            if but.is_active() {
+                ApplicationStateAPI::set_bestof_firstto(true);
+            }
+        }
+
+        #[template_callback]
+        fn first_to_toggled_on(but: &gtk4::CheckButton) {
+            if but.is_active() {
+                ApplicationStateAPI::set_bestof_firstto(false);
+            }
+        }
+
+        #[template_callback]
+        fn on_bestof_counter_change(ctr: &gtk4::SpinButton) {
+            ApplicationStateAPI::set_bestof_firstto_counter(ctr.value_as_int() as u32);
+        }
+
+        #[template_callback]
+        fn on_change_tournname(name: &gtk4::Entry) {
+            ApplicationStateAPI::set_tournament_name(name.text());
+        }
+
+        #[template_callback]
+        fn on_change_bracketpos(loc: &gtk4::Entry) {
+            ApplicationStateAPI::set_bracket_location(loc.text());
+        }
+    }
+
     #[object_subclass]
     impl ObjectSubclass for TournamentInfoBar {
         const NAME: &'static str = "TournamentInfoBar";
@@ -57,6 +92,7 @@ mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
+            klass.bind_template_callbacks();
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {

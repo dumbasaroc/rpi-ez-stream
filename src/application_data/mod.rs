@@ -102,6 +102,26 @@ impl ApplicationStateAPI {
         let mut appstate = APPLICATION_STATE.lock().unwrap();
         appstate.set_player_character_to_none(player_id);
     }
+
+    pub fn set_bestof_firstto(is_bestof: bool) {
+        let mut appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.set_is_bestof(is_bestof);
+    }
+
+    pub fn set_bestof_firstto_counter(ctr: u32) {
+        let mut appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.set_bestof_firstto_counter(ctr);
+    }
+
+    pub fn set_tournament_name<C>(name: C) where C: Into<String> {
+        let mut appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.set_tournament_name(name);
+    }
+
+    pub fn set_bracket_location<C>(loc: C) where C: Into<String> {
+        let mut appstate = APPLICATION_STATE.lock().unwrap();
+        appstate.set_bracket_location(loc);
+    }
 }
 
 pub struct ModuleHandlerAPI;

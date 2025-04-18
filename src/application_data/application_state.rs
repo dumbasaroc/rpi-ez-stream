@@ -22,8 +22,20 @@ pub struct ApplicationData {
     players: PlayersHashMap,
 
     #[cfg(test)]
-    pub players: PlayersHashMap
+    pub players: PlayersHashMap,
 
+    /// True if mode is "Best Of", false
+    /// if mode is "First To"
+    is_bestof: bool,
+
+    /// Tournament name string
+    tournament_name: String,
+
+    bracket_location: String,
+
+    /// @TODO CHANGE THIS DEFAULT TO READ
+    /// FROM THE APPLICATION ITSELF
+    setcount: u32,
 }
 
 impl ApplicationData {
@@ -35,7 +47,11 @@ impl ApplicationData {
         players.insert(playerid!(PLAYER2), PlayerData::default());
 
         ApplicationData {
-            players
+            players,
+            is_bestof: true,
+            tournament_name: String::new(),
+            bracket_location: String::new(),
+            setcount: 3,
         }
     }
 
@@ -156,5 +172,21 @@ impl super::data_trait::AppStateDataAPI for ApplicationData {
         };
 
         pdata.set_character::<String>(None);
+    }
+
+    fn set_is_bestof(&mut self, is_bestof: bool) {
+        self.is_bestof = is_bestof;
+    }
+
+    fn set_bestof_firstto_counter(&mut self, ctr: u32) {
+        self.setcount = ctr;
+    }
+
+    fn set_tournament_name<C>(&mut self, name: C) where C: Into<String> {
+        self.tournament_name = name.into();
+    }
+
+    fn set_bracket_location<C>(&mut self, loc: C) where C: Into<String> {
+        self.bracket_location = loc.into();
     }
 }
