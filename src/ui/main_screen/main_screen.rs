@@ -61,6 +61,10 @@ mod imp {
         #[template_child]
         #[property(get)]
         p2_score_input: TemplateChild<ui::ScoreEntry>,
+
+        #[template_child]
+        #[property(get)]
+        tournament_info_bar: TemplateChild<ui::TournamentInfoBar>,
     }
 
     #[glib::object_subclass]
