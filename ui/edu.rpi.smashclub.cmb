@@ -61,6 +61,7 @@
 	(8,5,"GtkButton","cancel_button",4,None,None,None,0,None,None),
 	(8,6,"GtkButton","confirm_button",4,None,None,None,1,None,None),
 	(9,1,"GtkWindow","ModuleSelector",None,None,None,None,0,None,None),
+	(9,2,"ModuleSelectorLayout","layout",1,None,None,None,0,None,None),
 	(10,1,"GtkGrid","MainScreen",None,None,None,None,0,None,None),
 	(10,2,"GtkButton","switch_data",1,None,None,None,0,None,None),
 	(10,3,"GtkButton","p1_character",1,None,None,None,1,None,None),
@@ -74,14 +75,13 @@
 	(11,1,"GtkApplicationWindow","MainWindow",None,None,None,None,0,None,None),
 	(11,2,"GtkHeaderBar",None,1,None,None,None,0,None,None),
 	(11,3,"GtkMenuButton",None,2,None,None,None,0,None,None),
-	(11,4,"GtkPopoverMenu",None,3,None,None,None,0,None,None),
 	(11,5,"GtkStack","scene_switcher",1,None,None,None,1,None,None),
 	(11,6,"GtkStackPage","main_screen",5,None,None,None,0,None,None),
 	(11,7,"MainScreen",None,6,None,None,None,0,None,None),
 	(11,8,"GtkStackPage","character_select_screen",5,None,None,None,1,None,None),
 	(11,9,"CharacterSelectScreen",None,8,None,None,None,0,None,None),
-	(11,11,"(menu)","mainwindow_menu",4,None,None,None,0,None,None),
-	(11,12,"(item)","open_modwin",11,None,None,None,0,None,None)
+	(11,10,"(menu)",None,3,None,None,None,0,None,None),
+	(11,11,"(item)",None,10,None,None,None,0,None,None)
   </object>
   <object_property>
 	(2,1,"GtkWidget","hexpand","True",0,None,None,None,None,None,None,None,None),
@@ -223,8 +223,7 @@
 	(11,1,"GtkWindow","title","RPI Smash EZ-Stream",0,None,None,None,None,None,None,None,None),
 	(11,1,"GtkWindow","titlebar",None,0,None,None,None,2,None,None,None,None),
 	(11,3,"GtkMenuButton","icon-name","start-here",0,None,None,None,None,None,None,None,None),
-	(11,3,"GtkMenuButton","popover",None,0,None,None,None,4,None,None,None,None),
-	(11,4,"GtkPopoverMenu","menu-model",None,0,None,None,None,None,None,None,None,None),
+	(11,3,"GtkMenuButton","menu-model",None,None,None,None,None,10,None,None,None,None),
 	(11,5,"GtkWidget","hexpand","True",0,None,None,None,None,None,None,None,None),
 	(11,5,"GtkWidget","hexpand-set","True",0,None,None,None,None,None,None,None,None),
 	(11,5,"GtkWidget","vexpand","True",0,None,None,None,None,None,None,None,None),
@@ -239,8 +238,8 @@
 	(11,8,"GtkStackPage","name","css",0,None,None,None,None,None,None,None,None),
 	(11,9,"GtkWidget","hexpand","True",0,None,None,None,None,None,None,None,None),
 	(11,9,"GtkWidget","vexpand","True",0,None,None,None,None,None,None,None,None),
-	(11,12,"(item)","action","win.OPENMODULEDIALOG",None,None,None,None,None,None,None,None,None),
-	(11,12,"(item)","label","Change Active Module",None,None,None,None,None,None,None,None,None)
+	(11,11,"(item)","action","win.OPENMODULEDIALOG",None,None,None,None,None,None,None,None,None),
+	(11,11,"(item)","label","Change Active Module",None,None,None,None,None,None,None,None,None)
   </object_property>
   <object_layout_property>
 	(5,1,2,"GtkGridLayoutChild","column","1",0,None,None,None),

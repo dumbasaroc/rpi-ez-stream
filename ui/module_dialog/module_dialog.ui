@@ -6,5 +6,8 @@
   <template class="ModuleSelector" parent="GtkWindow">
     <property name="modal">True</property>
     <property name="title">Change Active Module</property>
+    <child>
+      <object class="ModuleSelectorLayout" id="layout"/>
+    </child>
   </template>
 </interface>

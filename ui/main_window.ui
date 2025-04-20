@@ -13,17 +13,13 @@
         <child>
           <object class="GtkMenuButton">
             <property name="icon-name">start-here</property>
-            <property name="popover">
-              <object class="GtkPopoverMenu">
-                <child>
-                  <menu id="mainwindow_menu">
-                    <item>
-                      <attribute name="action">win.OPENMODULEDIALOG</attribute>
-                      <attribute name="label">Change Active Module</attribute>
-                    </item>
-                  </menu>
-                </child>
-              </object>
+            <property name="menu-model">
+              <menu>
+                <item>
+                  <attribute name="action">win.OPENMODULEDIALOG</attribute>
+                  <attribute name="label">Change Active Module</attribute>
+                </item>
+              </menu>
             </property>
           </object>
         </child>
