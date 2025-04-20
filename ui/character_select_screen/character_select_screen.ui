@@ -17,7 +17,7 @@
             <property name="activates-default">True</property>
             <property name="hexpand">True</property>
             <property name="placeholder-text">Search character name...</property>
-            <signal name="changed" handler="on_type_character" object="character_box"/>
+            <signal name="changed" handler="on_type_character"/>
           </object>
         </child>
       </object>
