@@ -217,7 +217,21 @@ impl ModuleHandlerAPI {
     pub fn list_modules_in_folder() -> std::io::Result<Vec<(std::path::PathBuf, String)>>{
         const MODULES_FOLDER: &str = "./res/modules/";
 
-        let dirs = std::fs::read_dir(MODULES_FOLDER)?;
+        let dirs = match std::fs::read_dir(MODULES_FOLDER) {
+            Ok(d) => d,
+            Err(e) => {
+
+                // Fix "modules" folder not existing
+                // by creating it and trying again
+                if e.kind() == std::io::ErrorKind::NotFound {
+                    std::fs::create_dir_all(MODULES_FOLDER)?;
+                    return ModuleHandlerAPI::list_modules_in_folder();
+                }
+
+                return Err(e);
+            }
+        };
+
         let mut out_mods: Vec<(std::path::PathBuf, String)> = vec![];
 
         for path in dirs {
