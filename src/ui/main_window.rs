@@ -60,7 +60,7 @@ impl MainWindow {
 
         // Instantiate the default active module
         
-        ModuleHandlerAPI::load_module(&win, Some("res/modules/smash_ultimate_stock_icons")).unwrap();
+        ModuleHandlerAPI::load_module(&win, None::<String>).unwrap();
         // let _ = ModuleHandlerAPI::list_modules_in_folder();
         // ModuleHandlerAPI::load_module(&win, Some("res/modules/smash_ultimate_stock_icons")).unwrap();
         // win.change_module("res/modules/smash_ultimate_stock_icons");
