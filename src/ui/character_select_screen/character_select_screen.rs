@@ -78,7 +78,7 @@ mod imp {
     use crate::ui;
 
     #[derive(Default, CompositeTemplate, Properties)]
-    #[template(file = "./character_select_screen.ui")]
+    #[template(resource = "/edu/rpi/ezstream/ui/character_select_screen/character_select_screen.ui")]
     #[properties(wrapper_type = super::CharacterSelectScreen)]
     pub struct CharacterSelectScreen {
 

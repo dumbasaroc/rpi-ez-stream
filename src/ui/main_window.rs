@@ -190,7 +190,7 @@ mod imp {
 
     #[derive(Default, CompositeTemplate, Properties)]
     #[properties(wrapper_type = super::MainWindow)]
-    #[template(file = "main_window.ui")]
+    #[template(resource = "/edu/rpi/ezstream/ui/main_window.ui")]
     pub struct MainWindow {
 
         #[template_child]

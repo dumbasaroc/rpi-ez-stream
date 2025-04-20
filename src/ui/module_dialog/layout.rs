@@ -32,7 +32,7 @@ mod imp {
 
     #[derive(Default, CompositeTemplate, Properties)]
     #[properties(wrapper_type = super::ModuleSelectorLayout)]
-    #[template(file = "layout.ui")]
+    #[template(resource = "/edu/rpi/ezstream/ui/module_dialog/layout.ui")]
     pub struct ModuleSelectorLayout {
 
         #[template_child]

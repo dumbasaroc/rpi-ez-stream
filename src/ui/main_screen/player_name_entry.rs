@@ -51,7 +51,7 @@ mod imp {
     use std::cell::RefCell;
 
     #[derive(Default, CompositeTemplate, glib::Properties)]
-    #[template(file = "player_name_entry.ui")]
+    #[template(resource = "/edu/rpi/ezstream/ui/main_screen/player_name_entry.ui")]
     #[properties(wrapper_type = super::PlayerNameEntry)]
     pub struct PlayerNameEntry {
 

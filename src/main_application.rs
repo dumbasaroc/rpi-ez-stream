@@ -42,7 +42,13 @@ impl MainApplication {
         testing_callback: impl Fn(&ui::MainWindow) + 'static
     ) -> Self {
 
-        // Start by instantiating the GTK settings
+        // First, load the UI from the compiled
+        // gresource
+        gtk4::gio::resources_register_include!(
+            "ui_resource.gresource"
+        ).expect("Could not load UI gresource... aborting launch.");
+
+        // Then, we instantiate the GTK settings
         // object
         debug!("Instantiating/Loading settings...");
 

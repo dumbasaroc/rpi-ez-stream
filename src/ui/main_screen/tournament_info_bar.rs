@@ -26,7 +26,7 @@ mod imp {
     use crate::application_data::ApplicationStateAPI;
 
     #[derive(Default, CompositeTemplate, glib::Properties)]
-    #[template(file = "tournament_info_bar.ui")]
+    #[template(resource = "/edu/rpi/ezstream/ui/main_screen/tournament_info_bar.ui")]
     #[properties(wrapper_type = super::TournamentInfoBar)]
     pub struct TournamentInfoBar {
 

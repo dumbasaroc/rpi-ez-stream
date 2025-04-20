@@ -141,7 +141,7 @@ mod imp {
 
     #[derive(Default, CompositeTemplate, Properties)]
     #[properties(wrapper_type = super::ModuleSelector)]
-    #[template(file = "module_dialog.ui")]
+    #[template(resource = "/edu/rpi/ezstream/ui/module_dialog/module_dialog.ui")]
     pub struct ModuleSelector {
 
         #[template_child]

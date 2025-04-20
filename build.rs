@@ -4,6 +4,12 @@ use settings_data::export_settings_to_xml;
 
 fn main() {
 
+    glib_build_tools::compile_resources(
+        &[ "ui" ],
+        "ui/ui_resource.gresource.xml",
+        "ui_resource.gresource"
+    );
+
     const LOC_OF_SETTINGS_SCHEMA: &str = "data/edu.rpi.smashclub.ezstream.gschema.xml";
     export_settings_to_xml(LOC_OF_SETTINGS_SCHEMA).unwrap();
 

@@ -89,7 +89,7 @@ mod imp {
     use std::rc::Rc;
 
     #[derive(Default, CompositeTemplate, Properties)]
-    #[template(file = "./character_select_button.ui")]
+    #[template(resource = "/edu/rpi/ezstream/ui/character_select_screen/character_select_button.ui")]
     #[properties(wrapper_type = super::CharacterButton)]
     pub struct CharacterButton {
 

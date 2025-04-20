@@ -26,7 +26,7 @@ mod imp {
     use crate::ui;
 
     #[derive(Default, CompositeTemplate, Properties)]
-    #[template(file = "./main_screen.ui")]
+    #[template(resource = "/edu/rpi/ezstream/ui/main_screen/main_screen.ui")]
     #[properties(wrapper_type = super::MainScreen)]
     pub struct MainScreen {
 

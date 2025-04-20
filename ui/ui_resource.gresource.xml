@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/edu/rpi/ezstream/ui/">
+    <file compressed="true" preprocess="xml-stripblanks">main_window.ui</file>
+
+    <!-- Module Dialog UI -->
+    <file compressed="true" preprocess="xml-stripblanks">module_dialog/layout.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">module_dialog/module_dialog.ui</file>
+
+    <!-- Main Screen UI -->
+    <file compressed="true" preprocess="xml-stripblanks">main_screen/main_screen.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">main_screen/player_name_entry.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">main_screen/tournament_info_bar.ui</file>
+
+    <!-- Character Select Screen UI -->
+    <file compressed="true" preprocess="xml-stripblanks">character_select_screen/character_select_button.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">character_select_screen/character_select_screen.ui</file>
+  </gresource>
+</gresources>
