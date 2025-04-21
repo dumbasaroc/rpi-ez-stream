@@ -80,8 +80,8 @@
 	(11,7,"MainScreen",None,6,None,None,None,0,None,None),
 	(11,8,"GtkStackPage","character_select_screen",5,None,None,None,1,None,None),
 	(11,9,"CharacterSelectScreen",None,8,None,None,None,0,None,None),
-	(11,10,"(menu)",None,3,None,None,None,0,None,None),
-	(11,11,"(item)",None,10,None,None,None,0,None,None)
+	(11,12,"(menu)","topleft_menu",None,None,None,None,1,None,None),
+	(11,13,"(item)",None,12,None,None,None,0,None,None)
   </object>
   <object_property>
 	(2,1,"GtkWidget","hexpand","True",0,None,None,None,None,None,None,None,None),
@@ -223,7 +223,7 @@
 	(11,1,"GtkWindow","title","RPI Smash EZ-Stream",0,None,None,None,None,None,None,None,None),
 	(11,1,"GtkWindow","titlebar",None,0,None,None,None,2,None,None,None,None),
 	(11,3,"GtkMenuButton","icon-name","start-here",0,None,None,None,None,None,None,None,None),
-	(11,3,"GtkMenuButton","menu-model",None,None,None,None,None,10,None,None,None,None),
+	(11,3,"GtkMenuButton","menu-model","12",None,None,None,None,None,None,None,None,None),
 	(11,5,"GtkWidget","hexpand","True",0,None,None,None,None,None,None,None,None),
 	(11,5,"GtkWidget","hexpand-set","True",0,None,None,None,None,None,None,None,None),
 	(11,5,"GtkWidget","vexpand","True",0,None,None,None,None,None,None,None,None),
@@ -238,8 +238,8 @@
 	(11,8,"GtkStackPage","name","css",0,None,None,None,None,None,None,None,None),
 	(11,9,"GtkWidget","hexpand","True",0,None,None,None,None,None,None,None,None),
 	(11,9,"GtkWidget","vexpand","True",0,None,None,None,None,None,None,None,None),
-	(11,11,"(item)","action","win.OPENMODULEDIALOG",None,None,None,None,None,None,None,None,None),
-	(11,11,"(item)","label","Change Active Module",None,None,None,None,None,None,None,None,None)
+	(11,13,"(item)","action","win.OPENMODULEDIALOG",0,None,None,None,None,None,None,None,None),
+	(11,13,"(item)","label","Change Active Module",0,None,None,None,None,None,None,None,None)
   </object_property>
   <object_layout_property>
 	(5,1,2,"GtkGridLayoutChild","column","1",0,None,None,None),

@@ -13,14 +13,7 @@
         <child>
           <object class="GtkMenuButton">
             <property name="icon-name">start-here</property>
-            <property name="menu-model">
-              <menu>
-                <item>
-                  <attribute name="action">win.OPENMODULEDIALOG</attribute>
-                  <attribute name="label">Change Active Module</attribute>
-                </item>
-              </menu>
-            </property>
+            <property name="menu-model">topleft_menu</property>
           </object>
         </child>
       </object>
@@ -60,4 +53,10 @@
       </object>
     </child>
   </template>
+  <menu id="topleft_menu">
+    <item>
+      <attribute name="action">win.OPENMODULEDIALOG</attribute>
+      <attribute name="label">Change Active Module</attribute>
+    </item>
+  </menu>
 </interface>
