@@ -44,12 +44,31 @@ impl MainWindow {
     /// A newly instantiated MainWindow object.
     pub fn new(app: &Application) -> Self {
 
+        use pango::prelude::*;
         use crate::ui::main_screen as cmn;
         use crate::ui::actions::*;
         use crate::application_data::ModuleHandlerAPI;
 
         // Create new window
         let win: MainWindow = glib::Object::builder().property("application", app).build();
+        match win.load_fonts_from_directory("./res/fonts") {
+            Ok(_) => {},
+            Err(e) => {
+                log::error!("Failed somewhere in loading fonts: {}", e);
+            }
+        };
+
+        {
+            const CSS: &str = "* { font-family: \"Oswald\"; }";
+            let provider  = gtk4::CssProvider::new();
+            provider.load_from_string(CSS);
+            gtk4::style_context_add_provider_for_display(
+                &gdk::Display::default().expect("Could not connect to a display."),
+                &provider,
+                gtk4::STYLE_PROVIDER_PRIORITY_APPLICATION,
+            );
+        }
+
         win.instantiate_actions();
 
         win.main_screen().p1_name_input().set_change_callback(playerid!(PLAYER1));
@@ -71,6 +90,44 @@ impl MainWindow {
         ).unwrap();
 
         win
+    }
+
+
+    /// Loads the '.ttf' files in the provided
+    /// folder into the window's Pango context.
+    fn load_fonts_from_directory(&self, directory: impl AsRef<std::path::Path>) -> std::io::Result<()> {
+
+        const ALLOWED_EXTENSIONS: [&'static str; 2] = [ "ttf", "otf" ];
+
+        let directory_contents = std::fs::read_dir(directory)?;
+        for f in directory_contents {
+            let f = f?;
+            if f.metadata()?.is_file() && f.path().extension().is_some_and(
+                |ext| { let ss = ext.to_str().unwrap(); ALLOWED_EXTENSIONS.contains(&ss) }
+            ) {
+                match self.pango_context().font_map() {
+                    None => {
+                        log::warn!("No available Pango FontMap for window... skipping.");
+                        return Ok(());
+                    },
+                    Some(m) => {
+                        match m.add_font_file(f.path()) {
+                            Err(e) => {
+                                log::warn!("Failed to load font file \"{}\".\n\nError: {}",
+                                    f.file_name().to_str().unwrap(),
+                                    e
+                                );
+                            },
+                            Ok(_) => {
+                                log::info!("Loaded font file \"{}\"", f.file_name().to_str().unwrap());
+                            }
+                        }
+                    }
+                };
+            }
+        }
+
+        Ok(())
     }
 
 

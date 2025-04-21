@@ -16,6 +16,8 @@ gtk4 = { version = "0.9.5", features = [ "v4_12" ] }
 gtk_tester = { path = "./gtk_tester/" }
 lazy_static = "1.5.0"
 log = "0.4.25"
+pango = { version = "0.20.9", features = [ "v1_56" ] }
+pango-sys = { version = "0.20.9", features = [ "v1_56" ] }
 serde = { version = "1.0.217", features = [ "derive" ] }
 serde_json = "1.0.138"
 settings_data = { path = "./settings_data/" }
