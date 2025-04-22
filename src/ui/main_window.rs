@@ -59,9 +59,8 @@ impl MainWindow {
         };
 
         {
-            const CSS: &str = "* { font-family: \"Oswald\"; }";
             let provider  = gtk4::CssProvider::new();
-            provider.load_from_string(CSS);
+            provider.load_from_resource("/edu/rpi/ezstream/ui/main_window.css");
             gtk4::style_context_add_provider_for_display(
                 &gdk::Display::default().expect("Could not connect to a display."),
                 &provider,

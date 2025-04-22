@@ -21,6 +21,8 @@
     </child>
     <child>
       <object class="GtkBox" id="button_box">
+        <property name="halign">center</property>
+        <property name="spacing">10</property>
         <child>
           <object class="GtkButton" id="cancel_button">
             <property name="label">Cancel</property>

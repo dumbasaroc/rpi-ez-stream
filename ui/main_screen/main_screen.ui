@@ -11,6 +11,7 @@
     <property name="margin-end">10</property>
     <property name="margin-start">10</property>
     <property name="margin-top">10</property>
+    <property name="name">mainscreen</property>
     <property name="row-spacing">10</property>
     <property name="vexpand">True</property>
     <property name="vexpand-set">True</property>
@@ -61,6 +62,7 @@
         <property name="height-request">100</property>
         <property name="hexpand">True</property>
         <property name="label">UPDATE</property>
+        <property name="name">updatebutton</property>
         <property name="valign">center</property>
         <property name="width-request">200</property>
         <layout>

@@ -7,12 +7,13 @@
   <template class="MainWindow" parent="GtkApplicationWindow">
     <property name="hexpand">True</property>
     <property name="hexpand-set">True</property>
+    <property name="name">mainwindowe</property>
     <property name="title">RPI Smash EZ-Stream</property>
     <property name="titlebar">
       <object class="GtkHeaderBar">
         <child>
           <object class="GtkMenuButton">
-            <property name="icon-name">start-here</property>
+            <property name="icon-name">start-here-symbolic</property>
             <property name="menu-model">topleft_menu</property>
           </object>
         </child>

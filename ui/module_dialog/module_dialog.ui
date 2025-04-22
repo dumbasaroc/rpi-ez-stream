@@ -7,7 +7,9 @@
     <property name="modal">True</property>
     <property name="title">Change Active Module</property>
     <child>
-      <object class="ModuleSelectorLayout" id="layout"/>
+      <object class="ModuleSelectorLayout" id="layout">
+        <property name="valign">center</property>
+      </object>
     </child>
   </template>
 </interface>

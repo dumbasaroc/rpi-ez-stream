@@ -1,0 +1,135 @@
+:root {
+    --titlebar-bg-color: #303030;
+    --background-color: #3b3b3b;
+    --element-bg-color: #333333;
+
+    --button-hover-color: #373737;
+    --button-clicked-color: #2b2b2b;
+
+    --text-color: white;
+    --inactive-text-color: #dddddd;
+
+    --left-corner-color: red;
+    --right-corner-color: blue;
+}
+
+* {
+    font-family: "Oswald";
+}
+
+window {
+    background: radial-gradient(25% at top left, var(--left-corner-color) 50%, transparent),
+                radial-gradient(25% at top right, var(--right-corner-color) 50%, transparent),
+                var(--background-color);
+}
+
+headerbar {
+    background: var(--titlebar-bg-color);
+}
+
+/* Set all text on header to be white */
+headerbar windowhandle box * {
+    color: var(--text-color);
+}
+
+windowcontrols button {
+    background: var(--titlebar-bg-color);
+}
+
+windowcontrols button:hover {
+    background: var(--button-hover-color);
+}
+
+windowcontrols button:active {
+    background: var(--button-clicked-color);
+}
+
+#mainscreen {
+    background-color: transparent;
+}
+
+/* ------------------------------- */
+/* ----- Individual Elements ----- */
+/* ------------------------------- */
+
+
+/* ---- TEXT ---- */
+
+entry {
+    background-color: var(--element-bg-color);
+}
+
+text.placeholder {
+    color: var(--inactive-text-color);
+}
+
+
+/* ---- BUTTONS ---- */
+
+button {
+    /* background-color: var(--element-bg-color); */
+    background: var(--element-bg-color);
+    color: var(--text-color);
+}
+
+button:hover {
+    background: var(--button-hover-color);
+}
+
+button:active {
+    background: var(--button-clicked-color);
+}
+
+menubutton {
+    background-color: var(--element-bg-color);
+    color: var(--text-color);
+}
+
+menubutton:hover {
+    background: var(--button-hover-color);
+}
+
+menubutton:active {
+    background: var(--button-clicked-color);
+}
+
+#updatebutton {
+    font-size: 30px;
+}
+
+
+/* ---- SPINBUTTON ---- */
+
+spinbutton {
+    background: var(--element-bg-color);
+}
+
+spinbutton text {
+    color: var(--text-color);
+}
+
+spinbutton button.up {
+    background-color: var(--element-bg-color);
+    color: var(--text-color);
+}
+
+spinbutton button.up:hover {
+    background: var(--button-hover-color);
+}
+
+spinbutton button.up:active {
+    background: var(--button-clicked-color);
+}
+
+spinbutton button.down {
+    background-color: var(--element-bg-color);
+    color: var(--text-color);
+}
+
+spinbutton button.down:hover {
+    background: var(--button-hover-color);
+}
+
+spinbutton button.down:active {
+    background: var(--button-clicked-color);
+}
