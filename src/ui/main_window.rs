@@ -44,7 +44,6 @@ impl MainWindow {
     /// A newly instantiated MainWindow object.
     pub fn new(app: &Application) -> Self {
 
-        use pango::prelude::*;
         use crate::ui::main_screen as cmn;
         use crate::ui::actions::*;
         use crate::application_data::ModuleHandlerAPI;

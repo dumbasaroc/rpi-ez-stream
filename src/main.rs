@@ -1,3 +1,6 @@
+// Disable command prompt on launch for Windows
+#![windows_subsystem = "windows"]
+
 mod application_data;
 mod main_application;
 mod ui;
