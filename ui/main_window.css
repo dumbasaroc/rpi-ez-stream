@@ -137,3 +137,10 @@ spinbutton button.down:hover {
 spinbutton button.down:active {
     background: var(--button-clicked-color);
 }
+
+
+/* ---- SPINBUTTON ---- */
+
+checkbutton label {
+    color: var(--text-color);
+}
