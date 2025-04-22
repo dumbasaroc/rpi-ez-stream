@@ -18,8 +18,8 @@
 }
 
 window {
-    background: radial-gradient(25% at top left, var(--left-corner-color) 50%, transparent),
-                radial-gradient(25% at top right, var(--right-corner-color) 50%, transparent),
+    background: radial-gradient(ellipse 25% 100% at top left, var(--left-corner-color) 50%, transparent),
+                radial-gradient(ellipse 25% 100% at top right, var(--right-corner-color) 50%, transparent),
                 var(--background-color);
 }
 
