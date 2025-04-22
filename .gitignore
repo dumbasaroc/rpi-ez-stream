@@ -9,7 +9,10 @@ gschemas.compiled
 data.json
 
 # Test image folder
-res/
+res/scripts
+res/iconOrder.txt
+res/overlay-data.json
+res/modules
 
 # Just straight up ignored files
 ignored/

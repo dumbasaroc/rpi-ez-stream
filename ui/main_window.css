@@ -59,6 +59,10 @@ entry {
     background-color: var(--element-bg-color);
 }
 
+text {
+    color: var(--text-color);
+}
+
 text.placeholder {
     color: var(--inactive-text-color);
 }
